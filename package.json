@@ -9,6 +9,9 @@
     "build": "npm run build --prefix app",
     "test": "npm run test --prefix server && npm run test --prefix app",
     "init-db": "npm run init-db --prefix server",
+    "publish-all": "npm run publish-all --prefix server",
+    "import-csv": "npm run import-csv --prefix server --",
+    "t5-critical-path": "npm run t5-critical-path --prefix server",
     "install:all": "npm install --prefix app && npm install --prefix server"
   }
 }
