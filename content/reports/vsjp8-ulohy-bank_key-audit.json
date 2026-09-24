@@ -1,0 +1,310 @@
+{
+  "ok": false,
+  "letterKeyChecked": 365,
+  "letterKeyMismatches": [
+    {
+      "id": "bank-exam-x4-t3-04-d135c838ed",
+      "expected": null,
+      "actual": "A",
+      "detail": "PDF states question has no correct solution / contains errors"
+    },
+    {
+      "id": "bank-evan-martin-2021-t6-02-fe6cb8c504",
+      "expected": "D",
+      "actual": "A"
+    },
+    {
+      "id": "bank-evan-martin-2021-t6-05-2810dd65bf",
+      "expected": "D",
+      "actual": "C"
+    },
+    {
+      "id": "bank-exam-x7-t7-01-e737c8537a",
+      "expected": "D",
+      "actual": "B"
+    },
+    {
+      "id": "bank-exam-x7-t7-03-992cd3d160",
+      "expected": "C",
+      "actual": "B"
+    },
+    {
+      "id": "bank-exam-x7-t7-05-42fec534e2",
+      "expected": "C",
+      "actual": "A"
+    },
+    {
+      "id": "bank-exam-x7-t7-07-0a507a782b",
+      "expected": "C",
+      "actual": "D"
+    },
+    {
+      "id": "bank-exam-x7-t7-08-0a07286dc2",
+      "expected": null,
+      "actual": "D",
+      "detail": "no letter key at itemIndex in primary Riesenie section"
+    },
+    {
+      "id": "bank-exam-x7-t7-09-09ed13ba3e",
+      "expected": null,
+      "actual": "C",
+      "detail": "no letter key at itemIndex in primary Riesenie section"
+    }
+  ],
+  "restatedSample": [
+    {
+      "id": "bank-cielene-b1-t3-01-c8ef6f5e97",
+      "status": "wrong",
+      "detail": "Riesenie restates choices then only '2 BODY'—no answer text. CSV=D is last-choice inference; clock hands imply B (14:35)."
+    },
+    {
+      "id": "bank-cielene-b1-t3-29-063571a745",
+      "status": "wrong",
+      "detail": "No answer text after choices (only '2 BODY'). 'nie je veda' → A astrológia, not D história."
+    },
+    {
+      "id": "bank-cielene-b1-t3-02-9327d68630",
+      "status": "wrong",
+      "detail": "120 d = 10 s → C; CSV=D (24 d) matches last-choice fallback, not arithmetic."
+    },
+    {
+      "id": "bank-cielene-b2-t4-01-a516c912f9",
+      "status": "wrong",
+      "detail": "Solution computes 38880>25760 (left larger) → A; CSV=D."
+    },
+    {
+      "id": "bank-cielene-b2-t4-15-e0001d0b6a",
+      "status": "confirmed",
+      "detail": "Solution: 2% neither parent has freckles; supports D."
+    },
+    {
+      "id": "bank-cielene-b2-t4-33-3982a35d80",
+      "status": "wrong",
+      "detail": "No answer text; biografia=životopis → C, not D beletria."
+    },
+    {
+      "id": "bank-cielene-b3-t5-01-b2fc6e22b6",
+      "status": "confirmed",
+      "detail": "Elimination A/B/D in solution text → C."
+    },
+    {
+      "id": "bank-cielene-b3-t5-15-40ca04b142",
+      "status": "uncertain",
+      "detail": "Remainder lacks clear key; only choice-text echo of D."
+    },
+    {
+      "id": "bank-cielene-b3-t5-32-5a83922ac5",
+      "status": "uncertain",
+      "detail": "Garbled/fragmented solution remainder; cannot clearly support CSV=D."
+    },
+    {
+      "id": "bank-cielene-b4-t6-02-348cf98cea",
+      "status": "confirmed",
+      "detail": "Solution eliminates A/B/C → D."
+    },
+    {
+      "id": "bank-cielene-b4-t6-17-0cc6bc8bf5",
+      "status": "wrong",
+      "detail": "Empty solution remainder; disponovať≈mať → A, not D umiestniť."
+    },
+    {
+      "id": "bank-cielene-b4-t6-30-cb2a734864",
+      "status": "confirmed",
+      "detail": "Solution highlights 'Vernostná' → C."
+    },
+    {
+      "id": "bank-cielene-c1-t7-01-09b4423d29",
+      "status": "wrong",
+      "detail": "Solution: šnúrka–pokojoe parallels pilier–na sebe → B; explicitly says D is reversed."
+    },
+    {
+      "id": "bank-cielene-c1-t7-16-a1159dea03",
+      "status": "uncertain",
+      "detail": "Principle stated but letter/choice not clearly identified."
+    },
+    {
+      "id": "bank-cielene-c1-t7-35-e8398e8c7b",
+      "status": "confirmed",
+      "detail": "Decoded question 'Koľko rokov má milénium?' → 1000 = D."
+    },
+    {
+      "id": "bank-cielene-c2-t8-01-f76e258fdb",
+      "status": "uncertain",
+      "detail": "Principle described; choice letter not explicit."
+    },
+    {
+      "id": "bank-cielene-c2-t8-36-cab567b9ac",
+      "status": "wrong",
+      "detail": "Solution says A is not a synonym row → answer A, not CSV=D."
+    },
+    {
+      "id": "bank-cielene-c2-t8-15-c322e6e1b3",
+      "status": "uncertain",
+      "detail": "Empty solution remainder after choices."
+    },
+    {
+      "id": "bank-cielene-c3-t9-01-e52644a18e",
+      "status": "wrong",
+      "detail": "Solution: 26+11=37 → A; CSV=D (41)."
+    },
+    {
+      "id": "bank-cielene-c3-t9-16-efd106606d",
+      "status": "confirmed",
+      "detail": "Solution: 44+1=45 → A."
+    },
+    {
+      "id": "bank-cielene-c3-t9-50-609b6576b9",
+      "status": "confirmed",
+      "detail": "Answer text 'Yorkshirské more' matches D as non-existent sea."
+    },
+    {
+      "id": "bank-cielene-c4-t10-01-caa54d89e8",
+      "status": "wrong",
+      "detail": "Solution targets reversed adult/young pair (krava–teľa) → C; CSV=D."
+    },
+    {
+      "id": "bank-cielene-c4-t10-14-ff6c06a34e",
+      "status": "confirmed",
+      "detail": "Cipher rule matches choice D š2véd3p."
+    },
+    {
+      "id": "bank-cielene-c4-t10-31-c2fbaa4c62",
+      "status": "confirmed",
+      "detail": "Solution identifies posilňovať (PSLŇVŤ) as the odd vowel set → D."
+    },
+    {
+      "id": "bank-cielene-d1a-t11-01-a4d8205a06",
+      "status": "wrong",
+      "detail": "Solution: x=4 hodiny → B; CSV=D (4h15)."
+    },
+    {
+      "id": "bank-cielene-d1a-t11-20-c7e5da05e8",
+      "status": "confirmed",
+      "detail": "Closed-loop letter counts support O=1 → A."
+    },
+    {
+      "id": "bank-cielene-d1a-t11-60-519de0360c",
+      "status": "wrong",
+      "detail": "Solution narrative: Adam 12 / sister 18 → B; CSV=D (15 a 10)."
+    },
+    {
+      "id": "bank-cielene-d2a-t12-01-b71aac818c",
+      "status": "confirmed",
+      "detail": "Solution text matches 'Väčšinu slov…nevieme zaradiť' → D."
+    },
+    {
+      "id": "bank-cielene-d2a-t12-38-6a34d64344",
+      "status": "confirmed",
+      "detail": "Solution: ústupčivá is antonym → D is not a synonym row."
+    },
+    {
+      "id": "bank-cielene-d2a-t12-59-79c92aff03",
+      "status": "confirmed",
+      "detail": "Answer text '27' matches D."
+    }
+  ],
+  "ulohySample": [
+    {
+      "id": "bank-t1-01-e2e72873f9",
+      "status": "confirmed",
+      "detail": "T1 #1: PDF letter D matches CSV D. Snip: 1.  D – poznania – predchodcov  (ľudské poznanie/nadviazať na predchodcov – táto"
+    },
+    {
+      "id": "bank-t1-11-b5a130c09c",
+      "status": "confirmed",
+      "detail": "T1 #11: PDF letter B matches CSV B. Snip: 11.  B – V2  (správne poradie je V4, V1, V3, V2, V5 . Pozor! V  tomto prípade sú"
+    },
+    {
+      "id": "bank-t2-01-60d48005d6",
+      "status": "confirmed",
+      "detail": "T2 #1: PDF letter B matches CSV B. Snip: 1.  B (vzťah je – vyžaruje/dáva)  "
+    },
+    {
+      "id": "bank-t2-11-2d59bac31d",
+      "status": "confirmed",
+      "detail": "T2 #11: PDF letter B matches CSV B. Snip: 11.  B ( Atény nie sú slovenské mesto, ostatné sú Sereď, Fiľakovo, Zvolen ) "
+    },
+    {
+      "id": "bank-t3-01-6cf9ccbb8f",
+      "status": "confirmed",
+      "detail": "T3 #1: PDF letter A matches CSV A. Snip: 1.  A  – Skúsime si dosadiť reálne hodnoty, ak by mal zelený špagát 10 metrov, p"
+    },
+    {
+      "id": "bank-t3-11-558999c530",
+      "status": "confirmed",
+      "detail": "T3 #11: PDF letter A matches CSV A. Snip: 11.  A – Postupnosť sa zvyšuje + 2, x 2, + 2, x 2...  "
+    },
+    {
+      "id": "bank-t4-01-9518748eea",
+      "status": "confirmed",
+      "detail": "T4 #1: PDF letter C matches CSV C. Snip: 1.  C – Slovo MONOvariát neexistuje.  "
+    },
+    {
+      "id": "bank-t4-11-3474d015ac",
+      "status": "confirmed",
+      "detail": "T4 #11: PDF letter A matches CSV A. Snip: 11.  A  – dravého, člunov  / členov, B – lovia, zaútočia, C – vĺčatá, normám, D "
+    },
+    {
+      "id": "bank-t5-01-cab409e886",
+      "status": "confirmed",
+      "detail": "T5 #1: PDF letter C matches CSV C. Snip: 1.  C – V prvej nádobe je 3 stlačenia x 14 = 42 guličiek. Druhú musíme teda stla"
+    },
+    {
+      "id": "bank-t5-12-22d90bd1e8",
+      "status": "confirmed",
+      "detail": "T5 #12: PDF letter B matches CSV B. Snip: 12.  B – Jedno z  detí je Ivanov otec a  na to, aby mal Ivan sesternice alebo br"
+    },
+    {
+      "id": "bank-t6-01-55915f83f7",
+      "status": "confirmed",
+      "detail": "T6 #1: PDF letter B matches CSV B. Snip: 1.  B – všímame si žltý stĺpček grafu , hodnota je 86.  "
+    },
+    {
+      "id": "bank-t6-11-a6b8ded7ac",
+      "status": "confirmed",
+      "detail": "T6 #11: PDF letter B matches CSV B. Snip: 11.  B – Si ngapur – Slovensko = 90  "
+    },
+    {
+      "id": "bank-t7-01-f0a84a0404",
+      "status": "confirmed",
+      "detail": "T7 #1: PDF letter A matches CSV A. Snip: 1.  A "
+    },
+    {
+      "id": "bank-t7-11-d501e5436a",
+      "status": "confirmed",
+      "detail": "T7 #11: PDF letter C matches CSV C. Snip: 11.  C "
+    },
+    {
+      "id": "bank-t8-01-b066d2fdf9",
+      "status": "confirmed",
+      "detail": "T8 #1: PDF letter C matches CSV C. Snip: 1.  C "
+    },
+    {
+      "id": "bank-t8-11-31923bd5ea",
+      "status": "confirmed",
+      "detail": "T8 #11: PDF letter C matches CSV C. Snip: 11.  C – ak Gabriel pestuje hrušky a  Roman nepestuje jablká, jablká musí pestov"
+    },
+    {
+      "id": "bank-t9-02-389ab08a4a",
+      "status": "confirmed",
+      "detail": "T9 #2: PDF letter D matches CSV D. Snip: 2.  D – 1– nárečové slová, 2 – spisovné slová, 3 – slangy. Hoďka (hodina) je sla"
+    },
+    {
+      "id": "bank-t9-12-bd7d79d9de",
+      "status": "confirmed",
+      "detail": "T9 #12: PDF letter C matches CSV C. Snip: 12.  C – nedočítala dielo ani ra z "
+    },
+    {
+      "id": "bank-t11-01-bec726d2fb",
+      "status": "confirmed",
+      "detail": "T11 #1: PDF B vs CSV B"
+    },
+    {
+      "id": "bank-t12-01-618f70aad9",
+      "status": "confirmed",
+      "detail": "T12 #1: PDF A vs CSV A"
+    }
+  ],
+  "recommendation": "reject_batch",
+  "summary": "Letter-key re-extraction checked 365 rows; 9 mismatches (Evanjelicke section-collision, X7 dual answer-key collision, X4 item with no official letter). Restated Cielene B/C/D sample n=30: 13 confirmed, 12 wrong, 5 uncertain. Restated bank keys are ~84% D (vs ~23% D on letter-key rows)—consistent with infer_restated_key falling back to last-choice text when Riesenie only restates the MCQ. Úlohy spot-check 20/20 confirmed. Recommendation: reject_batch — do not publish restated keys; fix letter-key multi-section pairs before keep."
+}

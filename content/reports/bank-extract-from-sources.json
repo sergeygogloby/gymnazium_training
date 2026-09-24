@@ -1,0 +1,211 @@
+{
+  "generatedAt": "2026-09-24T15:30:52.128424+00:00",
+  "source": "sources/ letter-key only: Mudre Ulohy+Riesenia, Cielene 1–2, EXAM X5/X6/X9 (A–D)",
+  "itemCount": 336,
+  "goldDropped": 0,
+  "goldDropSample": [],
+  "byTopicCounts": {
+    "T1": 65,
+    "T10": 20,
+    "T11": 19,
+    "T12": 20,
+    "T2": 54,
+    "T3": 20,
+    "T4": 20,
+    "T5": 28,
+    "T6": 20,
+    "T7": 20,
+    "T8": 17,
+    "T9": 33
+  },
+  "bySource": [
+    {
+      "kind": "ulohy",
+      "topic": 1,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/1/VSJP8_Mudre-predplatne_1_Ulohy-zhbksb.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f1/VSJP8_Mudre-predplatne_1_Riesenia-eqakog.pdf",
+      "parsed": 20,
+      "skipped": 0,
+      "reasons": {}
+    },
+    {
+      "kind": "ulohy",
+      "topic": 2,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/1/VSJP8_Mudre-predplatne_2_Ulohy-hgfdda.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f1/VSJP8_Mudre-predplatne_2_Riesenia-6i0lha.pdf",
+      "parsed": 20,
+      "skipped": 0,
+      "reasons": {}
+    },
+    {
+      "kind": "ulohy",
+      "topic": 3,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/2/VSJP8_Mudre-predplatne_3_Ulohy-2cvhxh.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-F2/VSJP8_Mudre-predplatne_3_Riesenia-hmvek4.pdf",
+      "parsed": 20,
+      "skipped": 0,
+      "reasons": {}
+    },
+    {
+      "kind": "ulohy",
+      "topic": 4,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/2/VSJP8_Mudre-predplatne_4_Ulohy-lv0avh.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-F2/VSJP8_Mudre-predplatne_4_Riesenia-wetyfq.pdf",
+      "parsed": 20,
+      "skipped": 0,
+      "reasons": {}
+    },
+    {
+      "kind": "ulohy",
+      "topic": 5,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/3/VSJP8_Mudre-predplatne_5_Ulohy-s6hvtz.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f3/VSJP8_Mudre-predplatne_5_Riesenia-00ceqg.pdf",
+      "parsed": 18,
+      "skipped": 2,
+      "reasons": {
+        "q5": "no_letter_key",
+        "q11": "no_mcq_choices"
+      }
+    },
+    {
+      "kind": "ulohy",
+      "topic": 6,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/3/VSJP8_Mudre-predplatne_6_Ulohy-uwkir9.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f3/VSJP8_Mudre-predplatne_6_Riesenia-pnxgbz.pdf",
+      "parsed": 20,
+      "skipped": 0,
+      "reasons": {}
+    },
+    {
+      "kind": "ulohy",
+      "topic": 7,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/4/VSJP8_Mudre-predplatne_7_Ulohy-ni0sko.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f4/VSJP8_Mudre-predplatne_7_Riesenia-x2tiii.pdf",
+      "parsed": 20,
+      "skipped": 0,
+      "reasons": {}
+    },
+    {
+      "kind": "ulohy",
+      "topic": 8,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/4/VSJP8_Mudre-predplatne_8_Ulohy-ksn6nf.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f4/VSJP8_Mudre-predplatne_8_Riesenia-isom5j.pdf",
+      "parsed": 17,
+      "skipped": 3,
+      "reasons": {
+        "q2": "no_mcq_choices",
+        "q7": "no_letter_key",
+        "q17": "no_letter_key"
+      }
+    },
+    {
+      "kind": "ulohy",
+      "topic": 9,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/5/VSJP8_Mudre-predplatne_9_Ulohy-khgcmh.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/New folder/VSJP8_Mudre-predplatne_9_Riesenia-bwpa8c.pdf",
+      "parsed": 17,
+      "skipped": 3,
+      "reasons": {
+        "q1": "no_mcq_choices",
+        "q4": "no_mcq_choices",
+        "q9": "no_mcq_choices"
+      }
+    },
+    {
+      "kind": "ulohy",
+      "topic": 10,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/5/VSJP8_Mudre-predplatne_10_Ulohy-frdkfu.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/New folder/VSJP8_Mudre-predplatne_10_Riesenia-dc92zv.pdf",
+      "parsed": 20,
+      "skipped": 0,
+      "reasons": {}
+    },
+    {
+      "kind": "ulohy",
+      "topic": 11,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/6/VSJP8_Mudre-predplatne_11_Ulohy-jdivir.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f6/VSJP8_Mudre-predplatne_11_Riesenia-raeg6x.pdf",
+      "parsed": 19,
+      "skipped": 1,
+      "reasons": {
+        "q4": "no_mcq_choices"
+      }
+    },
+    {
+      "kind": "ulohy",
+      "topic": 12,
+      "ulohy": "/Users/svm/work/projects/gymnazium_training/sources/6/VSJP8_Mudre-predplatne_12_Ulohy-bg6kfi.pdf",
+      "riesenia": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f6/VSJP8_Mudre-predplatne_12_Riesenia-ol4nxc.pdf",
+      "parsed": 20,
+      "skipped": 0,
+      "reasons": {}
+    },
+    {
+      "kind": "letter-key-test",
+      "id": "cielene-1",
+      "test": "/Users/svm/work/projects/gymnazium_training/sources/1/VSJP8_Test-Cielene_1-g1iqhp.pdf",
+      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f1/VSJP8_Test-Cielene_1_Riesenie-lq1nyo.pdf",
+      "parsed": 35,
+      "skipped": 5,
+      "reasons": {
+        "q6": "no_mcq_choices",
+        "q10": "no_mcq_choices",
+        "q20": "no_mcq_choices",
+        "q23": "no_mcq_choices",
+        "q34": "key_D_out_of_range_3"
+      }
+    },
+    {
+      "kind": "letter-key-test",
+      "id": "cielene-2",
+      "test": "/Users/svm/work/projects/gymnazium_training/sources/1/VSJP8_Test-Cielene_2-s9j1i4.pdf",
+      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f1/VSJP8_Test-Cielene_2_Riesenie-3mre04.pdf",
+      "parsed": 34,
+      "skipped": 6,
+      "reasons": {
+        "q1": "no_letter_key",
+        "q6": "no_mcq_choices",
+        "q8": "no_mcq_choices",
+        "q20": "no_mcq_choices",
+        "q22": "no_letter_key",
+        "q29": "no_letter_key"
+      }
+    },
+    {
+      "kind": "letter-key-test",
+      "id": "exam-x5",
+      "test": "/Users/svm/work/projects/gymnazium_training/sources/1/1_VJSJP8_Test_X5_Exam-vhpcld.pdf",
+      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f1/1_VSJP8_Test_X5_Exam_Riesenie-qaqtdt.pdf",
+      "parsed": 10,
+      "skipped": 0,
+      "reasons": {}
+    },
+    {
+      "kind": "letter-key-test",
+      "id": "exam-x6",
+      "test": "/Users/svm/work/projects/gymnazium_training/sources/3/5_VSJP8_Test_X6_Exam-3ndcxh.pdf",
+      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f3/5_VSJP8_Test_X6_Exam_Riesenie-zhweu2.pdf",
+      "parsed": 10,
+      "skipped": 0,
+      "reasons": {}
+    },
+    {
+      "kind": "letter-key-test",
+      "id": "exam-x9",
+      "test": "/Users/svm/work/projects/gymnazium_training/sources/5/9_VSJP8_Test_X9-1le8g0.pdf",
+      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/New folder/9_VSJP8_Test_X9_Riesenie-t4fyh5.pdf",
+      "parsed": 16,
+      "skipped": 4,
+      "reasons": {
+        "q9": "key_E_skipped",
+        "q10": "key_E_skipped",
+        "q11": "no_mcq_choices",
+        "q15": "key_E_skipped"
+      }
+    }
+  ],
+  "csv": "content/bank/vsjp8-ulohy-bank.csv",
+  "publishedDefault": "true (after gate)",
+  "note": "Bank MCQ with explicit letter keys in Riesenia only. Restated Cielene B/C/D rejected after key-audit (~40% wrong in sample). X4/X7/Evan/GMK skipped (key collisions or image-only). published=false until csv-import-qa publish gate. sources/ left untouched.",
+  "gate": "content/reports/vsjp8-ulohy-bank_gate.md"
+}

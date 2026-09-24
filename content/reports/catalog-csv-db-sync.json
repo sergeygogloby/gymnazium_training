@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-09-24T15:58:02.020323+00:00",
+  "dbPath": "data/gymnazium.sqlite",
+  "total": 376,
+  "bySourceType": {
+    "bank": 336,
+    "synthetic": 40
+  },
+  "byTopic": {
+    "T1": 65,
+    "T2": 54,
+    "T3": 20,
+    "T4": 20,
+    "T5": 68,
+    "T6": 20,
+    "T7": 20,
+    "T8": 17,
+    "T9": 33,
+    "T10": 20,
+    "T11": 19,
+    "T12": 20
+  },
+  "published": 366,
+  "files": {
+    "catalog": "content/published/catalog-all-376.csv",
+    "bank": "content/bank/vsjp8-ulohy-bank.csv",
+    "bankPublishedCopy": "content/published/vsjp8-ulohy-bank.csv",
+    "synthetic": "content/published/pilot-t5-synth-20260924_M3_T5.csv"
+  },
+  "note": "CSVs exported from SQLite so file catalog matches DB exactly."
+}
