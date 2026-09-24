@@ -26,7 +26,9 @@ export function PracticeEntryPage() {
   }
 
   function startExam(kind: 'exam_30' | 'exam_60') {
-    sessionStore.startSession(kind);
+    sessionStore.startSession(kind, {
+      skillArea: skillFilter === 'all' ? undefined : skillFilter,
+    });
     navigate('/relacia');
   }
 
