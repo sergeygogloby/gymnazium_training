@@ -218,7 +218,11 @@ export const sessionStore = {
         currentIndex: 0,
       };
     } else if (isExamKind(sessionKind)) {
-      const items = resolveExamItems(state.catalog);
+      const items = resolveExamItems(state.catalog, {
+        module: options?.module,
+        topic: options?.topic,
+        skillArea: options?.skillArea,
+      });
       const duration = examDurationMs(sessionKind);
       activeSession = {
         ...activeSession,
