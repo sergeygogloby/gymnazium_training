@@ -24,9 +24,14 @@ See [`sql/schema.sql`](./sql/schema.sql):
 ## Run
 
 ```bash
-# from repo root
-npm install          # installs app + server workspaces if using root scripts
-cd server && npm install && npm run init-db && npm run dev
+# from repo root (installs server deps if needed)
+npm run publish-all
+npm run init-db
+npm run t5-critical-path
+
+# or explicitly
+cd server && npm install && npm run publish-all
+cd server && npm run dev
 
 # app (separate terminal) — Vite proxies /api → :8787
 cd app && npm install && npm run dev
