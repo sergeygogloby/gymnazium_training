@@ -73,4 +73,30 @@ describe('practice session persist', () => {
       .map((a) => a.sessionKind);
     expect(kinds).toEqual(['practice', 'exam_30']);
   });
+
+  it('starts mistakes-scoped practice with explicit item ids only', () => {
+    sessionStore.ensureDemoCatalog();
+    const ids = ['demo_m1_t1_vsp_01', 'demo_m1_t2_vsp_02'];
+    const attemptId = sessionStore.startSession('practice', {
+      mistakesScoped: true,
+      itemIds: ids,
+    });
+    const active = sessionStore.getState().activeSession;
+    expect(active?.sessionKind).toBe('practice');
+    expect(active?.mistakesScoped).toBe(true);
+    expect(active?.itemIds).toEqual(ids);
+    expect(
+      sessionStore.getState().attempts.find((a) => a.id === attemptId)
+        ?.mistakesScoped,
+    ).toBe(true);
+  });
+
+  it('does not invent a practice set when mistakes queue is empty', () => {
+    sessionStore.ensureDemoCatalog();
+    sessionStore.startSession('practice', {
+      mistakesScoped: true,
+      itemIds: [],
+    });
+    expect(sessionStore.getState().activeSession?.itemIds).toEqual([]);
+  });
 });

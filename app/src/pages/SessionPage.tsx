@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { isDemoItemId } from '../lib/demoCatalog';
@@ -51,10 +51,11 @@ function PracticeSessionBody() {
   const [selected, setSelected] = useState<string>('');
   const [lastOutcome, setLastOutcome] = useState<AnswerOutcome | null>(null);
 
-  const attempt = useMemo(
-    () => attempts.find((a) => a.id === activeSession?.attemptId),
-    [attempts, activeSession?.attemptId],
-  );
+  if (!activeSession) {
+    return null;
+  }
+
+  const attempt = attempts.find((a) => a.id === activeSession.attemptId);
 
   const itemIds = activeSession.itemIds ?? [];
   const index = activeSession.currentIndex ?? 0;
