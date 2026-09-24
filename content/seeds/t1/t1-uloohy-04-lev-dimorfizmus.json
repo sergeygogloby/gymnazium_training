@@ -1,0 +1,51 @@
+{
+  "seedId": "t1-uloohy-04-lev-dimorfizmus",
+  "templateId": "t1.cloze-word-pair.mcq",
+  "module": "M1",
+  "topic": "T1",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "sourceType": "bank",
+  "published": false,
+  "provenance": {
+    "sourcePdf": "VSJP8_Mudre-predplatne_1_Ulohy-zhbksb.pdf",
+    "solutionPdf": "VSJP8_Mudre-predplatne_1_Riesenia-eqakog.pdf",
+    "itemIndex": 4,
+    "folder": "sources/1"
+  },
+  "stem": "Ktorú dvojicu slov možno doplniť na vynechané miesta tak, aby vznikol zmysluplný text?\nLev sa od iných mačkovitých šeliem ____ krátkou priliehavou srsťou a koncom chvosta, kde má dlhú srsť. Už na prvý pohľad vidieť ____ dimorfizmus.",
+  "choices": [
+    "delí – bezprízorný",
+    "pýši – dominantný",
+    "marí – nadmerný",
+    "odlišuje – pohlavný"
+  ],
+  "correctKey": "D",
+  "rationale": "Odlišuje sa od iných šeliem; pohlavný dimorfizmus je ustálený termín.",
+  "slots": {
+    "choicePairs": [
+      {
+        "left": "delí",
+        "right": "bezprízorný"
+      },
+      {
+        "left": "pýši",
+        "right": "dominantný"
+      },
+      {
+        "left": "marí",
+        "right": "nadmerný"
+      },
+      {
+        "left": "odlišuje",
+        "right": "pohlavný"
+      }
+    ],
+    "correctIndex": 3
+  },
+  "shapeNotes": "Verb + technical adjective collocation.",
+  "attestedCues": [
+    "odlišuje",
+    "pohlavný dimorfizmus"
+  ]
+}

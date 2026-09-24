@@ -1,0 +1,30 @@
+{
+  "seedId": "t5-uloohy-03-vylety-km",
+  "templateId": "t5.numeric-word-problem.mcq",
+  "module": "M3",
+  "topic": "T5",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "sourceType": "bank",
+  "published": false,
+  "provenance": {
+    "sourcePdf": "VSJP8_Mudre-predplatne_5_Ulohy-s6hvtz.pdf",
+    "solutionPdf": "VSJP8_Mudre-predplatne_5_Riesenia-00ceqg.pdf",
+    "itemIndex": 3,
+    "folder": "sources/3"
+  },
+  "stem": "Za tri dni prešli žiaci na výlete 65 km. Prvý deň prešli dvakrát toľko ako tretí deň, druhý deň prešli o 10 km menej ako prvý deň. Koľko kilometrov prešli v jednotlivých dňoch?",
+  "choices": [
+    "Prvý deň = 40 km, druhý deň = 15 km, tretí deň = 10 km",
+    "Prvý deň = 40 km, druhý deň = 30 km, tretí deň = 25 km",
+    "Prvý deň = 25 km, druhý deň = 25 km, tretí deň = 15 km",
+    "Prvý deň = 30 km, druhý deň = 20 km, tretí deň = 15 km"
+  ],
+  "correctKey": "D",
+  "rationale": "Zápis: 1. deň = 2x, 2. deň = 2x−10, 3. deň = x; 2x+(2x−10)+x = 65 → 5x=75 → x=15 → 30, 20, 15 km.",
+  "slots": {
+    "quantities": { "totalKm": 65, "day1Factor": 2, "day2OffsetFromDay1": -10 },
+    "derive": "solve 2x + (2x-10) + x = 65"
+  },
+  "shapeNotes": "Linear system disguised as three-day trip."
+}

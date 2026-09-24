@@ -1,0 +1,29 @@
+{
+  "templateId": "t5.percent-composition.mcq",
+  "module": "M3",
+  "topic": "T5",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "title": "Percento zloženia",
+  "description": "Part/whole × 100 → integer percent choice.",
+  "slots": {
+    "wholeGrams": { "type": "integer", "min": 1 },
+    "partGrams": { "type": "integer", "min": 0 },
+    "substance": { "type": "string", "example": "cukru" }
+  },
+  "renderStem": "Tyčinka obsahuje na {{wholeGrams}} gramov {{partGrams}} gramov {{substance}}. Koľko percent {{substance}} obsahuje tyčinka?",
+  "renderChoices": "A–D numeric percents",
+  "deriveCorrectKey": {
+    "mode": "programmatic",
+    "formula": "round((partGrams / wholeGrams) * 100)",
+    "solverHint": "t5.percent_of_whole"
+  },
+  "rationalePattern": "Percento = (part/whole)×100.",
+  "provenance": {
+    "sourcePdfs": [
+      "VSJP8_Mudre-predplatne_5_Ulohy-s6hvtz.pdf",
+      "VSJP8_Mudre-predplatne_5_Riesenia-00ceqg.pdf"
+    ]
+  },
+  "publishedDefault": false
+}

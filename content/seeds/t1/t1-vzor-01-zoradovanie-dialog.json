@@ -1,0 +1,45 @@
+{
+  "seedId": "t1-vzor-01-zoradovanie-dialog",
+  "templateId": "t1.sentence-order.mcq",
+  "module": "M1",
+  "topic": "T1",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "sourceType": "bank",
+  "published": false,
+  "provenance": {
+    "sourcePdf": "VSJP8_Mudre-predplatne_1_Doplnanie-chybajucich-slov-zoradovanie-viet-axipyn.pdf",
+    "itemIndex": 1,
+    "section": "Zoraďovanie viet",
+    "folder": "sources/1"
+  },
+  "stem": "V uvedenom texte je poprehadzované poradie viet. Ak ich zoradíme do zmysluplného poradia, ktorá veta bude predposledná?\nV1: To je ale čudný nápad!\nV2: Ale kam by mala ísť?\nV3: Priviazať?\nV4: No ak ju nepriviažeš, hocikam zájde a stratí sa.\nV5: Hocikam.",
+  "choices": [
+    "V5",
+    "V3",
+    "V4",
+    "V2"
+  ],
+  "correctKey": "D",
+  "rationale": "Poradie: V3, V1, V4, V2, V5. Predposledná je V2 (otázka pred odpoveďou V5 Hocikam).",
+  "slots": {
+    "sentences": [
+      "To je ale čudný nápad!",
+      "Ale kam by mala ísť?",
+      "Priviazať?",
+      "No ak ju nepriviažeš, hocikam zájde a stratí sa.",
+      "Hocikam."
+    ],
+    "ask": "position",
+    "targetPosition": 4,
+    "correctSentenceId": "V2",
+    "canonicalOrder": [
+      "V3",
+      "V1",
+      "V4",
+      "V2",
+      "V5"
+    ]
+  },
+  "shapeNotes": "Dialog reconstruction; ask for penultimate sentence id."
+}

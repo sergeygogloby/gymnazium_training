@@ -1,0 +1,51 @@
+{
+  "seedId": "t1-uloohy-01-newton-poznanie",
+  "templateId": "t1.cloze-word-pair.mcq",
+  "module": "M1",
+  "topic": "T1",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "sourceType": "bank",
+  "published": false,
+  "provenance": {
+    "sourcePdf": "VSJP8_Mudre-predplatne_1_Ulohy-zhbksb.pdf",
+    "solutionPdf": "VSJP8_Mudre-predplatne_1_Riesenia-eqakog.pdf",
+    "itemIndex": 1,
+    "folder": "sources/1"
+  },
+  "stem": "Ktorú dvojicu slov možno doplniť na vynechané miesta tak, aby vznikol zmysluplný text?\nSir Isaac Newton je jednou z najväčších postáv v dejinách ľudského _______ a od neho sa vlastne počíta fyzika ako novodobá veda. Nadviazal na výsledky svojich ______ – Galileiho, Keplera, Descarta a ďalších.",
+  "choices": [
+    "žitia – kamarátov",
+    "počítania – kolegov",
+    "filozofovania – obdivovateľov",
+    "poznania – predchodcov"
+  ],
+  "correctKey": "D",
+  "rationale": "Jediné ustálené/kolokačné: ľudské poznanie; nadviazať na výsledky predchodcov.",
+  "slots": {
+    "choicePairs": [
+      {
+        "left": "žitia",
+        "right": "kamarátov"
+      },
+      {
+        "left": "počítania",
+        "right": "kolegov"
+      },
+      {
+        "left": "filozofovania",
+        "right": "obdivovateľov"
+      },
+      {
+        "left": "poznania",
+        "right": "predchodcov"
+      }
+    ],
+    "correctIndex": 3
+  },
+  "shapeNotes": "Cloze two blanks; four word-pair choices.",
+  "attestedCues": [
+    "ľudské poznanie",
+    "nadviazať na predchodcov"
+  ]
+}
