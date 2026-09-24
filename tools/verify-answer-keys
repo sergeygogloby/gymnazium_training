@@ -200,6 +200,8 @@ def verify_row(
     row: dict[str, str],
     row_number: int,
     templates: dict[str, dict[str, Any]],
+    *,
+    gold_keys: dict[tuple[str, int], str] | None = None,
 ) -> RowVerdict:
     rid = (row.get("id") or "").strip() or f"<row-{row_number}>"
     actual = normalize_key(row.get("correctKey") or "")
@@ -211,6 +213,47 @@ def verify_row(
 
     template_hint = (row.get("templateId") or "").strip()
     # Optional column not in F22 core — ignore if absent
+
+    # Bank gold: solutionPdf + itemIndex letter from official Riesenia
+    source = (row.get("sourceType") or "").strip()
+    sol = (row.get("solutionPdf") or "").strip()
+    idx_raw = (row.get("itemIndex") or "").strip()
+    if (
+        source == "bank"
+        and gold_keys is not None
+        and sol
+        and idx_raw.isdigit()
+    ):
+        expected = gold_keys.get((sol, int(idx_raw)))
+        if expected is None:
+            return RowVerdict(
+                row_number,
+                rid,
+                "fail",
+                "bank.gold_riesenia",
+                f"no letter key in {sol} for itemIndex={idx_raw}",
+                None,
+                actual,
+            )
+        if expected == actual:
+            return RowVerdict(
+                row_number,
+                rid,
+                "pass",
+                "bank.gold_riesenia",
+                "CSV correctKey matches Riesenia letter",
+                expected,
+                actual,
+            )
+        return RowVerdict(
+            row_number,
+            rid,
+            "fail",
+            "bank.gold_riesenia",
+            "CSV correctKey disagrees with Riesenia letter",
+            expected,
+            actual,
+        )
 
     if choices:
         for method, fn in SOLVER_PIPELINE:
@@ -255,6 +298,56 @@ def verify_row(
     )
 
 
+def load_bank_gold_keys(csv_path: Path) -> dict[tuple[str, int], str] | None:
+    """If CSV has bank rows with solutionPdf, load letter keys from sources/ Riesenia."""
+    text = csv_path.read_text(encoding="utf-8-sig")
+    import csv as _csv
+    import io
+
+    rows = list(_csv.DictReader(io.StringIO(text)))
+    if not rows:
+        return None
+    if "solutionPdf" not in (rows[0].keys() if rows else []):
+        return None
+    bank_rows = [r for r in rows if (r.get("sourceType") or "").strip() == "bank"]
+    if not bank_rows:
+        return None
+
+    # Lazy import extract helpers by path
+    extract_path = REPO / "tools" / "extract-bank-from-sources"
+    if not extract_path.is_file():
+        return None
+    import types
+
+    code = extract_path.read_text(encoding="utf-8").split("if __name__")[0]
+    mod = types.ModuleType("extract_bank_for_verify")
+    sys.modules[mod.__name__] = mod
+    g: dict[str, Any] = {
+        "__file__": str(extract_path.resolve()),
+        "__name__": mod.__name__,
+    }
+    exec(compile(code, str(extract_path), "exec"), g)
+
+    sources: Path = g["SOURCES"]
+    split_numbered_blocks = g["split_numbered_blocks"]
+    parse_solution_block = g["parse_solution_block"]
+    pdf_text = g["pdf_text"]
+
+    needed = {(r.get("solutionPdf") or "").strip() for r in bank_rows}
+    needed.discard("")
+    gold: dict[tuple[str, int], str] = {}
+    for name in needed:
+        matches = sorted(sources.rglob(name))
+        if not matches:
+            continue
+        blocks = split_numbered_blocks(pdf_text(matches[0]))
+        for n, body in blocks.items():
+            key, _ = parse_solution_block(body)
+            if key:
+                gold[(name, n)] = key
+    return gold
+
+
 def run_verify(csv_path: Path, batch_id: str, templates_dir: Path) -> VerifyReport:
     lint = lint_csv_path(csv_path)
     report = VerifyReport(
@@ -278,8 +371,15 @@ def run_verify(csv_path: Path, batch_id: str, templates_dir: Path) -> VerifyRepo
         return report
 
     templates = load_templates(templates_dir)
+    gold_keys = load_bank_gold_keys(csv_path)
+    if gold_keys is not None:
+        report.note = (
+            "Bank rows verified against official Riesenia letter keys "
+            f"({len(gold_keys)} gold entries loaded)."
+        )
+
     for i, row in enumerate(lint.rows, start=1):
-        verdict = verify_row(row, i, templates)
+        verdict = verify_row(row, i, templates, gold_keys=gold_keys)
         report.rows.append(verdict)
         if verdict.status == "pass":
             report.passed += 1

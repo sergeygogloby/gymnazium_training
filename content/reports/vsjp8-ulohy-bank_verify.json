@@ -1,0 +1,3038 @@
+{
+  "batchId": "vsjp8-ulohy-bank",
+  "csvPath": "content/bank/vsjp8-ulohy-bank.csv",
+  "ok": true,
+  "lintOk": true,
+  "checked": 336,
+  "passed": 336,
+  "failed": 0,
+  "needsIndependentCheck": 0,
+  "generatedAt": "2026-09-24T15:36:38.859010+00:00",
+  "note": "Bank rows verified against official Riesenia letter keys (353 gold entries loaded).",
+  "rows": [
+    {
+      "row": 1,
+      "id": "bank-cielene-1-t1-01-45230188b3",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 2,
+      "id": "bank-exam-x5-t1-01-4d08a57411",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 3,
+      "id": "bank-t1-01-e2e72873f9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 4,
+      "id": "bank-cielene-1-t1-02-e83e3cc368",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 5,
+      "id": "bank-exam-x5-t1-02-f12476e7b7",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 6,
+      "id": "bank-t1-02-4f666679d6",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 7,
+      "id": "bank-cielene-1-t1-03-b4064188e2",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 8,
+      "id": "bank-exam-x5-t1-03-44abf0a394",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 9,
+      "id": "bank-t1-03-5200806fbc",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 10,
+      "id": "bank-cielene-1-t1-04-4557fa6487",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 11,
+      "id": "bank-exam-x5-t1-04-d135c838ed",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 12,
+      "id": "bank-t1-04-4ef431f056",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 13,
+      "id": "bank-cielene-1-t1-05-279c5b03f2",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 14,
+      "id": "bank-exam-x5-t1-05-7e506f4d9a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 15,
+      "id": "bank-t1-05-77d69a3592",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 16,
+      "id": "bank-exam-x5-t1-06-764d99f855",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 17,
+      "id": "bank-t1-06-9a7e73d7c6",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 18,
+      "id": "bank-cielene-1-t1-07-29f99bdd23",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 19,
+      "id": "bank-exam-x5-t1-07-51136bd573",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 20,
+      "id": "bank-t1-07-6ca88115bd",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 21,
+      "id": "bank-cielene-1-t1-08-579d519c71",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 22,
+      "id": "bank-exam-x5-t1-08-ce45328da3",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 23,
+      "id": "bank-t1-08-8b84b69ad0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 24,
+      "id": "bank-cielene-1-t1-09-64ec88cd22",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 25,
+      "id": "bank-exam-x5-t1-09-f2327a0f8d",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 26,
+      "id": "bank-t1-09-ada819ee01",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 27,
+      "id": "bank-exam-x5-t1-10-446189ffff",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 28,
+      "id": "bank-t1-10-125f47eeb7",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 29,
+      "id": "bank-cielene-1-t1-11-9fc891a8e9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 30,
+      "id": "bank-t1-11-b5a130c09c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 31,
+      "id": "bank-cielene-1-t1-12-12d25ed0a1",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 32,
+      "id": "bank-t1-12-0791796b1c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 33,
+      "id": "bank-cielene-1-t1-13-66b6b3ecca",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 34,
+      "id": "bank-t1-13-be82269c56",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 35,
+      "id": "bank-cielene-1-t1-14-7f39682dda",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 36,
+      "id": "bank-t1-14-404be884d7",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 37,
+      "id": "bank-cielene-1-t1-15-bac86c9c22",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 38,
+      "id": "bank-t1-15-e12e3ae69e",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 39,
+      "id": "bank-cielene-1-t1-16-72d73d6932",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 40,
+      "id": "bank-t1-16-68c1c4f17b",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 41,
+      "id": "bank-cielene-1-t1-17-0241e1f908",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 42,
+      "id": "bank-t1-17-f883d6de14",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 43,
+      "id": "bank-cielene-1-t1-18-b39fe5c8f9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 44,
+      "id": "bank-t1-18-acdbd0df57",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 45,
+      "id": "bank-cielene-1-t1-19-16e698ed05",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 46,
+      "id": "bank-t1-19-38a75a523b",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 47,
+      "id": "bank-t1-20-ce10c145e4",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 48,
+      "id": "bank-cielene-1-t1-21-cca472a585",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 49,
+      "id": "bank-cielene-1-t1-22-965b90c978",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 50,
+      "id": "bank-cielene-1-t1-24-f93a91683b",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 51,
+      "id": "bank-cielene-1-t1-25-de1e50a626",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 52,
+      "id": "bank-cielene-1-t1-26-61339fdc5d",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 53,
+      "id": "bank-cielene-1-t1-27-71f1cfe9d3",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 54,
+      "id": "bank-cielene-1-t1-28-a32bfde514",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 55,
+      "id": "bank-cielene-1-t1-29-d0463cdefd",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 56,
+      "id": "bank-cielene-1-t1-30-ff4b2cd885",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 57,
+      "id": "bank-cielene-1-t1-31-0765b977d0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 58,
+      "id": "bank-cielene-1-t1-32-0a5b0b5292",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 59,
+      "id": "bank-cielene-1-t1-33-72da45680a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 60,
+      "id": "bank-cielene-1-t1-35-7f28890c8a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 61,
+      "id": "bank-cielene-1-t1-36-a04215cca8",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 62,
+      "id": "bank-cielene-1-t1-37-d0463cdefd",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 63,
+      "id": "bank-cielene-1-t1-38-83b0055574",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 64,
+      "id": "bank-cielene-1-t1-39-43b17c62de",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 65,
+      "id": "bank-cielene-1-t1-40-7063c360e2",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 66,
+      "id": "bank-t10-01-40d8a7f99d",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 67,
+      "id": "bank-t10-02-538b9ff907",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 68,
+      "id": "bank-t10-03-631ebae5a8",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 69,
+      "id": "bank-t10-04-36cec35d46",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 70,
+      "id": "bank-t10-05-e003d247aa",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 71,
+      "id": "bank-t10-06-346c7f0e1c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 72,
+      "id": "bank-t10-07-1162f8e780",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 73,
+      "id": "bank-t10-08-b0c4e8f232",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 74,
+      "id": "bank-t10-09-3f99fdb8ec",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 75,
+      "id": "bank-t10-10-4f3f48746f",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 76,
+      "id": "bank-t10-11-9180254c21",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 77,
+      "id": "bank-t10-12-2de23d017a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 78,
+      "id": "bank-t10-13-9180254c21",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 79,
+      "id": "bank-t10-14-2ab8b1e48b",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 80,
+      "id": "bank-t10-15-82a4adf439",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 81,
+      "id": "bank-t10-16-ca9f8da5ba",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 82,
+      "id": "bank-t10-17-82a4adf439",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 83,
+      "id": "bank-t10-18-cefeecc753",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 84,
+      "id": "bank-t10-19-456fb8b375",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 85,
+      "id": "bank-t10-20-6704e563cb",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 86,
+      "id": "bank-t11-01-bec726d2fb",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 87,
+      "id": "bank-t11-02-e51b571421",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 88,
+      "id": "bank-t11-03-37ae499a0c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 89,
+      "id": "bank-t11-05-939b92fcd2",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 90,
+      "id": "bank-t11-06-6f9116749a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 91,
+      "id": "bank-t11-07-11e5bc7534",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 92,
+      "id": "bank-t11-08-4d8def77e4",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 93,
+      "id": "bank-t11-09-bc54e3408e",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 94,
+      "id": "bank-t11-10-a61cd9c0fc",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 95,
+      "id": "bank-t11-11-7c7cc3fcb6",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 96,
+      "id": "bank-t11-12-2785d66bc1",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 97,
+      "id": "bank-t11-13-0cdb13c54a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 98,
+      "id": "bank-t11-14-fa46bd7791",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 99,
+      "id": "bank-t11-15-0a1e963f39",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 100,
+      "id": "bank-t11-16-e72d9c43d4",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 101,
+      "id": "bank-t11-17-cc0af42799",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 102,
+      "id": "bank-t11-18-0d58e6f64c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 103,
+      "id": "bank-t11-19-f148272030",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 104,
+      "id": "bank-t11-20-6eb9b273b8",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 105,
+      "id": "bank-t12-01-618f70aad9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 106,
+      "id": "bank-t12-02-ee394d9531",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 107,
+      "id": "bank-t12-03-37dd17ff45",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 108,
+      "id": "bank-t12-04-2c32233da2",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 109,
+      "id": "bank-t12-05-1f513f88d3",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 110,
+      "id": "bank-t12-06-8e4f14faf1",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 111,
+      "id": "bank-t12-07-688acfe0f3",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 112,
+      "id": "bank-t12-08-12cb938266",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 113,
+      "id": "bank-t12-09-ae32465750",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 114,
+      "id": "bank-t12-10-f1ecc99d04",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 115,
+      "id": "bank-t12-11-401bd1adc0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 116,
+      "id": "bank-t12-12-d9534993ef",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 117,
+      "id": "bank-t12-13-84346875f6",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 118,
+      "id": "bank-t12-14-ca056abe05",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 119,
+      "id": "bank-t12-15-0f54a4e63c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 120,
+      "id": "bank-t12-16-0f54a4e63c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 121,
+      "id": "bank-t12-17-0f54a4e63c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 122,
+      "id": "bank-t12-18-0f54a4e63c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 123,
+      "id": "bank-t12-19-56971b6747",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 124,
+      "id": "bank-t12-20-0f54a4e63c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 125,
+      "id": "bank-t2-01-60d48005d6",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 126,
+      "id": "bank-cielene-2-t2-02-2caa0c9c4a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 127,
+      "id": "bank-t2-02-6d2415cfd0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 128,
+      "id": "bank-cielene-2-t2-03-c9138c1463",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 129,
+      "id": "bank-t2-03-c10659596a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 130,
+      "id": "bank-cielene-2-t2-04-1ed72f93b4",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 131,
+      "id": "bank-t2-04-ca0d29c4c7",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 132,
+      "id": "bank-cielene-2-t2-05-73bc6aea7c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 133,
+      "id": "bank-t2-05-3857198e65",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 134,
+      "id": "bank-t2-06-9b25b8e113",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 135,
+      "id": "bank-cielene-2-t2-07-354cb038f4",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 136,
+      "id": "bank-t2-07-54bb11d892",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 137,
+      "id": "bank-t2-08-a247a470c1",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 138,
+      "id": "bank-cielene-2-t2-09-bfabb69ebd",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 139,
+      "id": "bank-t2-09-521aef5d63",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 140,
+      "id": "bank-cielene-2-t2-10-77203246a4",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 141,
+      "id": "bank-t2-10-40f243ab43",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 142,
+      "id": "bank-cielene-2-t2-11-8f79fdadf5",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 143,
+      "id": "bank-t2-11-2d59bac31d",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 144,
+      "id": "bank-cielene-2-t2-12-96d8b18a89",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 145,
+      "id": "bank-t2-12-f73bc50e19",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 146,
+      "id": "bank-cielene-2-t2-13-f3c2e0f228",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 147,
+      "id": "bank-t2-13-a9ead6d063",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 148,
+      "id": "bank-cielene-2-t2-14-55604dc070",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 149,
+      "id": "bank-t2-14-02c56a4c47",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 150,
+      "id": "bank-cielene-2-t2-15-c40b726187",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 151,
+      "id": "bank-t2-15-4d5c40a48e",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 152,
+      "id": "bank-cielene-2-t2-16-632e2a6b9a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 153,
+      "id": "bank-t2-16-a3160889dd",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 154,
+      "id": "bank-cielene-2-t2-17-f113dd1e48",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 155,
+      "id": "bank-t2-17-a3160889dd",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 156,
+      "id": "bank-cielene-2-t2-18-12d25ed0a1",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 157,
+      "id": "bank-t2-18-9f25f21b47",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 158,
+      "id": "bank-cielene-2-t2-19-18591db4d8",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 159,
+      "id": "bank-t2-19-93f106953b",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 160,
+      "id": "bank-t2-20-93f106953b",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 161,
+      "id": "bank-cielene-2-t2-21-9519c7d464",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 162,
+      "id": "bank-cielene-2-t2-23-96c230e67c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 163,
+      "id": "bank-cielene-2-t2-24-fa8c7bb2b9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 164,
+      "id": "bank-cielene-2-t2-25-66300407aa",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 165,
+      "id": "bank-cielene-2-t2-26-9de4036021",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 166,
+      "id": "bank-cielene-2-t2-27-61211c03e1",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 167,
+      "id": "bank-cielene-2-t2-28-e4ba6582e2",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 168,
+      "id": "bank-cielene-2-t2-30-c938d9ae0c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 169,
+      "id": "bank-cielene-2-t2-31-d52eb2d1f8",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 170,
+      "id": "bank-cielene-2-t2-32-27434d32d6",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 171,
+      "id": "bank-cielene-2-t2-33-0d2bd874a4",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 172,
+      "id": "bank-cielene-2-t2-34-b18a151905",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 173,
+      "id": "bank-cielene-2-t2-35-ba02a9deba",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 174,
+      "id": "bank-cielene-2-t2-36-1471e8db16",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 175,
+      "id": "bank-cielene-2-t2-37-c7be2847f5",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 176,
+      "id": "bank-cielene-2-t2-38-eb004f58ff",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 177,
+      "id": "bank-cielene-2-t2-39-9518748eea",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 178,
+      "id": "bank-cielene-2-t2-40-9a27c34dbc",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 179,
+      "id": "bank-t3-01-6cf9ccbb8f",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 180,
+      "id": "bank-t3-02-617960f9c9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 181,
+      "id": "bank-t3-03-06a04b8fc1",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 182,
+      "id": "bank-t3-04-affd0f6adc",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 183,
+      "id": "bank-t3-05-2d57d559b5",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 184,
+      "id": "bank-t3-06-ea4b11de86",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 185,
+      "id": "bank-t3-07-06e1699ac2",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 186,
+      "id": "bank-t3-08-f795db6998",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 187,
+      "id": "bank-t3-09-b105c8eeed",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 188,
+      "id": "bank-t3-10-4c18225df3",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 189,
+      "id": "bank-t3-11-558999c530",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 190,
+      "id": "bank-t3-12-9c67141083",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 191,
+      "id": "bank-t3-13-55221d8e15",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 192,
+      "id": "bank-t3-14-ed4e559135",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 193,
+      "id": "bank-t3-15-e2ca6dd8ef",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 194,
+      "id": "bank-t3-16-0dc98772cd",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 195,
+      "id": "bank-t3-17-45c4d172ee",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 196,
+      "id": "bank-t3-18-ddea328c73",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 197,
+      "id": "bank-t3-19-41169e8f56",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 198,
+      "id": "bank-t3-20-b31ed82199",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 199,
+      "id": "bank-t4-01-9518748eea",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 200,
+      "id": "bank-t4-02-e9655e4565",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 201,
+      "id": "bank-t4-03-567a35aea9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 202,
+      "id": "bank-t4-04-63b5318e7e",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 203,
+      "id": "bank-t4-05-003d25ca8f",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 204,
+      "id": "bank-t4-06-103d16bf74",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 205,
+      "id": "bank-t4-07-9518748eea",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 206,
+      "id": "bank-t4-08-ab02df395c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 207,
+      "id": "bank-t4-09-c2bba7ae39",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 208,
+      "id": "bank-t4-10-1bc0148c6a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 209,
+      "id": "bank-t4-11-3474d015ac",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 210,
+      "id": "bank-t4-12-a551205430",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 211,
+      "id": "bank-t4-13-9cb278dfa2",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 212,
+      "id": "bank-t4-14-c32e495c26",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 213,
+      "id": "bank-t4-15-11e1df5b6f",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 214,
+      "id": "bank-t4-16-4eb2ce0b9e",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 215,
+      "id": "bank-t4-17-a2c1048069",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 216,
+      "id": "bank-t4-18-f9c856110d",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 217,
+      "id": "bank-t4-19-e8964561ea",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 218,
+      "id": "bank-t4-20-e8964561ea",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 219,
+      "id": "bank-exam-x6-t5-01-7bed5cbcf0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 220,
+      "id": "bank-t5-01-cab409e886",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 221,
+      "id": "bank-exam-x6-t5-02-82c9cc8c48",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 222,
+      "id": "bank-t5-02-9ce093e422",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 223,
+      "id": "bank-exam-x6-t5-03-44abf0a394",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 224,
+      "id": "bank-t5-03-dc2721743b",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 225,
+      "id": "bank-exam-x6-t5-04-d135c838ed",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 226,
+      "id": "bank-t5-04-d6d3ce50d9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 227,
+      "id": "bank-exam-x6-t5-05-641c5ba662",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 228,
+      "id": "bank-exam-x6-t5-06-f88053c920",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 229,
+      "id": "bank-t5-06-fb558054d0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 230,
+      "id": "bank-exam-x6-t5-07-a94c1dffa4",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 231,
+      "id": "bank-t5-07-31b84d340c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 232,
+      "id": "bank-exam-x6-t5-08-ce45328da3",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 233,
+      "id": "bank-t5-08-fa8ce7ba18",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 234,
+      "id": "bank-exam-x6-t5-09-ccdc4dee0f",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 235,
+      "id": "bank-t5-09-b65fcdb32f",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 236,
+      "id": "bank-exam-x6-t5-10-04d91b1965",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 237,
+      "id": "bank-t5-10-8230705ba7",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 238,
+      "id": "bank-t5-12-22d90bd1e8",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 239,
+      "id": "bank-t5-13-d86e751068",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 240,
+      "id": "bank-t5-14-4426781f39",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 241,
+      "id": "bank-t5-15-a0afe884ce",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 242,
+      "id": "bank-t5-16-ebf465c63f",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 243,
+      "id": "bank-t5-17-efb494f6ec",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 244,
+      "id": "bank-t5-18-94afd2d347",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 245,
+      "id": "bank-t5-19-c2de3a05a0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 246,
+      "id": "bank-t5-20-714a970eef",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 247,
+      "id": "bank-t6-01-55915f83f7",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 248,
+      "id": "bank-t6-02-371c9a454f",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 249,
+      "id": "bank-t6-03-5192b04362",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 250,
+      "id": "bank-t6-04-3e2145a6b7",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 251,
+      "id": "bank-t6-05-c7516c39bd",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 252,
+      "id": "bank-t6-06-86ccf3e7af",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 253,
+      "id": "bank-t6-07-0c491f6477",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 254,
+      "id": "bank-t6-08-ed58d918c4",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 255,
+      "id": "bank-t6-09-3cc876cdb7",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 256,
+      "id": "bank-t6-10-72f62fe8ae",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 257,
+      "id": "bank-t6-11-a6b8ded7ac",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 258,
+      "id": "bank-t6-12-1c13c2400c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 259,
+      "id": "bank-t6-13-afa7b06614",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 260,
+      "id": "bank-t6-14-886769f9e0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 261,
+      "id": "bank-t6-15-fd793a9bb6",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 262,
+      "id": "bank-t6-16-2b060c27b9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 263,
+      "id": "bank-t6-17-c13148cbe3",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 264,
+      "id": "bank-t6-18-87ae8e0796",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 265,
+      "id": "bank-t6-19-cf85b2cbab",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 266,
+      "id": "bank-t6-20-db3e608582",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 267,
+      "id": "bank-t7-01-f0a84a0404",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 268,
+      "id": "bank-t7-02-649f8e53dd",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 269,
+      "id": "bank-t7-03-f975794a3f",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 270,
+      "id": "bank-t7-04-8782103a4e",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 271,
+      "id": "bank-t7-05-1967c55b17",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 272,
+      "id": "bank-t7-06-f0ac651f6b",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 273,
+      "id": "bank-t7-07-8b7b28451d",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 274,
+      "id": "bank-t7-08-c845285618",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 275,
+      "id": "bank-t7-09-cab567b9ac",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 276,
+      "id": "bank-t7-10-dcc160017d",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 277,
+      "id": "bank-t7-11-d501e5436a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 278,
+      "id": "bank-t7-12-915d3ef5fa",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 279,
+      "id": "bank-t7-13-f2293a28e5",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 280,
+      "id": "bank-t7-14-1401df6b63",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 281,
+      "id": "bank-t7-15-7f01a095de",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 282,
+      "id": "bank-t7-16-311134ef70",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 283,
+      "id": "bank-t7-17-84b6683c79",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 284,
+      "id": "bank-t7-18-e9358c3d98",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 285,
+      "id": "bank-t7-19-82d6b502b0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 286,
+      "id": "bank-t7-20-09ed13ba3e",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 287,
+      "id": "bank-t8-01-b066d2fdf9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 288,
+      "id": "bank-t8-03-8f6a5cee59",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 289,
+      "id": "bank-t8-04-86f4b38231",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 290,
+      "id": "bank-t8-05-5bd29c2fd1",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 291,
+      "id": "bank-t8-06-06d686e970",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 292,
+      "id": "bank-t8-08-a7c3823c85",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 293,
+      "id": "bank-t8-09-4e019b6daf",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 294,
+      "id": "bank-t8-10-6a899a90f5",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 295,
+      "id": "bank-t8-11-31923bd5ea",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 296,
+      "id": "bank-t8-12-acdc5b40cf",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 297,
+      "id": "bank-t8-13-e0b7eb7ec9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 298,
+      "id": "bank-t8-14-13d3bbdb57",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 299,
+      "id": "bank-t8-15-2b3ae1a3d6",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 300,
+      "id": "bank-t8-16-c1441a194e",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 301,
+      "id": "bank-t8-18-2eecbbc7ad",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 302,
+      "id": "bank-t8-19-2e6c9222de",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 303,
+      "id": "bank-t8-20-cf3983021c",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 304,
+      "id": "bank-exam-x9-t9-01-20c80d072a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 305,
+      "id": "bank-exam-x9-t9-02-281bd2584a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 306,
+      "id": "bank-t9-02-389ab08a4a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 307,
+      "id": "bank-exam-x9-t9-03-0e2bbaa81e",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 308,
+      "id": "bank-t9-03-b20125be93",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 309,
+      "id": "bank-exam-x9-t9-04-21336d7c7a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 310,
+      "id": "bank-exam-x9-t9-05-d07befd8d8",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 311,
+      "id": "bank-t9-05-bb9b56c0e0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 312,
+      "id": "bank-exam-x9-t9-06-1a6f3206e9",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 313,
+      "id": "bank-t9-06-733883f873",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 314,
+      "id": "bank-exam-x9-t9-07-a9e83ba0a1",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 315,
+      "id": "bank-t9-07-df639ea682",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 316,
+      "id": "bank-exam-x9-t9-08-af99e8a2ab",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 317,
+      "id": "bank-t9-08-0777a1626a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 318,
+      "id": "bank-t9-10-e5d130ff18",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 319,
+      "id": "bank-t9-11-6851b07f04",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 320,
+      "id": "bank-exam-x9-t9-12-385a71bd25",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 321,
+      "id": "bank-t9-12-bd7d79d9de",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 322,
+      "id": "bank-exam-x9-t9-13-b1b9982646",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 323,
+      "id": "bank-t9-13-a54d345f87",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 324,
+      "id": "bank-exam-x9-t9-14-c2b134345a",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 325,
+      "id": "bank-t9-14-d82a1fc3d5",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 326,
+      "id": "bank-t9-15-f977d64353",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 327,
+      "id": "bank-exam-x9-t9-16-477e5e9dfb",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 328,
+      "id": "bank-t9-16-0c7b2bab47",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 329,
+      "id": "bank-exam-x9-t9-17-33cdbffd78",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 330,
+      "id": "bank-t9-17-c9be5e6228",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 331,
+      "id": "bank-exam-x9-t9-18-b28d7d4a8f",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 332,
+      "id": "bank-t9-18-d4c0671be0",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 333,
+      "id": "bank-exam-x9-t9-19-4fa8e3ef53",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 334,
+      "id": "bank-t9-19-a8ea282924",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 335,
+      "id": "bank-exam-x9-t9-20-ce7ee7d673",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 336,
+      "id": "bank-t9-20-a90f4c931d",
+      "status": "pass",
+      "method": "bank.gold_riesenia",
+      "detail": "CSV correctKey matches Riesenia letter",
+      "expectedKey": "B",
+      "actualKey": "B"
+    }
+  ]
+}

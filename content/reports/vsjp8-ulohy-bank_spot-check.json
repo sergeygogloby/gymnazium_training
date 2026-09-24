@@ -1,0 +1,222 @@
+{
+  "ok": true,
+  "sampleSize": 22,
+  "confirmed": 22,
+  "wrong": [],
+  "note": "Independent post-reject spot-check of content/bank/vsjp8-ulohy-bank.csv (336 letter-key-only rows, all published=false). Confirmed CSV contains no bank-cielene-b*/c*/d*, exam-x4, exam-x7, or evan ids. Sample spans Úlohy T1–T12 (1 each), Cielene 1/2 (2 each), Exam X5/X6/X9 (2 each). For each item, opened solutionPdf under sources/ and matched CSV correctKey to the Riesenia letter at itemIndex.",
+  "signedOff": true,
+  "sample": [
+    {
+      "id": "bank-t1-01-e2e72873f9",
+      "topic": "T1",
+      "itemIndex": 1,
+      "csvKey": "D",
+      "rieseniaKey": "D",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_1_Riesenia-eqakog.pdf"
+    },
+    {
+      "id": "bank-t2-01-60d48005d6",
+      "topic": "T2",
+      "itemIndex": 1,
+      "csvKey": "B",
+      "rieseniaKey": "B",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_2_Riesenia-6i0lha.pdf"
+    },
+    {
+      "id": "bank-t3-01-6cf9ccbb8f",
+      "topic": "T3",
+      "itemIndex": 1,
+      "csvKey": "A",
+      "rieseniaKey": "A",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_3_Riesenia-hmvek4.pdf"
+    },
+    {
+      "id": "bank-t4-01-9518748eea",
+      "topic": "T4",
+      "itemIndex": 1,
+      "csvKey": "C",
+      "rieseniaKey": "C",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_4_Riesenia-wetyfq.pdf"
+    },
+    {
+      "id": "bank-t5-01-cab409e886",
+      "topic": "T5",
+      "itemIndex": 1,
+      "csvKey": "C",
+      "rieseniaKey": "C",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_5_Riesenia-00ceqg.pdf"
+    },
+    {
+      "id": "bank-t6-01-55915f83f7",
+      "topic": "T6",
+      "itemIndex": 1,
+      "csvKey": "B",
+      "rieseniaKey": "B",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_6_Riesenia-pnxgbz.pdf"
+    },
+    {
+      "id": "bank-t7-01-f0a84a0404",
+      "topic": "T7",
+      "itemIndex": 1,
+      "csvKey": "A",
+      "rieseniaKey": "A",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_7_Riesenia-x2tiii.pdf"
+    },
+    {
+      "id": "bank-t8-01-b066d2fdf9",
+      "topic": "T8",
+      "itemIndex": 1,
+      "csvKey": "C",
+      "rieseniaKey": "C",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_8_Riesenia-isom5j.pdf"
+    },
+    {
+      "id": "bank-t9-02-389ab08a4a",
+      "topic": "T9",
+      "itemIndex": 2,
+      "csvKey": "D",
+      "rieseniaKey": "D",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_9_Riesenia-bwpa8c.pdf"
+    },
+    {
+      "id": "bank-t10-01-40d8a7f99d",
+      "topic": "T10",
+      "itemIndex": 1,
+      "csvKey": "D",
+      "rieseniaKey": "D",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_10_Riesenia-dc92zv.pdf"
+    },
+    {
+      "id": "bank-t11-01-bec726d2fb",
+      "topic": "T11",
+      "itemIndex": 1,
+      "csvKey": "B",
+      "rieseniaKey": "B",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_11_Riesenia-raeg6x.pdf"
+    },
+    {
+      "id": "bank-t12-01-618f70aad9",
+      "topic": "T12",
+      "itemIndex": 1,
+      "csvKey": "A",
+      "rieseniaKey": "A",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Mudre-predplatne_12_Riesenia-ol4nxc.pdf"
+    },
+    {
+      "id": "bank-cielene-1-t1-01-45230188b3",
+      "topic": "T1",
+      "itemIndex": 1,
+      "csvKey": "C",
+      "rieseniaKey": "C",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Test-Cielene_1_Riesenie-lq1nyo.pdf"
+    },
+    {
+      "id": "bank-cielene-1-t1-21-cca472a585",
+      "topic": "T1",
+      "itemIndex": 21,
+      "csvKey": "B",
+      "rieseniaKey": "B",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Test-Cielene_1_Riesenie-lq1nyo.pdf"
+    },
+    {
+      "id": "bank-cielene-2-t2-02-2caa0c9c4a",
+      "topic": "T2",
+      "itemIndex": 2,
+      "csvKey": "C",
+      "rieseniaKey": "C",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Test-Cielene_2_Riesenie-3mre04.pdf"
+    },
+    {
+      "id": "bank-cielene-2-t2-23-96c230e67c",
+      "topic": "T2",
+      "itemIndex": 23,
+      "csvKey": "C",
+      "rieseniaKey": "C",
+      "status": "confirmed",
+      "solutionPdf": "VSJP8_Test-Cielene_2_Riesenie-3mre04.pdf"
+    },
+    {
+      "id": "bank-exam-x5-t1-01-4d08a57411",
+      "topic": "T1",
+      "itemIndex": 1,
+      "csvKey": "B",
+      "rieseniaKey": "B",
+      "status": "confirmed",
+      "solutionPdf": "1_VSJP8_Test_X5_Exam_Riesenie-qaqtdt.pdf"
+    },
+    {
+      "id": "bank-exam-x5-t1-06-764d99f855",
+      "topic": "T1",
+      "itemIndex": 6,
+      "csvKey": "D",
+      "rieseniaKey": "D",
+      "status": "confirmed",
+      "solutionPdf": "1_VSJP8_Test_X5_Exam_Riesenie-qaqtdt.pdf"
+    },
+    {
+      "id": "bank-exam-x6-t5-01-7bed5cbcf0",
+      "topic": "T5",
+      "itemIndex": 1,
+      "csvKey": "B",
+      "rieseniaKey": "B",
+      "status": "confirmed",
+      "solutionPdf": "5_VSJP8_Test_X6_Exam_Riesenie-zhweu2.pdf"
+    },
+    {
+      "id": "bank-exam-x6-t5-06-f88053c920",
+      "topic": "T5",
+      "itemIndex": 6,
+      "csvKey": "B",
+      "rieseniaKey": "B",
+      "status": "confirmed",
+      "solutionPdf": "5_VSJP8_Test_X6_Exam_Riesenie-zhweu2.pdf"
+    },
+    {
+      "id": "bank-exam-x9-t9-01-20c80d072a",
+      "topic": "T9",
+      "itemIndex": 1,
+      "csvKey": "D",
+      "rieseniaKey": "D",
+      "status": "confirmed",
+      "solutionPdf": "9_VSJP8_Test_X9_Riesenie-t4fyh5.pdf"
+    },
+    {
+      "id": "bank-exam-x9-t9-06-1a6f3206e9",
+      "topic": "T9",
+      "itemIndex": 6,
+      "csvKey": "D",
+      "rieseniaKey": "D",
+      "status": "confirmed",
+      "solutionPdf": "9_VSJP8_Test_X9_Riesenie-t4fyh5.pdf"
+    }
+  ],
+  "prechecks": {
+    "rowCount": 336,
+    "publishedFalse": 336,
+    "letterKeysOnly": true,
+    "rejectedIdPatternsAbsent": [
+      "bank-cielene-b*",
+      "bank-cielene-c*",
+      "bank-cielene-d*",
+      "exam-x4",
+      "exam-x7",
+      "evan"
+    ]
+  },
+  "checkedAt": "2026-09-24T15:35:00+00:00"
+}

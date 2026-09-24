@@ -7,6 +7,34 @@ CLI helpers for the VSJP8 content pipeline. Run from the **repo root** (or this 
 - Never flip `published=true` from these tools.
 - No auth. These are local/LAN ops scripts.
 
+## `extract-bank-from-sources`
+
+Read-only pass over `sources/` — pairs Mudre **Úlohy+Riešenia** (T1–T12) and letter-key Cielene/exam PDFs into an F22 bank CSV. Skips free-answer, image-only, unkeyed, and **restated** Cielene B/C/D (failed independent key audit).
+
+```bash
+python3 tools/extract-bank-from-sources
+python3 tools/validate-questions-csv content/bank/vsjp8-ulohy-bank.csv
+python3 tools/verify-answer-keys content/bank/vsjp8-ulohy-bank.csv --batch-id vsjp8-ulohy-bank
+# Bank path: verify uses official Riesenia letters (not synthetic critic).
+# Spot-check sample ≥20, then import. critic-synthetic-batch is for synthetic only.
+npm run import-csv -- ../content/bank/vsjp8-ulohy-bank.csv
+```
+
+Does **not** modify `sources/`. Gate artifacts: `content/reports/vsjp8-ulohy-bank_*.json` / `_gate.md`.
+
+## `export-catalog-csv`
+
+Dump the live SQLite catalog to well-structured F22 CSVs (full + bank + synthetic) so files match the DB.
+
+```bash
+python3 tools/export-catalog-csv
+# → content/published/catalog-all-376.csv
+# → content/bank/vsjp8-ulohy-bank.csv
+# → content/published/vsjp8-ulohy-bank.csv
+# → content/published/pilot-t5-synth-20260924_M3_T5.csv
+python3 tools/validate-questions-csv content/published/catalog-all-376.csv
+```
+
 ## `validate-questions-csv`
 
 F22 structural lint against [docs/specs/question-csv-upload.md](../docs/specs/question-csv-upload.md) / [content-model.md](../docs/specs/content-model.md).
