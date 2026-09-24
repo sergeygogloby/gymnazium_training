@@ -7,6 +7,21 @@ CLI helpers for the VSJP8 content pipeline. Run from the **repo root** (or this 
 - Never flip `published=true` from these tools.
 - No auth. These are local/LAN ops scripts.
 
+## `extract-bank-from-sources`
+
+Read-only pass over `sources/` — pairs Mudre **Úlohy+Riešenia** (T1–T12) and Cielene/exam PDFs that have parseable letter keys into an F22 bank CSV (`published=true`). Skips free-answer, image-only, and unkeyed items.
+
+```bash
+python3 tools/extract-bank-from-sources
+# → content/bank/vsjp8-ulohy-bank.csv
+# → content/reports/bank-extract-from-sources.json
+
+python3 tools/validate-questions-csv content/bank/vsjp8-ulohy-bank.csv
+npm run import-csv -- ../content/bank/vsjp8-ulohy-bank.csv
+```
+
+Does **not** modify `sources/`.
+
 ## `validate-questions-csv`
 
 F22 structural lint against [docs/specs/question-csv-upload.md](../docs/specs/question-csv-upload.md) / [content-model.md](../docs/specs/content-model.md).
