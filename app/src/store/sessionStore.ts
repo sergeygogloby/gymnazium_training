@@ -203,7 +203,12 @@ export const sessionStore = {
     if (sessionKind === 'practice') {
       sessionStore.ensureDemoCatalog();
       let itemIds = options?.itemIds;
-      if (!itemIds || itemIds.length === 0) {
+      // Mistakes-scoped starts must use the explicit queue — never fall back
+      // to a random practice set (F16 → F02/F03).
+      if (
+        (!itemIds || itemIds.length === 0) &&
+        !options?.mistakesScoped
+      ) {
         const selected = selectPracticeItems(sessionStore.getState().catalog, {
           module: options?.module,
           topic: options?.topic,
@@ -214,11 +219,15 @@ export const sessionStore = {
       }
       activeSession = {
         ...activeSession,
-        itemIds,
+        itemIds: itemIds ?? [],
         currentIndex: 0,
       };
     } else if (isExamKind(sessionKind)) {
-      const items = resolveExamItems(state.catalog);
+      const items = resolveExamItems(state.catalog, {
+        module: options?.module,
+        topic: options?.topic,
+        skillArea: options?.skillArea,
+      });
       const duration = examDurationMs(sessionKind);
       activeSession = {
         ...activeSession,

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { isDemoItemId } from '../lib/demoCatalog';
@@ -51,13 +51,28 @@ function PracticeSessionBody() {
   const [selected, setSelected] = useState<string>('');
   const [lastOutcome, setLastOutcome] = useState<AnswerOutcome | null>(null);
 
-  const attempt = useMemo(
-    () => attempts.find((a) => a.id === activeSession?.attemptId),
-    [attempts, activeSession?.attemptId],
-  );
+  if (!activeSession) {
+    return null;
+  }
 
-  const itemIds = activeSession.itemIds ?? [];
-  const index = activeSession.currentIndex ?? 0;
+  const attempt = attempts.find((a) => a.id === activeSession.attemptId);
+
+  if (!activeSession) {
+    return (
+      <PageShell title="Relácia — Cvičenie" viewId="V03">
+        <p>Žiadna aktívna relácia.</p>
+        <p>
+          <Link to="/kurikulum">Späť na kurikulum</Link>
+          {' · '}
+          <Link to="/cvicenie">Spustiť cvičenie</Link>
+        </p>
+      </PageShell>
+    );
+  }
+
+  const session = activeSession;
+  const itemIds = session.itemIds ?? [];
+  const index = session.currentIndex ?? 0;
   const done = itemIds.length === 0 || index >= itemIds.length;
   const currentId = !done ? itemIds[index] : undefined;
   const item = currentId
@@ -65,8 +80,9 @@ function PracticeSessionBody() {
     : undefined;
 
   function finish() {
+    const attemptId = session.attemptId;
     sessionStore.endSession();
-    navigate(`/vysledok/${activeSession!.attemptId}`);
+    navigate(`/vysledok/${attemptId}`);
   }
 
   function submitAnswer(outcomeForced?: AnswerOutcome) {
@@ -142,7 +158,7 @@ function PracticeSessionBody() {
       <p className="session-progress muted">
         Položka {index + 1} / {itemIds.length}
         {attempt ? ` · odpovedí: ${attempt.answers.length}` : ''}
-        {activeSession.mistakesScoped ? ' · z chýb' : ''}
+        {session.mistakesScoped ? ' · z chýb' : ''}
       </p>
 
       <div className="item-labels" aria-label="Značky položky">

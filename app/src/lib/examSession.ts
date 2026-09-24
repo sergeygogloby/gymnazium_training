@@ -3,14 +3,42 @@ import type {
   Attempt,
   AttemptAnswer,
   ContentItem,
+  ModuleId,
   SessionKind,
+  SkillArea,
+  TopicId,
 } from '../types/content';
 import { isExamKind } from './sessionKind';
 
-/** Published catalog items, or demo set when empty. */
-export function resolveExamItems(catalog: ContentItem[]): ContentItem[] {
+export interface ExamItemFilter {
+  module?: ModuleId;
+  topic?: TopicId;
+  skillArea?: SkillArea;
+}
+
+function matchesExamFilter(
+  item: ContentItem,
+  filter: ExamItemFilter = {},
+): boolean {
+  if (filter.module && item.module !== filter.module) return false;
+  if (filter.topic && item.topic !== filter.topic) return false;
+  if (filter.skillArea && item.skillArea !== filter.skillArea) return false;
+  return true;
+}
+
+/**
+ * Published catalog items matching optional module/topic/VŠP|VJS scope (F17),
+ * or demo set when catalog has no published items (still respects filter).
+ */
+export function resolveExamItems(
+  catalog: ContentItem[],
+  filter: ExamItemFilter = {},
+): ContentItem[] {
   const published = catalog.filter((i) => i.published);
-  return published.length > 0 ? published : DEMO_ITEMS;
+  const pool = published.length > 0 ? published : DEMO_ITEMS;
+  const matched = pool.filter((i) => matchesExamFilter(i, filter));
+  // If scope empties the pool, fall back to unfiltered pool so exam still starts.
+  return matched.length > 0 ? matched : pool;
 }
 
 export function lookupItem(
