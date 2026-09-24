@@ -6,7 +6,7 @@
   "skillArea": "VSP",
   "itemType": "mcq",
   "sourceType": "bank",
-  "published": false,
+  "published": true,
   "provenance": {
     "sourcePdf": "VSJP8_Mudre-predplatne_5_Ulohy-s6hvtz.pdf",
     "solutionPdf": "VSJP8_Mudre-predplatne_5_Riesenia-00ceqg.pdf",
@@ -23,7 +23,11 @@
   "correctKey": "D",
   "rationale": "Zápis: 1. deň = 2x, 2. deň = 2x−10, 3. deň = x; 2x+(2x−10)+x = 65 → 5x=75 → x=15 → 30, 20, 15 km.",
   "slots": {
-    "quantities": { "totalKm": 65, "day1Factor": 2, "day2OffsetFromDay1": -10 },
+    "quantities": {
+      "totalKm": 65,
+      "day1Factor": 2,
+      "day2OffsetFromDay1": -10
+    },
     "derive": "solve 2x + (2x-10) + x = 65"
   },
   "shapeNotes": "Linear system disguised as three-day trip."

@@ -9,7 +9,8 @@
     "test": "vitest run",
     "init-db": "tsx src/initDb.ts",
     "import-csv": "tsx src/importQuestionsCsv.ts",
-    "t5-critical-path": "tsx src/t5CriticalPath.ts"
+    "t5-critical-path": "tsx src/t5CriticalPath.ts",
+    "publish-all": "tsx src/publishAll.ts"
   },
   "dependencies": {
     "better-sqlite3": "^11.7.0",

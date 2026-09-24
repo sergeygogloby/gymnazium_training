@@ -1,6 +1,8 @@
 # Seed & template JSON schema (pilot)
 
-Grounded shapes for VSJP8 generators. **Not** F22 CSV — generators later emit CSV from these templates. All seeds/templates in this pilot keep `published: false` / `publishedDefault: false`.
+Grounded shapes for VSJP8 generators. **Not** F22 CSV — generators later emit CSV from these templates.
+
+Live household content is **`published: true`** / `publishedDefault: true` so items are session-eligible. New synthetic batches may still enter the gate as unpublished until smoke; this tree’s current stock is published.
 
 See also: [docs/specs/content-model.md](../docs/specs/content-model.md), skill `extract-vsjp8-seeds`.
 
@@ -19,7 +21,7 @@ See also: [docs/specs/content-model.md](../docs/specs/content-model.md), skill `
 | `deriveCorrectKey` | yes | Prefer `mode: programmatic` for numeric/logic |
 | `rationalePattern` | yes | How explanations should look |
 | `provenance.sourcePdfs` | yes | Basename(s) under `sources/` (read-only) |
-| `publishedDefault` | yes | Always `false` until publish gate |
+| `publishedDefault` | yes | `true` for live stock (session-eligible) |
 
 ## Seed (`content/seeds/{tN}/*.json`)
 
@@ -29,7 +31,7 @@ See also: [docs/specs/content-model.md](../docs/specs/content-model.md), skill `
 | `templateId` | yes | Links to a template |
 | `module` / `topic` / `skillArea` | yes | Must match template |
 | `sourceType` | yes | Pilot uses `bank` (attested from PDF) |
-| `published` | yes | **Must be `false`** |
+| `published` | yes | `true` for live stock |
 | `provenance` | yes | `sourcePdf`, optional `solutionPdf`, `itemIndex`, `folder` |
 | `stem` | yes | Attested stem text (may be lightly cleaned for OCR) |
 | `choices` | conditional | Array of option texts (without `A.` prefix preferred) |

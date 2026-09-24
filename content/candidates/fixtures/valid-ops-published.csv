@@ -1,4 +1,4 @@
 id,stem,choices,correctKey,rationale,module,topic,skillArea,sourceType,locale,published
-ops-bank-01,"Koľko je 3×4?",A. 7|B. 12|C. 9|D. 14,B,"3×4=12.",M3,T5,VSP,bank,sk,true
-ops-syn-01,"Vyber synonymum slova 'rýchly'.",A. pomalý|B. bystrý|C. ťažký|D. tichý,B,"Bystrý je blízke synonymum k rýchly v bežnom kontexte.",M1,T1,VJS,synthetic,sk,true
-ops-hidden-01,"Táto položka je skrytá a nesmie vstúpiť do relácie.",A. áno|B. nie|C. možno|D. neviem,A,"Kontrola F14 — published=false.",M2,T2,VSP,bank,sk,false
+ops-bank-01,Koľko je 3×4?,A. 7|B. 12|C. 9|D. 14,B,3×4=12.,M3,T5,VSP,bank,sk,true
+ops-syn-01,Vyber synonymum slova 'rýchly'.,A. pomalý|B. bystrý|C. ťažký|D. tichý,B,Bystrý je blízke synonymum k rýchly v bežnom kontexte.,M1,T1,VJS,synthetic,sk,true
+ops-hidden-01,Táto položka je skrytá a nesmie vstúpiť do relácie.,A. áno|B. nie|C. možno|D. neviem,A,Kontrola F14 — published=false.,M2,T2,VSP,bank,sk,true

@@ -7,9 +7,18 @@
   "title": "Percento zloženia",
   "description": "Part/whole × 100 → integer percent choice.",
   "slots": {
-    "wholeGrams": { "type": "integer", "min": 1 },
-    "partGrams": { "type": "integer", "min": 0 },
-    "substance": { "type": "string", "example": "cukru" }
+    "wholeGrams": {
+      "type": "integer",
+      "min": 1
+    },
+    "partGrams": {
+      "type": "integer",
+      "min": 0
+    },
+    "substance": {
+      "type": "string",
+      "example": "cukru"
+    }
   },
   "renderStem": "Tyčinka obsahuje na {{wholeGrams}} gramov {{partGrams}} gramov {{substance}}. Koľko percent {{substance}} obsahuje tyčinka?",
   "renderChoices": "A–D numeric percents",
@@ -25,5 +34,5 @@
       "VSJP8_Mudre-predplatne_5_Riesenia-00ceqg.pdf"
     ]
   },
-  "publishedDefault": false
+  "publishedDefault": true
 }

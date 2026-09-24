@@ -7,9 +7,22 @@
   "title": "Ozubené kolesá / LCM",
   "description": "Two meshing gears; how many turns until same teeth meet again = LCM(a,b)/smaller.",
   "slots": {
-    "teethLarge": { "type": "integer", "min": 2 },
-    "teethSmall": { "type": "integer", "min": 2 },
-    "askWhich": { "type": "enum", "values": ["smaller", "larger"], "default": "smaller" }
+    "teethLarge": {
+      "type": "integer",
+      "min": 2
+    },
+    "teethSmall": {
+      "type": "integer",
+      "min": 2
+    },
+    "askWhich": {
+      "type": "enum",
+      "values": [
+        "smaller",
+        "larger"
+      ],
+      "default": "smaller"
+    }
   },
   "renderStem": "Dve ozubené kolesá zapadajú navzájom do seba. Väčšie má {{teethLarge}} zubov, menšie {{teethSmall}} zubov. Koľkokrát sa otočí {{askWhich}} koleso, aby do seba zapadali opäť tie isté zuby?",
   "renderChoices": "A–D numeric",
@@ -24,5 +37,5 @@
       "VSJP8_Mudre-predplatne_5_Numericke-a-logicke-ulohy-mzrvef.pdf"
     ]
   },
-  "publishedDefault": false
+  "publishedDefault": true
 }
