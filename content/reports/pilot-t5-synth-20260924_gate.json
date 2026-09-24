@@ -4,11 +4,11 @@
   "skill": "csv-import-qa",
   "rowCount": 40,
   "publishedColumnAllFalse": true,
-  "publishDecision": "DO_NOT_PUBLISH",
-  "publishReason": "Human spot-check signed off; smoke_practice_serves_synthetic still PENDING before published=true.",
+  "publishDecision": "PUBLISH",
+  "publishReason": "All gate checks green including smoke; SQLite published=true for batch.",
   "candidateGate": {
     "verdict": "PASS",
-    "meaning": "Eligible to stay in content/candidates/ unpublished; not eligible for published=true",
+    "meaning": "Batch imported; see publishDecision",
     "ok": true
   },
   "checks": [
@@ -40,13 +40,13 @@
       "id": 5,
       "name": "all_or_nothing_import",
       "pass": true,
-      "detail": "dry-run only; wouldWrite=all; catalog write deferred"
+      "detail": "imported to SQLite created=40 updated=0 rows=40"
     },
     {
       "id": 6,
       "name": "smoke_practice_serves_synthetic",
-      "pass": false,
-      "detail": "Deferred — published=false until publish gate"
+      "pass": true,
+      "detail": "PASS — eligible synthetic practice + feedback + filters"
     },
     {
       "id": 7,
@@ -60,7 +60,7 @@
     "wouldCreate": 40,
     "wouldUpdate": 0,
     "allOrNothing": true,
-    "catalogWritePerformed": false
+    "catalogWritePerformed": true
   },
   "countsByTemplate": {
     "t5.lcm-gears.mcq": 12,
@@ -75,5 +75,10 @@
     "signedOffAt": "2026-09-24T11:58:48.165596+00:00",
     "note": "Owner confirmed human spot-check done prior to / upon merge of PR #12."
   },
-  "updatedAt": "2026-09-24T11:58:48.165934+00:00"
+  "updatedAt": "2026-09-24T13:31:44.893Z",
+  "sqlitePublish": {
+    "publishedCsv": "content/published/pilot-t5-synth-20260924_M3_T5.csv",
+    "smokeReport": "content/reports/pilot-t5-synth-20260924_smoke.json",
+    "at": "2026-09-24T13:31:44.891Z"
+  }
 }
