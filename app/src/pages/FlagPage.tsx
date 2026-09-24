@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { sessionStore } from '../store/sessionStore';
 
 export function FlagPage() {
-  const [itemId, setItemId] = useState('');
+  const [params] = useSearchParams();
+  const [itemId, setItemId] = useState(params.get('itemId') ?? '');
   const [note, setNote] = useState('');
   const [done, setDone] = useState(false);
 

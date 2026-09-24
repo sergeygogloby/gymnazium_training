@@ -23,10 +23,10 @@ export function CurriculumPage() {
           Začať cvičenie
         </button>
         <button type="button" onClick={() => start('exam_30')}>
-          Skúška 30 min
+          Skúška · 30 min
         </button>
         <button type="button" onClick={() => start('exam_60')}>
-          Skúška 60 min
+          Skúška · 60 min
         </button>
       </div>
       <section>

@@ -1,22 +1,36 @@
 import type {
   Attempt,
+  AttemptAnswer,
   ContentItem,
   FlagRecord,
   SessionKind,
 } from '../types/content';
+import {
+  gradeAnswer,
+  finalizeExamScores,
+  lookupItem,
+  resolveExamItems,
+} from '../lib/examSession';
+import { examDurationMs, isExamKind } from '../lib/sessionKind';
 
 const STORAGE_KEY = 'gymnazium-training-store-v1';
+
+export interface ActiveSession {
+  sessionKind: SessionKind;
+  attemptId: string;
+  mistakesScoped?: boolean;
+  /** Exam item queue (ids). Practice agent owns practice item loop. */
+  itemIds?: string[];
+  currentIndex?: number;
+  /** ISO timestamp when exam countdown hits zero. */
+  endsAt?: string;
+}
 
 export interface AppStoreState {
   catalog: ContentItem[];
   attempts: Attempt[];
   flags: FlagRecord[];
-  /** Active session shell (Wave 1 stub — no full practice logic). */
-  activeSession: {
-    sessionKind: SessionKind;
-    attemptId: string;
-    mistakesScoped?: boolean;
-  } | null;
+  activeSession: ActiveSession | null;
   seenHelp: boolean;
 }
 
@@ -63,6 +77,15 @@ function emit(): void {
   listeners.forEach((l) => l());
 }
 
+function patchAttempt(id: string, patch: Partial<Attempt>): void {
+  state = {
+    ...state,
+    attempts: state.attempts.map((a) =>
+      a.id === id ? { ...a, ...patch } : a,
+    ),
+  };
+}
+
 export const sessionStore = {
   getState(): AppStoreState {
     return state;
@@ -94,49 +117,144 @@ export const sessionStore = {
   },
 
   updateAttempt(id: string, patch: Partial<Attempt>): void {
-    state = {
-      ...state,
-      attempts: state.attempts.map((a) =>
-        a.id === id ? { ...a, ...patch } : a,
-      ),
-    };
+    patchAttempt(id, patch);
     emit();
   },
 
-  startSession(sessionKind: SessionKind, options?: { mistakesScoped?: boolean }): string {
+  /**
+   * Start a session. Exam kinds get countdown + item queue.
+   * Practice path stays minimal — practice slice owns after-each feedback.
+   */
+  startSession(
+    sessionKind: SessionKind,
+    options?: { mistakesScoped?: boolean; nowMs?: number },
+  ): string {
     const attemptId = `att_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    const startedAt = new Date(options?.nowMs ?? Date.now()).toISOString();
     const attempt: Attempt = {
       id: attemptId,
       sessionKind,
-      startedAt: new Date().toISOString(),
+      startedAt,
       answers: [],
       mistakesScoped: options?.mistakesScoped,
     };
+
+    let activeSession: ActiveSession = {
+      sessionKind,
+      attemptId,
+      mistakesScoped: options?.mistakesScoped,
+    };
+
+    if (isExamKind(sessionKind)) {
+      const items = resolveExamItems(state.catalog);
+      const duration = examDurationMs(sessionKind);
+      const now = options?.nowMs ?? Date.now();
+      activeSession = {
+        ...activeSession,
+        itemIds: items.map((i) => i.id),
+        currentIndex: 0,
+        endsAt: new Date(now + duration).toISOString(),
+      };
+    }
+
     state = {
       ...state,
       attempts: [...state.attempts, attempt],
-      activeSession: {
-        sessionKind,
-        attemptId,
-        mistakesScoped: options?.mistakesScoped,
-      },
+      activeSession,
     };
     emit();
     return attemptId;
   },
 
-  endSession(): void {
-    if (!state.activeSession) return;
-    const { attemptId } = state.activeSession;
+  /**
+   * Record an exam answer or skip — grades silently (no mid-exam key reveal).
+   * Practice must not call this for after-each feedback UI.
+   */
+  recordExamResponse(givenAnswer?: string): {
+    done: boolean;
+    answer: AttemptAnswer | null;
+  } {
+    const active = state.activeSession;
+    if (!active || !isExamKind(active.sessionKind)) {
+      return { done: false, answer: null };
+    }
+    const itemIds = active.itemIds ?? [];
+    const idx = active.currentIndex ?? 0;
+    if (idx >= itemIds.length) {
+      return { done: true, answer: null };
+    }
+    const item = lookupItem(state.catalog, itemIds[idx]);
+    if (!item) {
+      return { done: false, answer: null };
+    }
+
+    const answer = gradeAnswer(item, givenAnswer);
+    const attempt = state.attempts.find((a) => a.id === active.attemptId);
+    const answers = [...(attempt?.answers ?? []), answer];
+    const nextIndex = idx + 1;
+    const done = nextIndex >= itemIds.length;
+
+    patchAttempt(active.attemptId, { answers });
     state = {
       ...state,
-      activeSession: null,
-      attempts: state.attempts.map((a) =>
-        a.id === attemptId
-          ? { ...a, endedAt: new Date().toISOString() }
-          : a,
-      ),
+      activeSession: done
+        ? { ...active, currentIndex: nextIndex }
+        : { ...active, currentIndex: nextIndex },
     };
+    emit();
+    return { done, answer };
+  },
+
+  /**
+   * Close session: score exams end-only; clear active shell.
+   * Practice may call this after its own feedback loop.
+   */
+  endSession(options?: { nowMs?: number }): void {
+    if (!state.activeSession) return;
+    const { attemptId, sessionKind, itemIds, currentIndex } =
+      state.activeSession;
+    const now = options?.nowMs ?? Date.now();
+    const attempt = state.attempts.find((a) => a.id === attemptId);
+    if (!attempt) {
+      state = { ...state, activeSession: null };
+      emit();
+      return;
+    }
+
+    let answers = [...attempt.answers];
+
+    if (isExamKind(sessionKind) && itemIds) {
+      // Auto-skip remaining items on time-up / early finish.
+      const startIdx = currentIndex ?? answers.length;
+      for (let i = startIdx; i < itemIds.length; i++) {
+        const already = answers.some((a) => a.itemId === itemIds[i]);
+        if (already) continue;
+        const item = lookupItem(state.catalog, itemIds[i]);
+        if (!item) continue;
+        answers.push(gradeAnswer(item, undefined));
+      }
+    }
+
+    const scores = isExamKind(sessionKind)
+      ? finalizeExamScores(answers)
+      : {
+          scoreCorrect: answers.filter((a) => a.outcome === 'correct').length,
+          scoreTotal: answers.length,
+        };
+
+    const started = Date.parse(attempt.startedAt);
+    const durationMs = Number.isFinite(started)
+      ? Math.max(0, now - started)
+      : undefined;
+
+    patchAttempt(attemptId, {
+      answers,
+      endedAt: new Date(now).toISOString(),
+      scoreCorrect: scores.scoreCorrect,
+      scoreTotal: scores.scoreTotal,
+      durationMs,
+    });
+    state = { ...state, activeSession: null };
     emit();
   },
 
@@ -154,5 +272,14 @@ export const sessionStore = {
   setSeenHelp(seen: boolean): void {
     state = { ...state, seenHelp: seen };
     emit();
+  },
+
+  /** Test helper — reset in-memory + storage. */
+  __resetForTests(): void {
+    state = emptyState();
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+    listeners.forEach((l) => l());
   },
 };

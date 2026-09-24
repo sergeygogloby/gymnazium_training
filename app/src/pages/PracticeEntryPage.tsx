@@ -1,14 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { sessionKindLabel } from '../lib/sessionKind';
 import { sessionStore } from '../store/sessionStore';
 import { useSessionStore } from '../store/useSessionStore';
 import type { SessionKind } from '../types/content';
-
-const KIND_LABEL: Record<SessionKind, string> = {
-  practice: 'Cvičenie (bez časovača)',
-  exam_30: 'Skúška 30 min',
-  exam_60: 'Skúška 60 min',
-};
 
 export function PracticeEntryPage() {
   const navigate = useNavigate();
@@ -22,29 +17,32 @@ export function PracticeEntryPage() {
   return (
     <PageShell title="Cvičenie / skúška" viewId="V03-entry">
       <p className="lede">
-        Vyberte druh relácie. Spätná väzba po každej položke platí pre cvičenie;
-        skúšky hodnotia až na konci. Plná logika cvičenia príde vo Wave 2.
+        Vyberte druh relácie (nie režim). Cvičenie: spätná väzba po každej
+        položke. Skúška 30 / 60 min: odpočet, hodnotenie až na konci.
       </p>
       {activeSession && (
         <p className="notice">
           Aktívna relácia:{' '}
-          <strong>{KIND_LABEL[activeSession.sessionKind]}</strong> —{' '}
+          <strong>{sessionKindLabel(activeSession.sessionKind)}</strong> —{' '}
           <Link to="/relacia">pokračovať</Link>
         </p>
       )}
       <div className="session-kind-actions">
         <button type="button" onClick={() => start('practice')}>
-          {KIND_LABEL.practice}
+          Cvičenie (bez časovača)
         </button>
         <button type="button" onClick={() => start('exam_30')}>
-          {KIND_LABEL.exam_30}
+          Skúška · 30 min
         </button>
         <button type="button" onClick={() => start('exam_60')}>
-          {KIND_LABEL.exam_60}
+          Skúška · 60 min
         </button>
       </div>
       <p className="muted">
-        Katalóg otázok: {catalog.length} (prázdny = Wave 2 / CSV upload)
+        Katalóg otázok: {catalog.length}
+        {catalog.length === 0
+          ? ' (prázdny → skúška použije demo položky)'
+          : ''}
       </p>
     </PageShell>
   );
