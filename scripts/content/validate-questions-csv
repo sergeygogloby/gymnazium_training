@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Thin wrappers so agents can also call scripts/content/*
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+exec python3 "$ROOT/tools/validate-questions-csv" "$@"

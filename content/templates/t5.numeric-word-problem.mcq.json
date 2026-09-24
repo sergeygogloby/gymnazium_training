@@ -1,0 +1,31 @@
+{
+  "templateId": "t5.numeric-word-problem.mcq",
+  "module": "M3",
+  "topic": "T5",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "title": "Numerická slovná úloha (A–D)",
+  "description": "Word problem with quantities; convert to equation; pick numeric choice. Grounded in VSJP8 Téma 5 Ulohy/Riesenia.",
+  "slots": {
+    "scenario": { "type": "string", "role": "stemNarrative" },
+    "quantities": { "type": "object", "role": "parameters", "description": "Named numeric inputs used by deriveCorrectKey" },
+    "questionAsk": { "type": "string", "role": "stemAsk" },
+    "distractors": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3 }
+  },
+  "renderStem": "{{scenario}} {{questionAsk}}",
+  "renderChoices": "A–D from correct + distractors (shuffle locked at generation time; store final order)",
+  "deriveCorrectKey": {
+    "mode": "programmatic",
+    "solverHint": "t5.lever_balls | t5.trip_days_linear | t5.discount_reverse | custom expression over quantities",
+    "notes": "Prefer closed-form recompute over LLM self-check."
+  },
+  "rationalePattern": "Show equation → arithmetic → final value matching correct choice letter.",
+  "provenance": {
+    "sourcePdfs": [
+      "VSJP8_Mudre-predplatne_5_Ulohy-s6hvtz.pdf",
+      "VSJP8_Mudre-predplatne_5_Riesenia-00ceqg.pdf",
+      "VSJP8_Mudre-predplatne_5_Numericke-a-logicke-ulohy-mzrvef.pdf"
+    ]
+  },
+  "publishedDefault": false
+}
