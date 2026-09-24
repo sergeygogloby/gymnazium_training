@@ -7,7 +7,9 @@
     "dev": "tsx watch src/index.ts",
     "start": "tsx src/index.ts",
     "test": "vitest run",
-    "init-db": "tsx src/initDb.ts"
+    "init-db": "tsx src/initDb.ts",
+    "import-csv": "tsx src/importQuestionsCsv.ts",
+    "t5-critical-path": "tsx src/t5CriticalPath.ts"
   },
   "dependencies": {
     "better-sqlite3": "^11.7.0",

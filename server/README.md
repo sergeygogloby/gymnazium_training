@@ -45,3 +45,13 @@ Or from root: `npm run dev` (concurrent).
 | GET | `/api/attempts` | attempts only |
 
 No auth (locked LAN ops).
+
+## T5 critical path (import → smoke → publish)
+
+```bash
+cd server && npm run t5-critical-path
+```
+
+Imports `content/candidates/pilot-t5-synth-20260924_M3_T5.csv` into SQLite
+(`published=false`), runs practice smoke, then flips `published=true` and writes
+`content/published/` + gate/smoke reports.

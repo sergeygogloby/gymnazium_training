@@ -1,0 +1,66 @@
+{
+  "smoke1": {
+    "ok": true,
+    "phase": "unpublished_smoke",
+    "checks": [
+      {
+        "name": "all_synthetic",
+        "pass": true,
+        "detail": "40/40 synthetic"
+      },
+      {
+        "name": "all_unpublished",
+        "pass": true,
+        "detail": "published=true count=0"
+      },
+      {
+        "name": "synthetic_label_sk",
+        "pass": true,
+        "detail": "syntetická"
+      },
+      {
+        "name": "feedback_correct_and_incorrect",
+        "pass": true,
+        "detail": "ok=40 fail=0"
+      },
+      {
+        "name": "explicit_practice_queue",
+        "pass": true,
+        "detail": "queue=5"
+      }
+    ]
+  },
+  "smoke2": {
+    "ok": true,
+    "phase": "published_smoke",
+    "checks": [
+      {
+        "name": "batch_all_published",
+        "pass": true,
+        "detail": "batch=40 published=40"
+      },
+      {
+        "name": "eligible_includes_batch",
+        "pass": true,
+        "detail": "eligibleBatch=40/40"
+      },
+      {
+        "name": "filters_vsp_synthetic_m3_t5",
+        "pass": true,
+        "detail": "filtered=40"
+      },
+      {
+        "name": "practice_serves_synthetic_feedback",
+        "pass": true,
+        "detail": "graded 3 eligible synthetic items correct + label"
+      }
+    ]
+  },
+  "stats": {
+    "questions": 40,
+    "published": 40,
+    "attempts": 0,
+    "answers": 0,
+    "flags": 0
+  }
+}
