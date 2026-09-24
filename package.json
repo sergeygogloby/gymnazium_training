@@ -1,0 +1,14 @@
+{
+  "name": "gymnazium-training",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "npm run dev --prefix server & npm run dev --prefix app",
+    "dev:app": "npm run dev --prefix app",
+    "dev:server": "npm run dev --prefix server",
+    "build": "npm run build --prefix app",
+    "test": "npm run test --prefix server && npm run test --prefix app",
+    "init-db": "npm run init-db --prefix server",
+    "install:all": "npm install --prefix app && npm install --prefix server"
+  }
+}

@@ -1,0 +1,47 @@
+# Local API + SQLite (LAN single-instance)
+
+Persists **questions** (catalog) and **results** (attempts + answers) in a local
+SQLite file so the household shares one database on the LAN — not browser
+`localStorage`.
+
+## Engine
+
+| | |
+|---|---|
+| DBMS | **SQLite 3** via `better-sqlite3` |
+| File | `data/gymnazium.sqlite` (gitignored; override with `GYM_DB_PATH`) |
+| Port | `8787` (`PORT` env) |
+
+## Schema
+
+See [`sql/schema.sql`](./sql/schema.sql):
+
+- `questions` — F22 catalog rows
+- `attempts` / `attempt_answers` — session results
+- `flags` — bad-item queue
+- `app_meta` — `seenHelp`, `activeSession` JSON
+
+## Run
+
+```bash
+# from repo root
+npm install          # installs app + server workspaces if using root scripts
+cd server && npm install && npm run init-db && npm run dev
+
+# app (separate terminal) — Vite proxies /api → :8787
+cd app && npm install && npm run dev
+```
+
+Or from root: `npm run dev` (concurrent).
+
+## API
+
+| Method | Path | Notes |
+|---|---|---|
+| GET | `/api/health` | engine + counts |
+| GET | `/api/state` | full AppStoreState |
+| PUT | `/api/state` | replace full state (SPA write-through) |
+| GET | `/api/questions` | catalog only |
+| GET | `/api/attempts` | attempts only |
+
+No auth (locked LAN ops).
