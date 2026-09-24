@@ -99,6 +99,8 @@ describe('sqlite persistence', () => {
     expect(loaded.flags).toHaveLength(1);
     expect(loaded.seenHelp).toBe(true);
     expect(dbStats(db).answers).toBe(1);
+    expect(dbStats(db).insights.correctAnswers).toBe(1);
+    expect(dbStats(db).insights.completedAttempts).toBe(1);
     db.close();
   });
 

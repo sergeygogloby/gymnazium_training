@@ -708,6 +708,177 @@ textarea {
   opacity: 0.55;
 }
 
+/* ——— V06 insight graphs / KPI (no chart lib) ——— */
+.insight-kpi-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.insight-kpi-grid li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 0.75rem 0.65rem;
+  text-align: center;
+}
+
+.insight-kpi-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.insight-kpi-label {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.insight-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin: 0.75rem 0 1rem;
+  max-width: 36rem;
+}
+
+.insight-bar-row {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 3.5rem;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.insight-bar-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.insight-bar-track {
+  height: 0.65rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.insight-bar-fill {
+  height: 100%;
+  background: var(--brand);
+  min-width: 2px;
+}
+
+.insight-bar-pct {
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+.insight-trend svg {
+  width: 100%;
+  max-width: 28rem;
+  height: auto;
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.insight-axis {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.insight-guide {
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  opacity: 0.7;
+}
+
+.insight-trend-line {
+  stroke: var(--brand);
+  stroke-width: 2;
+}
+
+.insight-dot-practice {
+  fill: var(--brand);
+}
+
+.insight-dot-exam {
+  fill: var(--ink);
+}
+
+.insight-trend-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.insight-outcome-track {
+  display: flex;
+  height: 0.85rem;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--surface);
+  max-width: 28rem;
+}
+
+.insight-outcome-track span {
+  display: block;
+  height: 100%;
+  min-width: 0;
+}
+
+.seg-correct {
+  background: #2f6f4e;
+}
+
+.seg-incorrect {
+  background: #a33b2b;
+}
+
+.seg-skipped {
+  background: #8a8478;
+}
+
+.insight-outcome-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+.swatch {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-right: 0.35rem;
+  vertical-align: middle;
+  border: 1px solid var(--line);
+}
+
+.swatch-correct {
+  background: #2f6f4e;
+}
+.swatch-incorrect {
+  background: #a33b2b;
+}
+.swatch-skipped {
+  background: #8a8478;
+}
+
 @media (max-width: 560px) {
   .meta div {
     grid-template-columns: 1fr;
@@ -719,5 +890,9 @@ textarea {
 
   .study-calendar {
     grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .insight-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

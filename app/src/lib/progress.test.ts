@@ -3,7 +3,11 @@ import type { Attempt, AttemptAnswer } from '../types/content';
 import {
   computeEffortVsAccuracy,
   computeGaps,
+  computeInsightSummary,
+  computeOutcomeMix,
   computeProgress,
+  computeSessionScoreTrend,
+  computeSkillAreaProgress,
   computeStreak,
   computeSuggestions,
   filterAttemptsBySection,
@@ -225,5 +229,75 @@ describe('computeEffortVsAccuracy', () => {
     const cue = computeEffortVsAccuracy(stuck);
     expect(cue.cue).toBe('practiced_stuck');
     expect(cue.topic).toBe('T1');
+  });
+});
+
+describe('insight aggregates', () => {
+  const sample: Attempt[] = [
+    attempt({
+      id: 'p1',
+      sessionKind: 'practice',
+      startedAt: '2026-09-20T10:00:00.000Z',
+      durationMs: 60_000,
+      answers: [
+        ans({ itemId: 'a', outcome: 'correct', skillArea: 'VSP' }),
+        ans({
+          itemId: 'b',
+          outcome: 'incorrect',
+          skillArea: 'VJS',
+          topic: 'T2',
+        }),
+        ans({ itemId: 'c', outcome: 'skipped', skillArea: 'VSP' }),
+      ],
+      scoreCorrect: 1,
+      scoreTotal: 3,
+    }),
+    attempt({
+      id: 'e1',
+      sessionKind: 'exam_30',
+      startedAt: '2026-09-21T10:00:00.000Z',
+      durationMs: 120_000,
+      answers: [
+        ans({ itemId: 'd', outcome: 'correct', module: 'M2', topic: 'T3' }),
+      ],
+      scoreCorrect: 1,
+      scoreTotal: 1,
+    }),
+  ];
+
+  it('computeInsightSummary totals sessions and accuracy', () => {
+    const practice = filterAttemptsBySection(sample, 'practice');
+    const s = computeInsightSummary(practice);
+    expect(s.sessionCount).toBe(1);
+    expect(s.answerCount).toBe(3);
+    expect(s.correctCount).toBe(1);
+    expect(s.accuracy).toBeCloseTo(1 / 3);
+    expect(s.durationMs).toBe(60_000);
+    expect(s.activeDays).toBe(1);
+  });
+
+  it('computeSkillAreaProgress splits VSP/VJS', () => {
+    const rows = computeSkillAreaProgress(
+      filterAttemptsBySection(sample, 'practice'),
+    );
+    expect(rows.find((r) => r.skillArea === 'VSP')?.answered).toBe(2);
+    expect(rows.find((r) => r.skillArea === 'VJS')?.answered).toBe(1);
+  });
+
+  it('computeOutcomeMix counts outcomes', () => {
+    const mix = computeOutcomeMix(filterAttemptsBySection(sample, 'practice'));
+    expect(mix).toEqual({
+      correct: 1,
+      incorrect: 1,
+      skipped: 1,
+      total: 3,
+    });
+  });
+
+  it('computeSessionScoreTrend returns chronological points', () => {
+    const pts = computeSessionScoreTrend(sample, 12);
+    expect(pts).toHaveLength(2);
+    expect(pts[0].id).toBe('p1');
+    expect(pts[1].accuracy).toBe(1);
   });
 });

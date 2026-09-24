@@ -280,6 +280,16 @@ export function dbStats(db: Database.Database): {
   attempts: number;
   answers: number;
   flags: number;
+  /** Insight rollups derived from persisted attempts (V06 source of truth). */
+  insights: {
+    practiceAttempts: number;
+    examAttempts: number;
+    completedAttempts: number;
+    correctAnswers: number;
+    incorrectAnswers: number;
+    skippedAnswers: number;
+    totalDurationMs: number;
+  };
 } {
   const questions = (
     db.prepare('SELECT COUNT(*) AS n FROM questions').get() as { n: number }
@@ -300,7 +310,76 @@ export function dbStats(db: Database.Database): {
   const flags = (
     db.prepare('SELECT COUNT(*) AS n FROM flags').get() as { n: number }
   ).n;
-  return { questions, published, attempts, answers, flags };
+
+  const practiceAttempts = (
+    db
+      .prepare(
+        `SELECT COUNT(*) AS n FROM attempts
+         WHERE session_kind = 'practice' AND ended_at IS NOT NULL`,
+      )
+      .get() as { n: number }
+  ).n;
+  const examAttempts = (
+    db
+      .prepare(
+        `SELECT COUNT(*) AS n FROM attempts
+         WHERE session_kind IN ('exam_30','exam_60') AND ended_at IS NOT NULL`,
+      )
+      .get() as { n: number }
+  ).n;
+  const completedAttempts = (
+    db
+      .prepare(
+        `SELECT COUNT(*) AS n FROM attempts WHERE ended_at IS NOT NULL`,
+      )
+      .get() as { n: number }
+  ).n;
+  const correctAnswers = (
+    db
+      .prepare(
+        `SELECT COUNT(*) AS n FROM attempt_answers WHERE outcome = 'correct'`,
+      )
+      .get() as { n: number }
+  ).n;
+  const incorrectAnswers = (
+    db
+      .prepare(
+        `SELECT COUNT(*) AS n FROM attempt_answers WHERE outcome = 'incorrect'`,
+      )
+      .get() as { n: number }
+  ).n;
+  const skippedAnswers = (
+    db
+      .prepare(
+        `SELECT COUNT(*) AS n FROM attempt_answers WHERE outcome = 'skipped'`,
+      )
+      .get() as { n: number }
+  ).n;
+  const totalDurationMs = (
+    db
+      .prepare(
+        `SELECT COALESCE(SUM(duration_ms), 0) AS n FROM attempts
+         WHERE ended_at IS NOT NULL`,
+      )
+      .get() as { n: number }
+  ).n;
+
+  return {
+    questions,
+    published,
+    attempts,
+    answers,
+    flags,
+    insights: {
+      practiceAttempts,
+      examAttempts,
+      completedAttempts,
+      correctAnswers,
+      incorrectAnswers,
+      skippedAnswers,
+      totalDurationMs,
+    },
+  };
 }
 
 export { emptyState };
