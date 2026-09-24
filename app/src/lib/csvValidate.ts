@@ -1,7 +1,7 @@
 /**
- * CSV question validator stub (F22).
+ * F22 question CSV validator (app).
  * All-or-nothing: any bad row → reject whole file; no partial writes.
- * See docs/specs/question-csv-upload.md and content-model.md.
+ * Parity target: tools/lib/f22_schema.py + docs/specs/question-csv-upload.md
  */
 
 import {
@@ -27,14 +27,17 @@ export const REQUIRED_COLUMNS = [
 ] as const;
 
 export interface CsvRowError {
-  row: number; // 1-based data row (header = row 0 conceptually; first data = 1)
+  /** 1-based data row; 0 = header/file-level */
+  row: number;
+  /** Item id when present, else `<row-N>` / `<header>` / `<file>` */
+  id: string;
   column?: string;
   message: string;
 }
 
 export type CsvValidateResult =
   | { ok: true; items: ContentItem[] }
-  | { ok: false; errors: CsvRowError[] };
+  | { ok: false; errors: CsvRowError[]; wouldWrite: 0 };
 
 function parseCsvLine(line: string): string[] {
   const cells: string[] = [];
@@ -66,43 +69,83 @@ function parseCsvLine(line: string): string[] {
   return cells;
 }
 
-function parseChoices(raw: string | undefined): string[] | undefined {
-  if (raw === undefined || raw === '') return undefined;
+function rowIdentity(idRaw: string | undefined, rowNum: number): string {
+  const id = idRaw?.trim();
+  return id ? id : `<row-${rowNum}>`;
+}
+
+export function parseChoices(raw: string | undefined): string[] | undefined {
+  if (raw === undefined || raw.trim() === '') return undefined;
   const trimmed = raw.trim();
   if (trimmed.startsWith('[')) {
+    let parsed: unknown;
     try {
-      const parsed = JSON.parse(trimmed) as unknown;
-      if (!Array.isArray(parsed) || !parsed.every((x) => typeof x === 'string')) {
-        throw new Error('choices must be a JSON string array');
-      }
-      return parsed;
+      parsed = JSON.parse(trimmed) as unknown;
     } catch {
-      throw new Error('malformed choices JSON');
+      throw new Error('choices JSON invalid');
     }
+    if (!Array.isArray(parsed) || !parsed.every((x) => typeof x === 'string')) {
+      throw new Error('choices JSON must be an array of strings');
+    }
+    return parsed.map((s) => s.trim());
   }
-  return trimmed.split('|').map((s) => s.trim()).filter(Boolean);
+  const parts = trimmed.split('|').map((s) => s.trim());
+  if (parts.length < 2) {
+    throw new Error('choices pipe list needs at least 2 options');
+  }
+  return parts;
 }
 
 function normalizeSkillArea(raw: string): SkillArea | null {
-  const v = raw.trim().toUpperCase().replace('Š', 'S').replace('š', 'S');
-  if (v === 'VSP' || v === 'VŠP') return 'VSP';
+  const trimmed = raw.trim();
+  if (trimmed === 'VŠP' || trimmed === 'VŠp') return 'VSP';
+  const v = trimmed.toUpperCase().replace(/Š/g, 'S').replace(/š/g, 'S');
+  if (v === 'VSP') return 'VSP';
   if (v === 'VJS') return 'VJS';
-  // After Š→S, VŠP becomes VSP already via replace
   if (SKILL_AREAS.includes(v as SkillArea)) return v as SkillArea;
   return null;
 }
 
 function parsePublished(raw: string | undefined): boolean {
-  if (raw === undefined || raw === '') return true;
+  if (raw === undefined || raw.trim() === '') return true;
   const v = raw.trim().toLowerCase();
   if (v === 'true' || v === '1' || v === 'yes') return true;
   if (v === 'false' || v === '0' || v === 'no') return false;
-  throw new Error(`invalid published value: ${raw}`);
+  throw new Error(`published must be boolean-like, got ${raw}`);
+}
+
+function validateMcqCorrectKey(
+  correct: string,
+  choices: string[],
+): string | null {
+  const upper = correct.toUpperCase();
+  if (/^[A-F]$/.test(upper)) {
+    const idx = upper.charCodeAt(0) - 'A'.charCodeAt(0);
+    if (idx >= choices.length) {
+      return `${correct} out of range for ${choices.length} choices`;
+    }
+    return null;
+  }
+  if (/^\d+$/.test(correct)) {
+    if (Number(correct) >= choices.length) {
+      return `index ${correct} out of range for ${choices.length} choices`;
+    }
+    return null;
+  }
+  return 'MCQ correctKey should be a choice letter (A–F) or 0-based index';
+}
+
+function newStableId(rowNum: number): string {
+  const rand =
+    typeof crypto !== 'undefined' && 'randomUUID' in crypto
+      ? crypto.randomUUID().slice(0, 8)
+      : Math.random().toString(36).slice(2, 10);
+  return `imp_${rowNum}_${rand}`;
 }
 
 /**
  * Validate CSV text against F22 schema.
- * Returns items only when every row passes; otherwise errors and zero items.
+ * Returns items only when every row passes; otherwise errors and zero writes.
  */
 export function validateQuestionCsv(csvText: string): CsvValidateResult {
   const lines = csvText
@@ -111,7 +154,11 @@ export function validateQuestionCsv(csvText: string): CsvValidateResult {
     .filter((l) => l.trim().length > 0);
 
   if (lines.length === 0) {
-    return { ok: false, errors: [{ row: 0, message: 'Prázdny súbor' }] };
+    return {
+      ok: false,
+      wouldWrite: 0,
+      errors: [{ row: 0, id: '<file>', message: 'CSV is empty' }],
+    };
   }
 
   const header = parseCsvLine(lines[0]).map((h) => h.trim());
@@ -119,131 +166,118 @@ export function validateQuestionCsv(csvText: string): CsvValidateResult {
 
   const errors: CsvRowError[] = [];
 
-  for (const col of REQUIRED_COLUMNS) {
-    if (!colIndex.has(col)) {
-      errors.push({
-        row: 0,
-        column: col,
-        message: `Chýba povinný stĺpec: ${col}`,
-      });
-    }
-  }
-
-  if (errors.length > 0) {
-    return { ok: false, errors };
+  const missing = REQUIRED_COLUMNS.filter((col) => !colIndex.has(col));
+  if (missing.length > 0) {
+    return {
+      ok: false,
+      wouldWrite: 0,
+      errors: [
+        {
+          row: 0,
+          id: '<header>',
+          column: 'header',
+          message: `missing required column(s): ${missing.join(', ')}`,
+        },
+      ],
+    };
   }
 
   const items: ContentItem[] = [];
 
   for (let i = 1; i < lines.length; i++) {
-    const rowNum = i; // data rows 1..n
+    const rowNum = i;
     const cells = parseCsvLine(lines[i]);
     const get = (name: string) => {
       const idx = colIndex.get(name);
       return idx === undefined ? undefined : (cells[idx] ?? '');
     };
 
-    const stem = get('stem') ?? '';
-    const correctKey = get('correctKey') ?? '';
-    const rationale = get('rationale') ?? '';
-    const moduleRaw = get('module') ?? '';
-    const topicRaw = get('topic') ?? '';
-    const skillRaw = get('skillArea') ?? '';
-    const sourceRaw = get('sourceType') ?? '';
+    const stem = (get('stem') ?? '').trim();
+    const correctKey = (get('correctKey') ?? '').trim();
+    const rationale = (get('rationale') ?? '').trim();
+    const moduleRaw = (get('module') ?? '').trim();
+    const topicRaw = (get('topic') ?? '').trim();
+    const skillRaw = (get('skillArea') ?? '').trim();
+    const sourceRaw = (get('sourceType') ?? '').trim();
     const idRaw = get('id');
     const localeRaw = get('locale');
     const publishedRaw = get('published');
     const choicesRaw = get('choices');
+    const rid = rowIdentity(idRaw, rowNum);
 
-    if (!stem) {
-      errors.push({ row: rowNum, column: 'stem', message: 'stem je povinný' });
-    }
-    if (!correctKey) {
-      errors.push({
-        row: rowNum,
-        column: 'correctKey',
-        message: 'correctKey je povinný',
-      });
-    }
-    if (!rationale) {
-      errors.push({
-        row: rowNum,
-        column: 'rationale',
-        message: 'rationale je povinný',
-      });
-    }
+    const pushErr = (column: string, message: string) => {
+      errors.push({ row: rowNum, id: rid, column, message });
+    };
 
-    if (!MODULES.includes(moduleRaw as ModuleId)) {
-      errors.push({
-        row: rowNum,
-        column: 'module',
-        message: `module musí byť M1–M6 (dostané: ${moduleRaw})`,
-      });
+    if (!stem) pushErr('stem', 'required field is empty');
+    if (!correctKey) pushErr('correctKey', 'required field is empty');
+    if (!rationale) pushErr('rationale', 'required field is empty');
+    if (!moduleRaw) pushErr('module', 'required field is empty');
+    if (!topicRaw) pushErr('topic', 'required field is empty');
+    if (!skillRaw) pushErr('skillArea', 'required field is empty');
+    if (!sourceRaw) pushErr('sourceType', 'required field is empty');
+
+    if (moduleRaw && !MODULES.includes(moduleRaw as ModuleId)) {
+      pushErr('module', `must be one of M1–M6, got ${moduleRaw}`);
     }
 
-    if (!TOPICS.includes(topicRaw as TopicId)) {
-      errors.push({
-        row: rowNum,
-        column: 'topic',
-        message: `topic musí byť T1–T12 (dostané: ${topicRaw})`,
-      });
+    const topicNorm = topicRaw.toUpperCase();
+    if (topicRaw && !TOPICS.includes(topicNorm as TopicId)) {
+      pushErr('topic', `must be one of T1–T12, got ${topicRaw}`);
     }
 
-    const skillArea = normalizeSkillArea(skillRaw);
-    if (!skillArea) {
-      errors.push({
-        row: rowNum,
-        column: 'skillArea',
-        message: `skillArea musí byť VSP alebo VJS (dostané: ${skillRaw})`,
-      });
+    const skillArea = skillRaw ? normalizeSkillArea(skillRaw) : null;
+    if (skillRaw && !skillArea) {
+      pushErr(
+        'skillArea',
+        `must be VSP or VJS (VŠP→VSP ok), got ${skillRaw}`,
+      );
     }
 
-    if (!SOURCE_TYPES.includes(sourceRaw as SourceType)) {
-      errors.push({
-        row: rowNum,
-        column: 'sourceType',
-        message: `sourceType musí byť bank alebo synthetic (dostané: ${sourceRaw})`,
-      });
+    if (sourceRaw && !SOURCE_TYPES.includes(sourceRaw as SourceType)) {
+      pushErr('sourceType', `must be bank|synthetic, got ${sourceRaw}`);
     }
 
     let choices: string[] | undefined;
     try {
       choices = parseChoices(choicesRaw);
     } catch (e) {
-      errors.push({
-        row: rowNum,
-        column: 'choices',
-        message: e instanceof Error ? e.message : 'neplatné choices',
-      });
+      pushErr(
+        'choices',
+        e instanceof Error ? e.message : 'neplatné choices',
+      );
+    }
+
+    if (choices !== undefined) {
+      if (choices.length < 2 || choices.length > 6) {
+        pushErr('choices', `expected 2–6 options, got ${choices.length}`);
+      }
+      if (correctKey) {
+        const mcqErr = validateMcqCorrectKey(correctKey, choices);
+        if (mcqErr) pushErr('correctKey', mcqErr);
+      }
     }
 
     let published = true;
     try {
       published = parsePublished(publishedRaw);
     } catch (e) {
-      errors.push({
-        row: rowNum,
-        column: 'published',
-        message: e instanceof Error ? e.message : 'neplatné published',
-      });
+      pushErr(
+        'published',
+        e instanceof Error ? e.message : 'neplatné published',
+      );
     }
 
-    // Collect row only if no new errors for this row since we started it —
-    // simpler: build item only after all checks; if any errors exist for this
-    // row, skip pushing. We check errors added for this rowNum.
     const rowHadError = errors.some((e) => e.row === rowNum);
     if (!rowHadError && skillArea) {
       items.push({
-        id:
-          idRaw && idRaw.trim()
-            ? idRaw.trim()
-            : `csv_${rowNum}_${Date.now()}`,
+        id: idRaw?.trim() ? idRaw.trim() : newStableId(rowNum),
         stem,
         choices,
         correctKey,
         rationale,
         module: moduleRaw as ModuleId,
-        topic: topicRaw as TopicId,
+        topic: topicNorm as TopicId,
         skillArea,
         sourceType: sourceRaw as SourceType,
         locale: localeRaw?.trim() || 'sk',
@@ -253,14 +287,14 @@ export function validateQuestionCsv(csvText: string): CsvValidateResult {
   }
 
   if (errors.length > 0) {
-    // All-or-nothing: discard any partially collected items
-    return { ok: false, errors };
+    return { ok: false, wouldWrite: 0, errors };
   }
 
   if (items.length === 0) {
     return {
       ok: false,
-      errors: [{ row: 0, message: 'Žiadne dátové riadky' }],
+      wouldWrite: 0,
+      errors: [{ row: 0, id: '<file>', message: 'no data rows' }],
     };
   }
 
