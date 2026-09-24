@@ -11,6 +11,7 @@
     "init-db": "npm install --prefix server && npm run init-db --prefix server",
     "publish-all": "npm install --prefix server && npm run publish-all --prefix server",
     "import-csv": "npm install --prefix server && npm run import-csv --prefix server --",
+    "seed-db": "npm install --prefix server && npm run import-csv --prefix server -- ../content/published/pilot-t5-synth-20260924_M3_T5.csv",
     "t5-critical-path": "npm install --prefix server && npm run t5-critical-path --prefix server",
     "install:all": "npm install --prefix app && npm install --prefix server"
   }
