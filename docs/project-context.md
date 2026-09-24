@@ -37,7 +37,7 @@ No Student vs Parent modes, parallel navigations, or role-gated screens.
 
 ## Decisions (locked)
 
-1. **Household = anonymous shared device/browser context.** Progress and attempt history live in local (or single-instance) storage. Anyone on the LAN who opens the app sees the **same** shared screens and data.  
+1. **Household = anonymous shared device/browser context.** Progress and attempt history live in a **local SQLite** database (single LAN instance via `server/`). Anyone on the LAN who opens the app sees the **same** shared screens and data. See [persistence-sqlite.md](./persistence-sqlite.md).  
 2. **No modes.** Do **not** split Student vs Parent into separate modes, navigations, or parallel screens. Parent and child look at results, progress, gaps, and suggestions **together** on the normal app screens.  
 3. **Session kinds (not modes):** the tool supports both **task-by-task practice** (untimed) and **timed exams** of **30 minutes** and **60 minutes**. Exam is a **session kind** on the same shared screens — not a Student/Parent mode or parallel UI.  
 4. **Reports separate practice from exams.** Results & Progress must show practice vs exams (30 / 60) via filters or sections so families can see exam readiness apart from daily drills. Do **not** mix exam sessions into the same undifferentiated progress rollups as casual practice.  
