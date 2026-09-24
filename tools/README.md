@@ -41,13 +41,31 @@ python3 tools/verify-answer-keys path.csv --dry-run
 
 Does **not** publish. High fail rate → scrap/revise the batch (all-or-nothing spirit).
 
+## `generate-t5-pilot-batch`
+
+Deterministic T5 (M3) synthetic pilot generator — fills locked templates with programmatic keys only. Emits `published=false` / `sourceType=synthetic`.
+
+```bash
+python3 tools/generate-t5-pilot-batch
+# → content/candidates/pilot-t5-synth-20260924_M3_T5.csv
+```
+
+## `critic-synthetic-batch`
+
+Adversarial second pass (not the generator). Requires a green verify report.
+
+```bash
+python3 tools/critic-synthetic-batch content/candidates/BATCH.csv --batch-id BATCH
+# → content/reports/BATCH_critic.json
+```
+
 ## Agent invoke order
 
 1. `extract-vsjp8-seeds` → `content/seeds/`, `content/templates/`
 2. `generate-vsjp8-items` → `content/candidates/*.csv` (`published=false`)
 3. **`validate-questions-csv`**
 4. **`verify-answer-keys`**
-5. `critic-synthetic-batch`
+5. **`critic-synthetic-batch`**
 6. `csv-import-qa` publish gate (human sample, smoke) — only then `published=true`
 
 ## Fixtures

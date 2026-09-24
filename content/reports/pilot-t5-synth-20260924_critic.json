@@ -1,0 +1,279 @@
+{
+  "batchId": "pilot-t5-synth-20260924",
+  "csvPath": "content/candidates/pilot-t5-synth-20260924_M3_T5.csv",
+  "ok": true,
+  "persona": "critic-synthetic-batch (adversarial; not generator)",
+  "verifyReport": "/Users/svm/work/projects/gymnazium_training-synth/content/reports/pilot-t5-synth-20260924_verify.json",
+  "verifyOk": true,
+  "rowCount": 40,
+  "criticalCount": 0,
+  "minorCount": 0,
+  "residualMinorPercent": 0.0,
+  "thresholds": {
+    "criticalMax": 0,
+    "minorMaxPercent": 2.0
+  },
+  "grounding": {
+    "templates": [
+      "t1.cloze-word-pair.mcq",
+      "t1.sentence-order.mcq",
+      "t5.lcm-gears.mcq",
+      "t5.numeric-word-problem.mcq",
+      "t5.percent-composition.mcq"
+    ],
+    "seedsCited": [
+      "t5-uloohy-01-paky-gulicky",
+      "t5-uloohy-07-percent-cukor",
+      "t5-vzor-03-ozubene-kolesa",
+      "t5-vzor-04-zlacnenie-bicykel"
+    ],
+    "note": "Template siblings that differ only by slot numbers are allowed; exact stem clones and verbatim bank seeds are critical rejects. Lexicon allow-list for percent items: attested 'cukru' only."
+  },
+  "issues": [],
+  "decisions": [
+    {
+      "row": 1,
+      "id": "t5.lcm-gears.mcq-d6ba56415f",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 2,
+      "id": "t5.lcm-gears.mcq-2f939bf522",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 3,
+      "id": "t5.lcm-gears.mcq-106214994f",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 4,
+      "id": "t5.lcm-gears.mcq-45d5e2db63",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 5,
+      "id": "t5.lcm-gears.mcq-9da82dea88",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 6,
+      "id": "t5.lcm-gears.mcq-76dadeeae0",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 7,
+      "id": "t5.lcm-gears.mcq-82b2263ad2",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 8,
+      "id": "t5.lcm-gears.mcq-6946f89023",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 9,
+      "id": "t5.lcm-gears.mcq-dcd20ec509",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 10,
+      "id": "t5.lcm-gears.mcq-625c5e6081",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 11,
+      "id": "t5.lcm-gears.mcq-890add1112",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 12,
+      "id": "t5.lcm-gears.mcq-6c8309eb9d",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 13,
+      "id": "t5.percent-composition.mcq-ee45fe30f7",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 14,
+      "id": "t5.percent-composition.mcq-ae910f54db",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 15,
+      "id": "t5.percent-composition.mcq-c98c6c48e9",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 16,
+      "id": "t5.percent-composition.mcq-c89a4e9629",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 17,
+      "id": "t5.percent-composition.mcq-dbc4e21e72",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 18,
+      "id": "t5.percent-composition.mcq-29c753ae3a",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 19,
+      "id": "t5.percent-composition.mcq-157f9f7b3e",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 20,
+      "id": "t5.percent-composition.mcq-f20578a061",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 21,
+      "id": "t5.percent-composition.mcq-1f09fc9e35",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 22,
+      "id": "t5.percent-composition.mcq-0cfdc56fcc",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 23,
+      "id": "t5.percent-composition.mcq-4e3f1046b8",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 24,
+      "id": "t5.percent-composition.mcq-3375d9a451",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 25,
+      "id": "t5.numeric-word-problem.mcq-4bbd62aba0",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 26,
+      "id": "t5.numeric-word-problem.mcq-4d01a80de4",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 27,
+      "id": "t5.numeric-word-problem.mcq-8fb07516c1",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 28,
+      "id": "t5.numeric-word-problem.mcq-bc9eb2718d",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 29,
+      "id": "t5.numeric-word-problem.mcq-3b0f723289",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 30,
+      "id": "t5.numeric-word-problem.mcq-13852f8637",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 31,
+      "id": "t5.numeric-word-problem.mcq-91119e2121",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 32,
+      "id": "t5.numeric-word-problem.mcq-d9ec539375",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 33,
+      "id": "t5.numeric-word-problem.mcq-b0847bb737",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 34,
+      "id": "t5.numeric-word-problem.mcq-35ef123a47",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 35,
+      "id": "t5.numeric-word-problem.mcq-cb9954659e",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 36,
+      "id": "t5.numeric-word-problem.mcq-7a14aca01a",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 37,
+      "id": "t5.numeric-word-problem.mcq-9579aaa48d",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 38,
+      "id": "t5.numeric-word-problem.mcq-68ad828062",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 39,
+      "id": "t5.numeric-word-problem.mcq-37d4b54061",
+      "decision": "keep",
+      "reason": "no critical issues"
+    },
+    {
+      "row": 40,
+      "id": "t5.numeric-word-problem.mcq-2f1408781b",
+      "decision": "keep",
+      "reason": "no critical issues"
+    }
+  ],
+  "keepCount": 40,
+  "discardCount": 0,
+  "generatedAt": "2026-09-24T11:47:09.653343+00:00",
+  "verdict": "PASS"
+}
