@@ -6,7 +6,7 @@
   "skillArea": "VSP",
   "itemType": "mcq",
   "sourceType": "bank",
-  "published": false,
+  "published": true,
   "provenance": {
     "sourcePdf": "VSJP8_Mudre-predplatne_5_Ulohy-s6hvtz.pdf",
     "solutionPdf": "VSJP8_Mudre-predplatne_5_Riesenia-00ceqg.pdf",
@@ -14,7 +14,12 @@
     "folder": "sources/3"
   },
   "stem": "Tyčinka obsahuje na 50 gramov 12 gramov cukru. Koľko percent cukru obsahuje tyčinka?",
-  "choices": ["12", "50", "20", "24"],
+  "choices": [
+    "12",
+    "50",
+    "20",
+    "24"
+  ],
   "correctKey": "D",
   "rationale": "Percento cukru = (12/50)×100 = 24%.",
   "slots": {

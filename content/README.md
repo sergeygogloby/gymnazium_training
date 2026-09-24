@@ -6,8 +6,8 @@ Folders for the synthetic / bank content workflow (see [docs/agent-operating-mod
 |---|---|
 | `seeds/` | Extracted seeds / fixtures from `sources/` PDFs (per topic templates) |
 | `templates/` | Locked item templates (JSON Schema or equivalent) per topic |
-| `candidates/` | Unpublished candidate CSV batches (`sourceType=synthetic`, `published=false`) |
-| `published/` | Gate-passed batches eligible for `published=true` after smoke |
+| `candidates/` | Candidate CSV batches (current stock `published=true`; new batches may gate as unpublished) |
+| `published/` | Gate-passed / live CSV (`published=true`) |
 | `reports/` | Gate reports (`*_report.json`: lint, verify, critic, human sample) |
 
 **Invoke order:** `extract-vsjp8-seeds` → `generate-vsjp8-items` → `verify-answer-keys` → `critic-synthetic-batch` → `csv-import-qa`.

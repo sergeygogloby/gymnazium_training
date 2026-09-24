@@ -6,7 +6,7 @@
   "skillArea": "VSP",
   "itemType": "mcq",
   "sourceType": "bank",
-  "published": false,
+  "published": true,
   "provenance": {
     "sourcePdf": "VSJP8_Mudre-predplatne_5_Ulohy-s6hvtz.pdf",
     "solutionPdf": "VSJP8_Mudre-predplatne_5_Riesenia-00ceqg.pdf",
@@ -14,11 +14,20 @@
     "folder": "sources/3"
   },
   "stem": "Máme dve nádoby a dve páky. Pri potiahnutí páky 1 sa do nádoby 1 vysype 14 guličiek. Pri potiahnutí páky 2 sa do nádoby 2 vysypú 3 guličky. Koľkokrát musíme potiahnuť páku 2 tak, aby v nádobe 2 bol rovnaký počet guličiek ako v nádobe 1, ak sme páku 1 stlačili trikrát?",
-  "choices": ["18", "23", "14", "12"],
+  "choices": [
+    "18",
+    "23",
+    "14",
+    "12"
+  ],
   "correctKey": "C",
   "rationale": "V prvej nádobe je 3×14 = 42 guličiek. Druhú páku musíme stlačiť 42÷3 = 14×.",
   "slots": {
-    "quantities": { "pull1Per": 14, "pull2Per": 3, "pull1Count": 3 },
+    "quantities": {
+      "pull1Per": 14,
+      "pull2Per": 3,
+      "pull1Count": 3
+    },
     "derive": "(pull1Count * pull1Per) / pull2Per"
   },
   "shapeNotes": "MCQ A–D; linear proportion / equal totals."
