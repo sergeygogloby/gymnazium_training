@@ -17,8 +17,7 @@ import {
 } from '../lib/examSession';
 import { examDurationMs, isExamKind } from '../lib/sessionKind';
 import { selectPracticeItems } from '../lib/selectPracticeItems';
-
-const STORAGE_KEY = 'gymnazium-training-store-v1';
+import { fetchState, isTestRuntime, putState } from '../lib/api';
 
 export interface ActiveSession {
   sessionKind: SessionKind;
@@ -62,39 +61,25 @@ const emptyState = (): AppStoreState => ({
   seenHelp: false,
 });
 
-function load(): AppStoreState {
-  if (typeof localStorage === 'undefined') return emptyState();
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return emptyState();
-    const parsed = JSON.parse(raw) as Partial<AppStoreState>;
-    return {
-      ...emptyState(),
-      ...parsed,
-      catalog: parsed.catalog ?? [],
-      attempts: parsed.attempts ?? [],
-      flags: parsed.flags ?? [],
-      activeSession: parsed.activeSession ?? null,
-      seenHelp: parsed.seenHelp ?? false,
-    };
-  } catch {
-    return emptyState();
-  }
-}
-
-function save(state: AppStoreState): void {
-  if (typeof localStorage === 'undefined') return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
-
 type Listener = () => void;
 
-let state = load();
+let state = emptyState();
 const listeners = new Set<Listener>();
+let persistQueue: Promise<void> = Promise.resolve();
+let hydrated = false;
 
 function emit(): void {
-  save(state);
   listeners.forEach((l) => l());
+  // Source of truth: SQLite via API (skip in unit tests).
+  if (!isTestRuntime()) {
+    const snapshot = state;
+    persistQueue = persistQueue
+      .then(() => putState(snapshot))
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error('[sessionStore] SQLite persist failed', err);
+      });
+  }
 }
 
 function patchAttempt(id: string, patch: Partial<Attempt>): void {
@@ -112,9 +97,7 @@ function publishedCount(catalog: ContentItem[]): number {
 
 function wipeStore(): void {
   state = emptyState();
-  if (typeof localStorage !== 'undefined') {
-    localStorage.removeItem(STORAGE_KEY);
-  }
+  hydrated = false;
   listeners.forEach((l) => l());
 }
 
@@ -126,6 +109,35 @@ export const sessionStore = {
   subscribe(listener: Listener): () => void {
     listeners.add(listener);
     return () => listeners.delete(listener);
+  },
+
+  /** Load household state from SQLite API. Safe to call once at boot. */
+  async hydrateFromDb(): Promise<void> {
+    if (isTestRuntime()) {
+      hydrated = true;
+      return;
+    }
+    const remote = await fetchState();
+    state = {
+      ...emptyState(),
+      ...remote,
+      catalog: remote.catalog ?? [],
+      attempts: remote.attempts ?? [],
+      flags: remote.flags ?? [],
+      activeSession: remote.activeSession ?? null,
+      seenHelp: remote.seenHelp ?? false,
+    };
+    hydrated = true;
+    listeners.forEach((l) => l());
+  },
+
+  isHydrated(): boolean {
+    return hydrated || isTestRuntime();
+  },
+
+  /** Flush pending persist writes (tests / shutdown). */
+  async flushPersist(): Promise<void> {
+    await persistQueue;
   },
 
   /** Replace entire catalog only after all-or-nothing CSV validation succeeds. */
@@ -377,12 +389,12 @@ export const sessionStore = {
     emit();
   },
 
-  /** Test helper — wipe in-memory + persisted store (practice tests). */
+  /** Test helper — wipe in-memory store (practice tests). */
   resetForTests(): void {
     wipeStore();
   },
 
-  /** Test helper — wipe in-memory + persisted store (exam tests). */
+  /** Test helper — wipe in-memory store (exam tests). */
   __resetForTests(): void {
     wipeStore();
   },

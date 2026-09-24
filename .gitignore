@@ -1,8 +1,17 @@
 .DS_Store
 sources/Mudre-predplatne_Prihlasovacie-udaje_VSJP8_KOMPLET-ezhkvi.pdf
 node_modules/
+app/node_modules/
+server/node_modules/
 app/dist/
 app/*.tsbuildinfo
+server/dist/
+data/*.sqlite
+data/*.sqlite-wal
+data/*.sqlite-shm
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
 *.local
 __pycache__/
 *.pyc
