@@ -5,7 +5,7 @@
   "rowCount": 40,
   "publishedColumnAllFalse": true,
   "publishDecision": "DO_NOT_PUBLISH",
-  "publishReason": "Human spot-check (#4) and smoke (#6) not signed; locks forbid published=true until full gate.",
+  "publishReason": "Human spot-check signed off; smoke_practice_serves_synthetic still PENDING before published=true.",
   "candidateGate": {
     "verdict": "PASS",
     "meaning": "Eligible to stay in content/candidates/ unpublished; not eligible for published=true",
@@ -33,8 +33,8 @@
     {
       "id": 4,
       "name": "human_spot_check_signed_off",
-      "pass": false,
-      "detail": "PENDING — first pilot batches need human ≥2% or ≥20 sample"
+      "pass": true,
+      "detail": "SIGNED OFF 2026-09-24 — human spot-check confirmed by project owner (merge #12)"
     },
     {
       "id": 5,
@@ -69,5 +69,11 @@
   },
   "generatorTool": "tools/generate-t5-pilot-batch",
   "criticTool": "tools/critic-synthetic-batch",
-  "generatedAt": "2026-09-24T11:47:09.689727+00:00"
+  "generatedAt": "2026-09-24T11:47:09.689727+00:00",
+  "humanSpotCheck": {
+    "signedOff": true,
+    "signedOffAt": "2026-09-24T11:58:48.165596+00:00",
+    "note": "Owner confirmed human spot-check done prior to / upon merge of PR #12."
+  },
+  "updatedAt": "2026-09-24T11:58:48.165934+00:00"
 }
