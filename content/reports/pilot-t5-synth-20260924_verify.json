@@ -1,0 +1,374 @@
+{
+  "batchId": "pilot-t5-synth-20260924",
+  "csvPath": "content/candidates/pilot-t5-synth-20260924_M3_T5.csv",
+  "ok": true,
+  "lintOk": true,
+  "checked": 40,
+  "passed": 40,
+  "failed": 0,
+  "needsIndependentCheck": 0,
+  "generatedAt": "2026-09-24T11:47:09.614035+00:00",
+  "note": "Scaffold: full solvers TBD. Rows without a matching solver are reported as needsIndependentCheck — do not rubber-stamp.",
+  "rows": [
+    {
+      "row": 1,
+      "id": "t5.lcm-gears.mcq-d6ba56415f",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 2,
+      "id": "t5.lcm-gears.mcq-2f939bf522",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 3,
+      "id": "t5.lcm-gears.mcq-106214994f",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 4,
+      "id": "t5.lcm-gears.mcq-45d5e2db63",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 5,
+      "id": "t5.lcm-gears.mcq-9da82dea88",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 6,
+      "id": "t5.lcm-gears.mcq-76dadeeae0",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 7,
+      "id": "t5.lcm-gears.mcq-82b2263ad2",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 8,
+      "id": "t5.lcm-gears.mcq-6946f89023",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 9,
+      "id": "t5.lcm-gears.mcq-dcd20ec509",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 10,
+      "id": "t5.lcm-gears.mcq-625c5e6081",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 11,
+      "id": "t5.lcm-gears.mcq-890add1112",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 12,
+      "id": "t5.lcm-gears.mcq-6c8309eb9d",
+      "status": "pass",
+      "method": "t5.lcm_gears",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 13,
+      "id": "t5.percent-composition.mcq-ee45fe30f7",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 14,
+      "id": "t5.percent-composition.mcq-ae910f54db",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 15,
+      "id": "t5.percent-composition.mcq-c98c6c48e9",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 16,
+      "id": "t5.percent-composition.mcq-c89a4e9629",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 17,
+      "id": "t5.percent-composition.mcq-dbc4e21e72",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 18,
+      "id": "t5.percent-composition.mcq-29c753ae3a",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 19,
+      "id": "t5.percent-composition.mcq-157f9f7b3e",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 20,
+      "id": "t5.percent-composition.mcq-f20578a061",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 21,
+      "id": "t5.percent-composition.mcq-1f09fc9e35",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 22,
+      "id": "t5.percent-composition.mcq-0cfdc56fcc",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 23,
+      "id": "t5.percent-composition.mcq-4e3f1046b8",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 24,
+      "id": "t5.percent-composition.mcq-3375d9a451",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 25,
+      "id": "t5.numeric-word-problem.mcq-4bbd62aba0",
+      "status": "pass",
+      "method": "t5.lever_balls",
+      "detail": "solver matched",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 26,
+      "id": "t5.numeric-word-problem.mcq-4d01a80de4",
+      "status": "pass",
+      "method": "t5.lever_balls",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 27,
+      "id": "t5.numeric-word-problem.mcq-8fb07516c1",
+      "status": "pass",
+      "method": "t5.lever_balls",
+      "detail": "solver matched",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 28,
+      "id": "t5.numeric-word-problem.mcq-bc9eb2718d",
+      "status": "pass",
+      "method": "t5.lever_balls",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 29,
+      "id": "t5.numeric-word-problem.mcq-3b0f723289",
+      "status": "pass",
+      "method": "t5.lever_balls",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 30,
+      "id": "t5.numeric-word-problem.mcq-13852f8637",
+      "status": "pass",
+      "method": "t5.lever_balls",
+      "detail": "solver matched",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 31,
+      "id": "t5.numeric-word-problem.mcq-91119e2121",
+      "status": "pass",
+      "method": "t5.lever_balls",
+      "detail": "solver matched",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 32,
+      "id": "t5.numeric-word-problem.mcq-d9ec539375",
+      "status": "pass",
+      "method": "t5.lever_balls",
+      "detail": "solver matched",
+      "expectedKey": "D",
+      "actualKey": "D"
+    },
+    {
+      "row": 33,
+      "id": "t5.numeric-word-problem.mcq-b0847bb737",
+      "status": "pass",
+      "method": "t5.discount_reverse",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 34,
+      "id": "t5.numeric-word-problem.mcq-35ef123a47",
+      "status": "pass",
+      "method": "t5.discount_reverse",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 35,
+      "id": "t5.numeric-word-problem.mcq-cb9954659e",
+      "status": "pass",
+      "method": "t5.discount_reverse",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 36,
+      "id": "t5.numeric-word-problem.mcq-7a14aca01a",
+      "status": "pass",
+      "method": "t5.discount_reverse",
+      "detail": "solver matched",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 37,
+      "id": "t5.numeric-word-problem.mcq-9579aaa48d",
+      "status": "pass",
+      "method": "t5.discount_reverse",
+      "detail": "solver matched",
+      "expectedKey": "B",
+      "actualKey": "B"
+    },
+    {
+      "row": 38,
+      "id": "t5.numeric-word-problem.mcq-68ad828062",
+      "status": "pass",
+      "method": "t5.discount_reverse",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 39,
+      "id": "t5.numeric-word-problem.mcq-37d4b54061",
+      "status": "pass",
+      "method": "t5.discount_reverse",
+      "detail": "solver matched",
+      "expectedKey": "A",
+      "actualKey": "A"
+    },
+    {
+      "row": 40,
+      "id": "t5.numeric-word-problem.mcq-2f1408781b",
+      "status": "pass",
+      "method": "t5.discount_reverse",
+      "detail": "solver matched",
+      "expectedKey": "D",
+      "actualKey": "D"
+    }
+  ]
+}

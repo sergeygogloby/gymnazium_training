@@ -29,3 +29,7 @@ Shapes locked: cloze word-pair MCQ; sentence-order MCQ. `deriveCorrectKey` is at
 - Full 12-topic extract
 - Candidate CSV generation / `published=true`
 - Critic / human sample gate
+
+## Follow-up (2026-09-24 generate pilot)
+
+Batch `pilot-t5-synth-20260924` filled locked T5 templates into `content/candidates/` (`sourceType=synthetic`, `published=false`). See `content/reports/pilot-t5-synth-20260924_gate.md`. T1 optional expansion deferred (attested cloze lexicon only — not in this numeric pilot).

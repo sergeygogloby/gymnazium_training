@@ -1,0 +1,261 @@
+#!/usr/bin/env python3
+"""Adversarial critic for synthetic candidate CSV (not the generator).
+
+Usage:
+  python3 tools/critic-synthetic-batch content/candidates/BATCH.csv --batch-id BATCH
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import re
+from collections import defaultdict
+from datetime import datetime, timezone
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+
+
+def fingerprint_numbers(stem: str) -> str:
+    """Keep numbers — exact-stem clone detector."""
+    return re.sub(r"\s+", " ", stem.strip().lower())
+
+
+def load_seeds(seeds_dir: Path) -> list[dict]:
+    out = []
+    if not seeds_dir.is_dir():
+        return out
+    for path in seeds_dir.rglob("*.json"):
+        out.append(json.loads(path.read_text(encoding="utf-8")))
+    return out
+
+
+def load_templates(templates_dir: Path) -> dict[str, dict]:
+    out: dict[str, dict] = {}
+    if not templates_dir.is_dir():
+        return out
+    for path in templates_dir.glob("*.json"):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        tid = data.get("templateId") or path.stem
+        out[tid] = data
+    return out
+
+
+def run_critic(
+    csv_path: Path,
+    batch_id: str,
+    verify_path: Path,
+    templates_dir: Path,
+    seeds_dir: Path,
+) -> dict:
+    verify = json.loads(verify_path.read_text(encoding="utf-8"))
+    templates = load_templates(templates_dir)
+    seeds = load_seeds(seeds_dir)
+    bank_stems = {
+        (s.get("seedId"), fingerprint_numbers(s.get("stem") or "")): s
+        for s in seeds
+        if s.get("stem")
+    }
+
+    rows = list(csv.DictReader(csv_path.open(encoding="utf-8")))
+    issues: list[dict] = []
+
+    def add(row_n: int, rid: str, severity: str, kind: str, detail: str) -> None:
+        issues.append(
+            {
+                "row": row_n,
+                "id": rid,
+                "severity": severity,
+                "kind": kind,
+                "detail": detail,
+            }
+        )
+
+    if not verify.get("ok") or verify.get("failed", 1) != 0:
+        add(0, "<batch>", "critical", "verify_not_green", "verify report must pass before critic")
+
+    exact_fps: dict[str, list[str]] = defaultdict(list)
+
+    for i, r in enumerate(rows, start=1):
+        rid = (r.get("id") or f"<row-{i}>").strip()
+        stem = r.get("stem") or ""
+        fp = fingerprint_numbers(stem)
+        exact_fps[fp].append(rid)
+
+        if r.get("module") != "M3" or r.get("topic") != "T5" or r.get("skillArea") != "VSP":
+            add(
+                i,
+                rid,
+                "critical",
+                "tag_lie",
+                f"expected M3/T5/VSP got {r.get('module')}/{r.get('topic')}/{r.get('skillArea')}",
+            )
+        if (r.get("sourceType") or "").strip() != "synthetic":
+            add(i, rid, "critical", "tag_lie", f"sourceType={r.get('sourceType')}")
+        if (r.get("published") or "").strip().lower() != "false":
+            add(i, rid, "critical", "publish_leak", f"published={r.get('published')}")
+
+        tid = (r.get("templateId") or "").strip()
+        if tid and tid not in templates:
+            add(i, rid, "critical", "ungrounded_template", f"unknown templateId {tid}")
+        elif tid:
+            tmpl = templates[tid]
+            if tmpl.get("module") != r.get("module") or tmpl.get("topic") != r.get("topic"):
+                add(i, rid, "critical", "tag_lie", "row tags != template tags")
+
+        key = (r.get("correctKey") or "").strip().upper()
+        choices_raw = (r.get("choices") or "").strip()
+        choices = [c.strip() for c in choices_raw.split("|")] if choices_raw else []
+        if choices:
+            stripped = [
+                re.sub(r"^[A-D]\s*[.)]\s*", "", c, flags=re.I).strip() for c in choices
+            ]
+            if len(stripped) != len(set(stripped)):
+                add(i, rid, "critical", "duplicate_choices", f"choices={stripped}")
+            if key not in "ABCD" or (ord(key) - ord("A")) >= len(choices):
+                add(i, rid, "critical", "bad_key", f"correctKey={key}")
+
+        # Solvability — shape-specific
+        if "ozubené kolesá" in stem.lower() or "zubov" in stem.lower():
+            if not re.search(r"\d+\s*zubov.*?\d+\s*zubov", stem, re.I | re.S):
+                add(i, rid, "critical", "unsolvable", "gear stem missing teeth counts")
+        if stem.startswith("Tyčinka obsahuje") or (
+            "gramov" in stem.lower() and "percent" in stem.lower()
+        ):
+            if not re.search(r"na\s+\d+\s+gramov\w*\s+\d+\s+gramov", stem, re.I):
+                add(i, rid, "critical", "unsolvable", "percent stem missing part/whole grams")
+            if "cukru" not in stem:
+                add(
+                    i,
+                    rid,
+                    "critical",
+                    "invented_lexicon",
+                    "substance not attested (allow-list: cukru)",
+                )
+        if "zlacnen" in stem.lower():
+            if not re.search(r"zlacnen[íi]\s+o\s+\d+\s*%", stem, re.I):
+                add(i, rid, "critical", "unsolvable", "discount stem missing percent")
+            if not re.search(r"\d[\d\s]*\s*€", stem):
+                add(i, rid, "critical", "unsolvable", "discount stem missing sale price")
+        if "gulič" in stem.lower() and "páky" in stem.lower():
+            if not re.search(r"trikrát|3\s*krát", stem, re.I):
+                add(i, rid, "critical", "unsolvable", "lever stem missing pull-count cue")
+            nums = re.findall(r"(\d+)\s*gulič", stem, re.I)
+            if len(nums) < 2:
+                add(i, rid, "critical", "unsolvable", "lever stem missing guličky amounts")
+
+        # Verbatim bank clone (exact stem match)
+        for (seed_id, bank_fp), _seed in bank_stems.items():
+            if fp == bank_fp:
+                add(i, rid, "critical", "bank_clone", f"verbatim bank seed {seed_id}")
+
+    # Exact within-batch clones only (same stem text), not template siblings
+    for fp, ids in exact_fps.items():
+        if len(ids) > 1:
+            for rid in ids:
+                rn = next(i for i, r in enumerate(rows, 1) if r.get("id") == rid)
+                add(
+                    rn,
+                    rid,
+                    "critical",
+                    "exact_dup_batch",
+                    f"identical stem shared by {ids}",
+                )
+
+    crit = [x for x in issues if x["severity"] == "critical"]
+    mino = [x for x in issues if x["severity"] == "minor"]
+    n = len(rows)
+    residual_minor_pct = (len(mino) / n * 100) if n else 0.0
+    ok = (
+        verify.get("ok") is True
+        and verify.get("failed", 1) == 0
+        and len(crit) == 0
+        and residual_minor_pct < 2.0
+        and n > 0
+    )
+
+    crit_ids = {x["id"] for x in crit if x["id"] != "<batch>"}
+    decisions = []
+    for i, r in enumerate(rows, 1):
+        rid = r.get("id") or f"<row-{i}>"
+        if rid in crit_ids:
+            decisions.append(
+                {
+                    "row": i,
+                    "id": rid,
+                    "decision": "discard",
+                    "reason": "critical critic finding",
+                }
+            )
+        else:
+            decisions.append(
+                {"row": i, "id": rid, "decision": "keep", "reason": "no critical issues"}
+            )
+
+    return {
+        "batchId": batch_id,
+        "csvPath": str(csv_path),
+        "ok": ok,
+        "persona": "critic-synthetic-batch (adversarial; not generator)",
+        "verifyReport": str(verify_path),
+        "verifyOk": bool(verify.get("ok")),
+        "rowCount": n,
+        "criticalCount": len(crit),
+        "minorCount": len(mino),
+        "residualMinorPercent": round(residual_minor_pct, 3),
+        "thresholds": {"criticalMax": 0, "minorMaxPercent": 2.0},
+        "grounding": {
+            "templates": sorted(templates),
+            "seedsCited": sorted({(r.get("seedRef") or "") for r in rows} - {""}),
+            "note": (
+                "Template siblings that differ only by slot numbers are allowed; "
+                "exact stem clones and verbatim bank seeds are critical rejects. "
+                "Lexicon allow-list for percent items: attested 'cukru' only."
+            ),
+        },
+        "issues": issues,
+        "decisions": decisions,
+        "keepCount": sum(1 for d in decisions if d["decision"] == "keep"),
+        "discardCount": sum(1 for d in decisions if d["decision"] == "discard"),
+        "generatedAt": datetime.now(timezone.utc).isoformat(),
+        "verdict": "PASS" if ok else "FAIL — scrap or rewrite",
+    }
+
+
+def main(argv: list[str] | None = None) -> int:
+    p = argparse.ArgumentParser(description="Critic synthetic candidate batch")
+    p.add_argument("csv", type=Path)
+    p.add_argument("--batch-id", default=None)
+    p.add_argument("--verify", type=Path, default=None)
+    p.add_argument("--templates", type=Path, default=REPO / "content" / "templates")
+    p.add_argument("--seeds", type=Path, default=REPO / "content" / "seeds")
+    p.add_argument("--reports-dir", type=Path, default=REPO / "content" / "reports")
+    args = p.parse_args(argv)
+
+    batch_id = args.batch_id or args.csv.stem
+    verify_path = args.verify or (args.reports_dir / f"{batch_id}_verify.json")
+    if not verify_path.is_file():
+        print(f"Missing verify report: {verify_path}")
+        return 1
+
+    report = run_critic(args.csv, batch_id, verify_path, args.templates, args.seeds)
+    args.reports_dir.mkdir(parents=True, exist_ok=True)
+    out = args.reports_dir / f"{batch_id}_critic.json"
+    out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"Wrote {out}")
+    print(
+        f"critic ok={report['ok']} critical={report['criticalCount']} "
+        f"minor={report['minorCount']} keep={report['keepCount']} "
+        f"verdict={report['verdict']}"
+    )
+    for issue in report["issues"][:30]:
+        print(
+            f"  [{issue['severity']}] {issue['kind']} {issue['id']}: {issue['detail']}"
+        )
+    return 0 if report["ok"] else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,389 @@
+#!/usr/bin/env python3
+"""Generate a small gated T5 synthetic pilot CSV (template-grounded only).
+
+Fills locked T5 templates with programmatic deriveCorrectKey.
+Never sets published=true. Generator only — do not self-critic.
+
+Usage (repo root):
+  python3 tools/generate-t5-pilot-batch
+"""
+
+from __future__ import annotations
+
+import csv
+import hashlib
+import math
+import random
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+OUT = REPO / "content" / "candidates" / "pilot-t5-synth-20260924_M3_T5.csv"
+BATCH_ID = "pilot-t5-synth-20260924"
+
+# Deterministic for reproducibility
+RNG = random.Random(20260924)
+
+
+def stable_id(template_id: str, slots: dict) -> str:
+    payload = template_id + "|" + ",".join(f"{k}={slots[k]}" for k in sorted(slots))
+    h = hashlib.sha1(payload.encode("utf-8")).hexdigest()[:10]
+    return f"{template_id}-{h}"
+
+
+def fmt_choices(values: list[int | str]) -> str:
+    letters = "ABCD"
+    parts = []
+    for i, v in enumerate(values):
+        parts.append(f"{letters[i]}. {v}")
+    return "|".join(parts)
+
+
+def place_answer_rng(correct: int | str, distractors: list[int | str], salt: int) -> tuple[list, str]:
+    opts = [correct, *distractors]
+    rng = random.Random(salt)
+    rng.shuffle(opts)
+    # Ensure unique string forms
+    seen = set()
+    unique = []
+    for o in opts:
+        s = str(o)
+        if s in seen:
+            continue
+        seen.add(s)
+        unique.append(o)
+    while len(unique) < 4:
+        # pad with unused near-miss (should not happen if callers careful)
+        pad = int(correct) + len(unique) * 7 if isinstance(correct, int) else f"x{len(unique)}"
+        if str(pad) not in seen:
+            unique.append(pad)
+            seen.add(str(pad))
+    key = "ABCD"[unique.index(correct)]
+    return unique[:4], key
+
+
+def gen_lcm_gears(n: int) -> list[dict]:
+    rows = []
+    # Coprime-ish pairs that yield interesting LCM; avoid identical teeth
+    # Exclude attested seed (36, 20)
+    pairs = [
+        (24, 18), (30, 12), (42, 28), (48, 18), (40, 24),
+        (45, 20), (60, 36), (32, 20), (28, 16), (54, 36), (50, 20),
+        (33, 22), (27, 18), (35, 14), (63, 21),
+    ]
+    RNG.shuffle(pairs)
+    for teeth_large, teeth_small in pairs[:n]:
+        if teeth_large <= teeth_small:
+            teeth_large, teeth_small = max(teeth_large, teeth_small + 2), min(teeth_large, teeth_small)
+        lcm = math.lcm(teeth_large, teeth_small)
+        correct = lcm // teeth_small  # askWhich=smaller (matches seed + solver)
+        distractors = []
+        for cand in (
+            lcm // teeth_large,
+            teeth_large // math.gcd(teeth_large, teeth_small),
+            teeth_small,
+            correct + 1,
+            correct - 1,
+            teeth_large + teeth_small,
+            lcm,
+        ):
+            if cand > 0 and cand != correct and cand not in distractors:
+                distractors.append(cand)
+            if len(distractors) == 3:
+                break
+        while len(distractors) < 3:
+            distractors.append(correct + 3 + len(distractors))
+        slots = {
+            "teethLarge": teeth_large,
+            "teethSmall": teeth_small,
+            "askWhich": "smaller",
+        }
+        choices, key = place_answer_rng(correct, distractors, teeth_large * 1000 + teeth_small)
+        stem = (
+            f"Dve ozubené kolesá zapadajú navzájom do seba. "
+            f"Väčšie má {teeth_large} zubov, menšie {teeth_small} zubov. "
+            f"Koľkokrát sa otočí menšie koleso, aby do seba zapadali opäť tie isté zuby?"
+        )
+        rationale = (
+            f"NSN({teeth_large}, {teeth_small}) = {lcm}; "
+            f"{lcm}÷{teeth_small} = {correct} otočení menšieho kolesa."
+        )
+        rows.append(
+            {
+                "id": stable_id("t5.lcm-gears.mcq", slots),
+                "stem": stem,
+                "choices": fmt_choices(choices),
+                "correctKey": key,
+                "rationale": rationale,
+                "module": "M3",
+                "topic": "T5",
+                "skillArea": "VSP",
+                "sourceType": "synthetic",
+                "locale": "sk",
+                "published": "false",
+                "templateId": "t5.lcm-gears.mcq",
+                "seedRef": "t5-vzor-03-ozubene-kolesa",
+                "batchId": BATCH_ID,
+            }
+        )
+    return rows
+
+
+def gen_percent(n: int) -> list[dict]:
+    rows = []
+    # Attested substance framing from seed; vary grams only (no invented lexicon)
+    substances = ["cukru"]  # attested in seed — do not invent SK food nouns
+    # Exclude attested seed (50, 12) → 24%
+    wholes = [40, 60, 75, 80, 100, 120, 150, 200, 25, 90, 125, 160]
+    parts_frac = [0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.08, 0.16, 0.18, 0.5, 0.05, 0.35]
+    used = set()
+    i = 0
+    while len(rows) < n and i < 200:
+        i += 1
+        whole = RNG.choice(wholes)
+        frac = RNG.choice(parts_frac)
+        part = int(round(whole * frac))
+        if part <= 0 or part >= whole:
+            continue
+        pct = round(part / whole * 100)
+        key_slots = (whole, part, pct)
+        if key_slots in used:
+            continue
+        used.add(key_slots)
+        substance = substances[0]
+        distractors = []
+        for cand in (part, whole, pct + 4, pct - 4, round(part / whole * 10) * 10, 100 - pct):
+            if cand != pct and cand > 0 and cand not in distractors:
+                distractors.append(cand)
+            if len(distractors) == 3:
+                break
+        while len(distractors) < 3:
+            distractors.append(pct + 5 + len(distractors))
+        slots = {"wholeGrams": whole, "partGrams": part, "substance": substance}
+        choices, key = place_answer_rng(pct, distractors, whole * 100 + part)
+        stem = (
+            f"Tyčinka obsahuje na {whole} gramov {part} gramov {substance}. "
+            f"Koľko percent {substance} obsahuje tyčinka?"
+        )
+        rationale = f"Percento {substance} = ({part}/{whole})×100 = {pct}%."
+        rows.append(
+            {
+                "id": stable_id("t5.percent-composition.mcq", slots),
+                "stem": stem,
+                "choices": fmt_choices(choices),
+                "correctKey": key,
+                "rationale": rationale,
+                "module": "M3",
+                "topic": "T5",
+                "skillArea": "VSP",
+                "sourceType": "synthetic",
+                "locale": "sk",
+                "published": "false",
+                "templateId": "t5.percent-composition.mcq",
+                "seedRef": "t5-uloohy-07-percent-cukor",
+                "batchId": BATCH_ID,
+            }
+        )
+    return rows
+
+
+def gen_lever_balls(n: int) -> list[dict]:
+    """Same shape as attested seed t5-uloohy-01 — vary pull amounts / count."""
+    rows = []
+    # Exclude attested seed (14, 3, 3) — no verbatim bank clones
+    configs = [
+        (10, 2, 3),
+        (12, 4, 3),
+        (15, 5, 3),
+        (8, 2, 3),
+        (18, 3, 3),
+        (20, 4, 3),
+        (9, 3, 3),
+        (16, 4, 3),
+        (21, 7, 3),
+        (6, 2, 3),
+        (24, 6, 3),
+        (22, 2, 3),
+    ]
+    for pull1, pull2, count in configs[:n]:
+        total = count * pull1
+        if total % pull2 != 0:
+            continue
+        correct = total // pull2
+        distractors = []
+        for cand in (total, pull1 + pull2, correct + 2, correct - 2, pull1 * pull2, count * pull2):
+            if cand > 0 and cand != correct and cand not in distractors:
+                distractors.append(cand)
+            if len(distractors) == 3:
+                break
+        while len(distractors) < 3:
+            distractors.append(correct + 3 + len(distractors))
+        slots = {"pull1Per": pull1, "pull2Per": pull2, "pull1Count": count}
+        choices, key = place_answer_rng(correct, distractors, pull1 * 100 + pull2)
+        stem = (
+            f"Máme dve nádoby a dve páky. Pri potiahnutí páky 1 sa do nádoby 1 vysype "
+            f"{pull1} guličiek. Pri potiahnutí páky 2 sa do nádoby 2 vysypú {pull2} guličky. "
+            f"Koľkokrát musíme potiahnuť páku 2 tak, aby v nádobe 2 bol rovnaký počet "
+            f"guličiek ako v nádobe 1, ak sme páku 1 stlačili trikrát?"
+        )
+        rationale = (
+            f"V prvej nádobe je {count}×{pull1} = {total} guličiek. "
+            f"Druhú páku musíme stlačiť {total}÷{pull2} = {correct}×."
+        )
+        rows.append(
+            {
+                "id": stable_id("t5.numeric-word-problem.mcq", {**slots, "shape": "lever"}),
+                "stem": stem,
+                "choices": fmt_choices(choices),
+                "correctKey": key,
+                "rationale": rationale,
+                "module": "M3",
+                "topic": "T5",
+                "skillArea": "VSP",
+                "sourceType": "synthetic",
+                "locale": "sk",
+                "published": "false",
+                "templateId": "t5.numeric-word-problem.mcq",
+                "seedRef": "t5-uloohy-01-paky-gulicky",
+                "batchId": BATCH_ID,
+            }
+        )
+    return rows
+
+
+def gen_discount(n: int) -> list[dict]:
+    rows = []
+    # Exclude attested seed (40%, 6000 €)
+    configs = [
+        (20, 8000),
+        (25, 7500),
+        (50, 5000),
+        (10, 9000),
+        (30, 7000),
+        (15, 8500),
+        (35, 6500),
+        (45, 5500),
+        (5, 9500),
+        (60, 4000),
+        (40, 4800),
+        (20, 6400),
+    ]
+    for pct, sale in configs[:n]:
+        remain = 1 - pct / 100
+        if remain <= 0:
+            continue
+        correct = round(sale / remain)
+        # Prefer clean integers
+        if abs(sale / remain - correct) > 1e-6:
+            continue
+        distractors = []
+        for cand in (
+            sale,
+            round(sale * (1 + pct / 100)),
+            round(sale / (pct / 100)) if pct else 0,
+            correct + 500,
+            correct - 500,
+            sale * 2,
+        ):
+            if cand > 0 and cand != correct and cand not in distractors:
+                distractors.append(cand)
+            if len(distractors) == 3:
+                break
+        while len(distractors) < 3:
+            distractors.append(correct + 1000 * (len(distractors) + 1))
+        slots = {"discountPercent": pct, "salePrice": sale}
+        # Format sale with thin space like seed ("6 000") for solver digit scrape
+        sale_fmt = f"{sale:,}".replace(",", " ")
+        choice_vals = []
+        for v in place_answer_rng(correct, distractors, pct * 10000 + sale)[0]:
+            choice_vals.append(f"{int(v):,}".replace(",", " ") + " €")
+        # recompute key after formatting
+        correct_fmt = f"{correct:,}".replace(",", " ") + " €"
+        # rebuild with place that preserves € strings
+        opts = [correct_fmt]
+        for d in distractors:
+            opts.append(f"{int(d):,}".replace(",", " ") + " €")
+        rng = random.Random(pct * 10000 + sale)
+        rng.shuffle(opts)
+        key = "ABCD"[opts.index(correct_fmt)]
+        stem = (
+            f"Bicykel stál po zlacnení o {pct} % {sale_fmt} €. "
+            f"Koľko stál bicykel pred zlacnením?"
+        )
+        remain_pct = 100 - pct
+        rationale = (
+            f"Po zlacnení ostalo {remain_pct} % pôvodnej ceny: "
+            f"{remain_pct/100:g}·x = {sale} → x = {correct} €."
+        )
+        rows.append(
+            {
+                "id": stable_id("t5.numeric-word-problem.mcq", {**slots, "shape": "discount"}),
+                "stem": stem,
+                "choices": fmt_choices(opts),
+                "correctKey": key,
+                "rationale": rationale,
+                "module": "M3",
+                "topic": "T5",
+                "skillArea": "VSP",
+                "sourceType": "synthetic",
+                "locale": "sk",
+                "published": "false",
+                "templateId": "t5.numeric-word-problem.mcq",
+                "seedRef": "t5-vzor-04-zlacnenie-bicykel",
+                "batchId": BATCH_ID,
+            }
+        )
+    return rows
+
+
+def main() -> None:
+    # ~36 rows: 12+12+8+8 — within 20–50 pilot gate
+    rows = []
+    rows.extend(gen_lcm_gears(12))
+    rows.extend(gen_percent(12))
+    rows.extend(gen_lever_balls(8))
+    rows.extend(gen_discount(8))
+
+    # Deduplicate by id
+    seen = set()
+    unique = []
+    for r in rows:
+        if r["id"] in seen:
+            continue
+        seen.add(r["id"])
+        unique.append(r)
+
+    fieldnames = [
+        "id",
+        "stem",
+        "choices",
+        "correctKey",
+        "rationale",
+        "module",
+        "topic",
+        "skillArea",
+        "sourceType",
+        "locale",
+        "published",
+        "templateId",
+        "seedRef",
+        "batchId",
+    ]
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    with OUT.open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames)
+        w.writeheader()
+        w.writerows(unique)
+
+    print(f"Wrote {len(unique)} rows → {OUT}")
+    by_t: dict[str, int] = {}
+    for r in unique:
+        by_t[r["templateId"]] = by_t.get(r["templateId"], 0) + 1
+    for tid, c in sorted(by_t.items()):
+        print(f"  {tid}: {c}")
+    assert all(r["published"] == "false" for r in unique)
+    assert all(r["sourceType"] == "synthetic" for r in unique)
+    assert 20 <= len(unique) <= 50, len(unique)
+
+
+if __name__ == "__main__":
+    main()

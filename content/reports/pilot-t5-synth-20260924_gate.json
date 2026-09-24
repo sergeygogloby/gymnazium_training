@@ -1,0 +1,73 @@
+{
+  "batchId": "pilot-t5-synth-20260924",
+  "csvPath": "content/candidates/pilot-t5-synth-20260924_M3_T5.csv",
+  "skill": "csv-import-qa",
+  "rowCount": 40,
+  "publishedColumnAllFalse": true,
+  "publishDecision": "DO_NOT_PUBLISH",
+  "publishReason": "Human spot-check (#4) and smoke (#6) not signed; locks forbid published=true until full gate.",
+  "candidateGate": {
+    "verdict": "PASS",
+    "meaning": "Eligible to stay in content/candidates/ unpublished; not eligible for published=true",
+    "ok": true
+  },
+  "checks": [
+    {
+      "id": 1,
+      "name": "structural_lint_100",
+      "pass": true,
+      "detail": "rows=40 errors=0"
+    },
+    {
+      "id": 2,
+      "name": "answer_key_verify_100",
+      "pass": true,
+      "detail": "pass=40 fail=0 needs=0"
+    },
+    {
+      "id": 3,
+      "name": "critic_residual_below_threshold",
+      "pass": true,
+      "detail": "critical=0 minor%=0.0 verdict=PASS"
+    },
+    {
+      "id": 4,
+      "name": "human_spot_check_signed_off",
+      "pass": false,
+      "detail": "PENDING — first pilot batches need human ≥2% or ≥20 sample"
+    },
+    {
+      "id": 5,
+      "name": "all_or_nothing_import",
+      "pass": true,
+      "detail": "dry-run only; wouldWrite=all; catalog write deferred"
+    },
+    {
+      "id": 6,
+      "name": "smoke_practice_serves_synthetic",
+      "pass": false,
+      "detail": "Deferred — published=false until publish gate"
+    },
+    {
+      "id": 7,
+      "name": "gate_report_archived",
+      "pass": true,
+      "detail": "verify + critic + gate JSON/MD archived under content/reports/"
+    }
+  ],
+  "dryRun": {
+    "wouldWrite": 40,
+    "wouldCreate": 40,
+    "wouldUpdate": 0,
+    "allOrNothing": true,
+    "catalogWritePerformed": false
+  },
+  "countsByTemplate": {
+    "t5.lcm-gears.mcq": 12,
+    "t5.percent-composition.mcq": 12,
+    "t5.numeric-word-problem.mcq": 16
+  },
+  "generatorTool": "tools/generate-t5-pilot-batch",
+  "criticTool": "tools/critic-synthetic-batch",
+  "generatedAt": "2026-09-24T11:47:09.689727+00:00"
+}
