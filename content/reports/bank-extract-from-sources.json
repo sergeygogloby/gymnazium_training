@@ -1,20 +1,22 @@
 {
-  "generatedAt": "2026-09-24T15:17:56.380102+00:00",
-  "source": "sources/ VSJP8 Ulohy+Riesenia + Cielene/exam pairs with parseable keys",
-  "itemCount": 780,
+  "generatedAt": "2026-09-24T15:30:52.128424+00:00",
+  "source": "sources/ letter-key only: Mudre Ulohy+Riesenia, Cielene 1–2, EXAM X5/X6/X9 (A–D)",
+  "itemCount": 336,
+  "goldDropped": 0,
+  "goldDropSample": [],
   "byTopicCounts": {
     "T1": 65,
-    "T10": 59,
-    "T11": 61,
-    "T12": 69,
+    "T10": 20,
+    "T11": 19,
+    "T12": 20,
     "T2": 54,
-    "T3": 64,
-    "T4": 56,
-    "T5": 68,
-    "T6": 70,
-    "T7": 76,
-    "T8": 58,
-    "T9": 80
+    "T3": 20,
+    "T4": 20,
+    "T5": 28,
+    "T6": 20,
+    "T7": 20,
+    "T8": 17,
+    "T9": 33
   },
   "bySource": [
     {
@@ -180,28 +182,10 @@
     },
     {
       "kind": "letter-key-test",
-      "id": "exam-x4",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/2/3_VSJP8_Text_X4_Exam-bnkq6k.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-F2/3_VSJP8_Test_X4_Exam_Riesenie-ixnmlr.pdf",
-      "parsed": 10,
-      "skipped": 0,
-      "reasons": {}
-    },
-    {
-      "kind": "letter-key-test",
       "id": "exam-x6",
       "test": "/Users/svm/work/projects/gymnazium_training/sources/3/5_VSJP8_Test_X6_Exam-3ndcxh.pdf",
       "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f3/5_VSJP8_Test_X6_Exam_Riesenie-zhweu2.pdf",
       "parsed": 10,
-      "skipped": 0,
-      "reasons": {}
-    },
-    {
-      "kind": "letter-key-test",
-      "id": "exam-x7",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/4/7_VSJP8_Test_X7_Exam-cucb6a.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f4/7_VSJP8_Test_X7_Exam_Riesenie-irotzv.pdf",
-      "parsed": 9,
       "skipped": 0,
       "reasons": {}
     },
@@ -218,218 +202,10 @@
         "q11": "no_mcq_choices",
         "q15": "key_E_skipped"
       }
-    },
-    {
-      "kind": "letter-key-test",
-      "id": "evan-martin-2021",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/3/6_VSJP8_Test_Evanjelicke_Martin_2021_DOD-zbwsh1.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f3/6_VSJP8_Test_Evanjelicke_Martin_2021_DOD_Riesenie-hfsocw.pdf",
-      "parsed": 10,
-      "skipped": 2,
-      "reasons": {
-        "q4": "no_letter_key",
-        "q10": "no_mcq_choices"
-      }
-    },
-    {
-      "kind": "letter-key-test",
-      "id": "gmk-2017",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/6/11_VSP8_GMK_Banska-Bystrica_2017_Cinske-seskxg.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f6/11_VSP8_GMK_Banska-Bystrica_2017_Cinske_Riesenie-sfoeko.pdf",
-      "parsed": 0,
-      "skipped": 0,
-      "reasons": {},
-      "error": "test_pdf_no_text"
-    },
-    {
-      "kind": "letter-key-test",
-      "id": "gmk-2018",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/6/12_VSP8_GMK_Banska-Bystrica_2018_Spanielske-zmajqw.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f6/12_VSP8_GMK_Banska-Bystrica_2018_Spanielske_Riesenie-ymkjhk.pdf",
-      "parsed": 0,
-      "skipped": 0,
-      "reasons": {},
-      "error": "test_pdf_no_text"
-    },
-    {
-      "kind": "restated-test",
-      "id": "cielene-b1",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/2/VSJP8_Test_Cielene_B.1-lps2ko.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-F2/VSJP8_Test_Cielene_B.1_Riesenie-oc39x3.pdf",
-      "parsed": 34,
-      "skipped": 6,
-      "reasons": {
-        "q8": "no_letter_key",
-        "q15": "no_mcq_choices",
-        "q19": "no_letter_key",
-        "q21": "no_letter_key",
-        "q22": "no_mcq_choices",
-        "q28": "no_letter_key"
-      }
-    },
-    {
-      "kind": "restated-test",
-      "id": "cielene-b2",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/2/VSJP8_Test_Cielene_B.2-tt9mn9.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-F2/VSJP8_Test_Cielene_B.2_Riesenie-kfodbr.pdf",
-      "parsed": 36,
-      "skipped": 10,
-      "reasons": {
-        "q7": "no_mcq_choices",
-        "q12": "no_mcq_choices",
-        "q16": "no_letter_key",
-        "q18": "no_letter_key",
-        "q23": "no_letter_key",
-        "q27": "no_letter_key",
-        "q28": "no_letter_key",
-        "q30": "no_letter_key",
-        "q42": "no_mcq_choices",
-        "q80": "no_mcq_choices"
-      }
-    },
-    {
-      "kind": "restated-test",
-      "id": "cielene-b3",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/3/VSJP8_Test_Cielene_B.3-qwqjcw.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f3/VSJP8_Test_Cielene_B.3_Riesenie-omn3sb.pdf",
-      "parsed": 40,
-      "skipped": 5,
-      "reasons": {
-        "q7": "no_letter_key",
-        "q17": "no_letter_key",
-        "q21": "no_letter_key",
-        "q27": "no_letter_key",
-        "q29": "no_letter_key"
-      }
-    },
-    {
-      "kind": "restated-test",
-      "id": "cielene-b4",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/3/VSJP8_Test_Cielene_B.4-1qxnvh.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f3/VSJP8_Test_Cielene_B.4_Riesenie-eaetxo.pdf",
-      "parsed": 40,
-      "skipped": 5,
-      "reasons": {
-        "q1": "no_mcq_choices",
-        "q4": "no_letter_key",
-        "q15": "no_letter_key",
-        "q35": "no_mcq_choices",
-        "q37": "no_letter_key"
-      }
-    },
-    {
-      "kind": "restated-test",
-      "id": "cielene-c1",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/4/VSJP8_Test_Cielene_C.1-objg2y.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f4/VSJP8_Test_Cielene_C.1_Riesenie-qt6wsi.pdf",
-      "parsed": 47,
-      "skipped": 3,
-      "reasons": {
-        "q24": "no_letter_key",
-        "q25": "no_mcq_choices",
-        "q33": "no_letter_key"
-      }
-    },
-    {
-      "kind": "restated-test",
-      "id": "cielene-c2",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/4/VSJP8_Test_Cielene_C.2-6i9hyb.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f4/VSJP8_Test_Cielene_C.2_Riesenie-1nleyu.pdf",
-      "parsed": 41,
-      "skipped": 11,
-      "reasons": {
-        "q8": "no_mcq_choices",
-        "q20": "no_letter_key",
-        "q24": "no_mcq_choices",
-        "q25": "no_mcq_choices",
-        "q26": "no_letter_key",
-        "q27": "no_letter_key",
-        "q28": "no_letter_key",
-        "q33": "no_letter_key",
-        "q46": "no_letter_key",
-        "q49": "no_mcq_choices",
-        "q52": "no_mcq_choices"
-      }
-    },
-    {
-      "kind": "restated-test",
-      "id": "cielene-c3",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/5/VSJP8_Test_Cielene_C.3-it2iqc.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/New folder/VSJP8_Test_Cielene_C.3_Riesenie-6uuacr.pdf",
-      "parsed": 47,
-      "skipped": 3,
-      "reasons": {
-        "q20": "no_letter_key",
-        "q37": "no_letter_key",
-        "q41": "no_letter_key"
-      }
-    },
-    {
-      "kind": "restated-test",
-      "id": "cielene-c4",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/5/VSJP8_Test_Cielene_C.4-znywov.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/New folder/VSJP8_Test_Cielene_C.4_Riesenie-p2nqnn.pdf",
-      "parsed": 39,
-      "skipped": 6,
-      "reasons": {
-        "q22": "no_letter_key",
-        "q25": "no_letter_key",
-        "q26": "no_mcq_choices",
-        "q30": "no_letter_key",
-        "q36": "no_letter_key",
-        "q38": "no_letter_key"
-      }
-    },
-    {
-      "kind": "restated-test",
-      "id": "cielene-d1a",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/6/VSJP8_Test_Cielene_D.1A-8avolq.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/New folder/VSJP8_Test_Cielene_D.1A_Riesenie-1kbxvf.pdf",
-      "parsed": 42,
-      "skipped": 18,
-      "reasons": {
-        "q2": "no_letter_key",
-        "q3": "no_letter_key",
-        "q4": "no_letter_key",
-        "q9": "no_letter_key",
-        "q11": "no_letter_key",
-        "q21": "no_letter_key",
-        "q23": "no_letter_key",
-        "q24": "no_letter_key",
-        "q26": "no_letter_key",
-        "q28": "no_letter_key",
-        "q29": "no_letter_key",
-        "q32": "no_letter_key",
-        "q33": "no_letter_key",
-        "q48": "no_letter_key",
-        "q50": "no_letter_key",
-        "q55": "no_letter_key",
-        "q56": "no_letter_key",
-        "q59": "no_letter_key"
-      }
-    },
-    {
-      "kind": "restated-test",
-      "id": "cielene-d2a",
-      "test": "/Users/svm/work/projects/gymnazium_training/sources/6/VSJP8_Test_Cielene_D.2A-q4lfe8.pdf",
-      "riesenie": "/Users/svm/work/projects/gymnazium_training/sources/lll/rep-f6/VSJP8_Test_Cielene_D.2A_Riesenie-r8ndli.pdf",
-      "parsed": 49,
-      "skipped": 11,
-      "reasons": {
-        "q8": "no_mcq_choices",
-        "q17": "no_mcq_choices",
-        "q21": "no_letter_key",
-        "q29": "no_letter_key",
-        "q34": "no_letter_key",
-        "q48": "no_letter_key",
-        "q50": "no_letter_key",
-        "q55": "no_letter_key",
-        "q57": "no_letter_key",
-        "q58": "no_letter_key",
-        "q60": "no_letter_key"
-      }
     }
   ],
   "csv": "content/bank/vsjp8-ulohy-bank.csv",
-  "note": "Bank MCQ only (letter keys A–D). Free-answer, image-only PDFs, E-choice (X9), and unparseable restated keys skipped. SJ8/M8/AJ8 skipped when solutions lack explicit letter keys. sources/ left untouched."
+  "publishedDefault": "true (after gate)",
+  "note": "Bank MCQ with explicit letter keys in Riesenia only. Restated Cielene B/C/D rejected after key-audit (~40% wrong in sample). X4/X7/Evan/GMK skipped (key collisions or image-only). published=false until csv-import-qa publish gate. sources/ left untouched.",
+  "gate": "content/reports/vsjp8-ulohy-bank_gate.md"
 }

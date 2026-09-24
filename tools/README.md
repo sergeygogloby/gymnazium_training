@@ -9,18 +9,18 @@ CLI helpers for the VSJP8 content pipeline. Run from the **repo root** (or this 
 
 ## `extract-bank-from-sources`
 
-Read-only pass over `sources/` — pairs Mudre **Úlohy+Riešenia** (T1–T12) and Cielene/exam PDFs that have parseable letter keys into an F22 bank CSV (`published=true`). Skips free-answer, image-only, and unkeyed items.
+Read-only pass over `sources/` — pairs Mudre **Úlohy+Riešenia** (T1–T12) and letter-key Cielene/exam PDFs into an F22 bank CSV. Skips free-answer, image-only, unkeyed, and **restated** Cielene B/C/D (failed independent key audit).
 
 ```bash
 python3 tools/extract-bank-from-sources
-# → content/bank/vsjp8-ulohy-bank.csv
-# → content/reports/bank-extract-from-sources.json
-
 python3 tools/validate-questions-csv content/bank/vsjp8-ulohy-bank.csv
+python3 tools/verify-answer-keys content/bank/vsjp8-ulohy-bank.csv --batch-id vsjp8-ulohy-bank
+# Bank path: verify uses official Riesenia letters (not synthetic critic).
+# Spot-check sample ≥20, then import. critic-synthetic-batch is for synthetic only.
 npm run import-csv -- ../content/bank/vsjp8-ulohy-bank.csv
 ```
 
-Does **not** modify `sources/`.
+Does **not** modify `sources/`. Gate artifacts: `content/reports/vsjp8-ulohy-bank_*.json` / `_gate.md`.
 
 ## `validate-questions-csv`
 

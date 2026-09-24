@@ -71,28 +71,12 @@ TEST_PAIRS: list[dict] = [
         "skillArea": "VJS",
     },
     {
-        "id": "exam-x4",
-        "test": "*X4_Exam*.pdf",
-        "riesenie": "*X4_Exam_Riesenie*.pdf",
-        "module": "M2",
-        "topic": "T3",
-        "skillArea": "VJS",
-    },
-    {
         "id": "exam-x6",
         "test": "*Test_X6_Exam*.pdf",
         "riesenie": "*Test_X6_Exam_Riesenie*.pdf",
         "module": "M3",
         "topic": "T5",
         "skillArea": "VJS",
-    },
-    {
-        "id": "exam-x7",
-        "test": "*Test_X7_Exam*.pdf",
-        "riesenie": "*Test_X7_Exam_Riesenie*.pdf",
-        "module": "M4",
-        "topic": "T7",
-        "skillArea": "VSP",
     },
     {
         "id": "exam-x9",
@@ -103,115 +87,10 @@ TEST_PAIRS: list[dict] = [
         "skillArea": "VSP",
         "five_choice": True,
     },
-    {
-        "id": "evan-martin-2021",
-        "test": "*Evanjelicke_Martin_2021*.pdf",
-        "riesenie": "*Evanjelicke_Martin_2021*Riesenie*.pdf",
-        "module": "M3",
-        "topic": "T6",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "gmk-2017",
-        "test": "*GMK_Banska-Bystrica_2017_Cinske*.pdf",
-        "riesenie": "*GMK_Banska-Bystrica_2017_Cinske_Riesenie*.pdf",
-        "module": "M6",
-        "topic": "T11",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "gmk-2018",
-        "test": "*GMK_Banska-Bystrica_2018_Spanielske*.pdf",
-        "riesenie": "*GMK_Banska-Bystrica_2018_Spanielske_Riesenie*.pdf",
-        "module": "M6",
-        "topic": "T12",
-        "skillArea": "VSP",
-    },
 ]
 
-# Cielene B/C/D restated-solution pairs (keys inferred from solution text).
-RESTATED_PAIRS: list[dict] = [
-    {
-        "id": "cielene-b1",
-        "test": "*VSJP8_Test_Cielene_B.1*.pdf",
-        "riesenie": "*VSJP8_Test_Cielene_B.1_Riesenie*.pdf",
-        "module": "M2",
-        "topic": "T3",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "cielene-b2",
-        "test": "*VSJP8_Test_Cielene_B.2*.pdf",
-        "riesenie": "*VSJP8_Test_Cielene_B.2_Riesenie*.pdf",
-        "module": "M2",
-        "topic": "T4",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "cielene-b3",
-        "test": "*VSJP8_Test_Cielene_B.3*.pdf",
-        "riesenie": "*VSJP8_Test_Cielene_B.3_Riesenie*.pdf",
-        "module": "M3",
-        "topic": "T5",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "cielene-b4",
-        "test": "*VSJP8_Test_Cielene_B.4*.pdf",
-        "riesenie": "*VSJP8_Test_Cielene_B.4_Riesenie*.pdf",
-        "module": "M3",
-        "topic": "T6",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "cielene-c1",
-        "test": "*VSJP8_Test_Cielene_C.1*.pdf",
-        "riesenie": "*VSJP8_Test_Cielene_C.1_Riesenie*.pdf",
-        "module": "M4",
-        "topic": "T7",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "cielene-c2",
-        "test": "*VSJP8_Test_Cielene_C.2*.pdf",
-        "riesenie": "*VSJP8_Test_Cielene_C.2_Riesenie*.pdf",
-        "module": "M4",
-        "topic": "T8",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "cielene-c3",
-        "test": "*VSJP8_Test_Cielene_C.3*.pdf",
-        "riesenie": "*VSJP8_Test_Cielene_C.3_Riesenie*.pdf",
-        "module": "M5",
-        "topic": "T9",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "cielene-c4",
-        "test": "*VSJP8_Test_Cielene_C.4*.pdf",
-        "riesenie": "*VSJP8_Test_Cielene_C.4_Riesenie*.pdf",
-        "module": "M5",
-        "topic": "T10",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "cielene-d1a",
-        "test": "*VSJP8_Test_Cielene_D.1A*.pdf",
-        "riesenie": "*VSJP8_Test_Cielene_D.1A_Riesenie*.pdf",
-        "module": "M6",
-        "topic": "T11",
-        "skillArea": "VSP",
-    },
-    {
-        "id": "cielene-d2a",
-        "test": "*VSJP8_Test_Cielene_D.2A*.pdf",
-        "riesenie": "*VSJP8_Test_Cielene_D.2A_Riesenie*.pdf",
-        "module": "M6",
-        "topic": "T12",
-        "skillArea": "VSP",
-    },
-]
+# Restated Cielene B/C/D pairs are NOT extracted: independent key audit found
+# ~40% wrong keys in sample (infer_restated_key last-choice bias). Prefer reject.
 
 HEADER_NOISE = re.compile(
     r"VSJP8 Múdre predplatné|Cielene \||© 20\d\d|MÚDRE PREDPLATNÉ|"
@@ -517,11 +396,12 @@ def make_item(
         skillArea=skill,
         sourceType="bank",
         locale="sk",
-        published="true",
-        sourcePdf=source_pdf.name,
-        solutionPdf=solution_pdf.name,
-        itemIndex=n,
-    )
+                # Gate: bank stays unpublished until gold-key audit + spot-check
+                published="false",
+                sourcePdf=source_pdf.name,
+                solutionPdf=solution_pdf.name,
+                itemIndex=n,
+            )
 
 
 def extract_topic(topic: int) -> tuple[list[Item], dict]:
@@ -781,20 +661,41 @@ def main() -> int:
             f"skipped={info.get('skipped', 0)} err={info.get('error')}"
         )
 
-    for spec in RESTATED_PAIRS:
-        items, info = extract_restated_pair(spec)
-        reports.append(info)
-        all_items.extend(items)
-        print(
-            f"Restated {spec['id']}: parsed={info.get('parsed', 0)} "
-            f"skipped={info.get('skipped', 0)} err={info.get('error')}"
-        )
-
     # Deduplicate by id
     by_id: dict[str, Item] = {}
     for it in all_items:
         by_id[it.id] = it
     items = list(by_id.values())
+
+    # Gold-key gate: re-parse Riesenia letter and drop mismatches (prefer reject)
+    gold_ok: list[Item] = []
+    gold_drop: list[dict] = []
+    by_sol: dict[str, list[Item]] = {}
+    for it in items:
+        by_sol.setdefault(it.solutionPdf, []).append(it)
+    for sol_name, group in by_sol.items():
+        matches = sorted(SOURCES.rglob(sol_name))
+        if not matches:
+            for it in group:
+                gold_drop.append({"id": it.id, "reason": "riesenie_missing"})
+            continue
+        a_blocks = split_numbered_blocks(pdf_text(matches[0]))
+        for it in group:
+            key, _ = parse_solution_block(a_blocks.get(it.itemIndex, ""))
+            if key and key == it.correctKey:
+                gold_ok.append(it)
+            else:
+                gold_drop.append(
+                    {
+                        "id": it.id,
+                        "reason": "gold_key_mismatch",
+                        "csvKey": it.correctKey,
+                        "pdfKey": key,
+                        "itemIndex": it.itemIndex,
+                        "solutionPdf": it.solutionPdf,
+                    }
+                )
+    items = gold_ok
     # Stable sort: topic, itemIndex, id
     items.sort(key=lambda x: (x.topic, x.itemIndex, x.id))
     write_csv(items, OUT_CSV)
@@ -805,15 +706,22 @@ def main() -> int:
 
     report = {
         "generatedAt": datetime.now(timezone.utc).isoformat(),
-        "source": "sources/ VSJP8 Ulohy+Riesenia + Cielene/exam pairs with parseable keys",
+        "source": (
+            "sources/ letter-key only: Mudre Ulohy+Riesenia, Cielene 1–2, "
+            "EXAM X5/X6/X9 (A–D)"
+        ),
         "itemCount": len(items),
+        "goldDropped": len(gold_drop),
+        "goldDropSample": gold_drop[:30],
         "byTopicCounts": by_topic,
         "bySource": reports,
         "csv": str(OUT_CSV.relative_to(ROOT)),
+        "publishedDefault": "false",
         "note": (
-            "Bank MCQ only (letter keys A–D). Free-answer, image-only PDFs, "
-            "E-choice (X9), and unparseable restated keys skipped. "
-            "SJ8/M8/AJ8 skipped when solutions lack explicit letter keys. "
+            "Bank MCQ with explicit letter keys in Riesenia only. "
+            "Restated Cielene B/C/D rejected after key-audit (~40% wrong in sample). "
+            "X4/X7/Evan/GMK skipped (key collisions or image-only). "
+            "published=false until csv-import-qa publish gate. "
             "sources/ left untouched."
         ),
     }
