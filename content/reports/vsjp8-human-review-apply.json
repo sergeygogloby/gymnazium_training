@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-09-24T15:57:44.689917+00:00",
+  "sourceCorrected": "vsjp8-ulohy-bank-corrected_746d.csv",
+  "sourceIssues": "vsjp8-validation-issues_df6b.csv",
+  "totalRows": 336,
+  "publishedTrue": 326,
+  "publishedFalse": 10,
+  "unpublishedIds": [
+    "bank-cielene-1-t1-03-b4064188e2",
+    "bank-cielene-2-t2-03-c9138c1463",
+    "bank-cielene-2-t2-04-1ed72f93b4",
+    "bank-exam-x9-t9-02-281bd2584a",
+    "bank-exam-x9-t9-05-d07befd8d8",
+    "bank-exam-x9-t9-20-ce7ee7d673",
+    "bank-t11-02-e51b571421",
+    "bank-t5-09-b65fcdb32f",
+    "bank-t8-03-8f6a5cee59",
+    "bank-t9-03-b20125be93"
+  ],
+  "unpublishedReasons": {
+    "bank-cielene-1-t1-03-b4064188e2": "Truncated stem + mismatched rationale | Restore from source PDF",
+    "bank-cielene-2-t2-03-c9138c1463": "Truncated stem + mismatched rationale | Restore from source PDF",
+    "bank-cielene-2-t2-04-1ed72f93b4": "Broken structure | Rebuild or unpublish",
+    "bank-exam-x9-t9-02-281bd2584a": "Missing choice | Restore option E or fix stem",
+    "bank-exam-x9-t9-05-d07befd8d8": "Broken structure | Rebuild or unpublish",
+    "bank-exam-x9-t9-20-ce7ee7d673": "Broken structure | Rebuild or unpublish",
+    "bank-t11-02-e51b571421": "Truncated stem | Restore stem",
+    "bank-t5-09-b65fcdb32f": "Incomplete stem | Add missing rule",
+    "bank-t8-03-8f6a5cee59": "Broken structure | Rebuild or unpublish",
+    "bank-t9-03-b20125be93": "Truncated stem + mismatched rationale | Restore from source PDF"
+  },
+  "keyFixesRetained": [
+    "bank-cielene-1-t1-28 D→C",
+    "bank-t4-19 B→D",
+    "bank-exam-x9-t9-06 D→C",
+    "bank-t12-03 C→B",
+    "bank-t12-04 B→D",
+    "bank-t9-02 D→A (verified: CSV stem is PDF Q3 languages; Riesenia #3 = A; itemIndex set to 3)"
+  ],
+  "note": "Human-corrected CSV applied. Broken/truncated items unpublished. 35 image/passage-dependent items left published but flagged in issues CSV. Official Riesenia letters disagreed with human on several keys; human solving of stored stems preferred after hand review."
+}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T15:41:20.399362+00:00",
+  "generatedAt": "2026-09-24T15:58:02.020323+00:00",
   "dbPath": "data/gymnazium.sqlite",
   "total": 376,
   "bySourceType": {
@@ -20,7 +20,7 @@
     "T11": 19,
     "T12": 20
   },
-  "published": 376,
+  "published": 366,
   "files": {
     "catalog": "content/published/catalog-all-376.csv",
     "bank": "content/bank/vsjp8-ulohy-bank.csv",
