@@ -26,11 +26,12 @@ describe('sessionStore exam flow', () => {
     expect(Date.parse(activeSession!.endsAt!)).toBe(now + 60 * 60 * 1000);
   });
 
-  it('does not attach exam queue to practice starts', () => {
+  it('does not attach exam timer to practice starts', () => {
     sessionStore.startSession('practice');
     const { activeSession } = sessionStore.getState();
     expect(activeSession?.sessionKind).toBe('practice');
-    expect(activeSession?.itemIds).toBeUndefined();
+    // Practice owns its item queue (after-each feedback); timer is exam-only.
+    expect(activeSession?.itemIds?.length).toBeGreaterThan(0);
     expect(activeSession?.endsAt).toBeUndefined();
   });
 
