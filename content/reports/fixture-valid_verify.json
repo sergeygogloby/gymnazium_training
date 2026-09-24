@@ -1,0 +1,32 @@
+{
+  "batchId": "fixture-valid",
+  "csvPath": "content/candidates/fixtures/valid-sample.csv",
+  "ok": true,
+  "lintOk": true,
+  "checked": 2,
+  "passed": 2,
+  "failed": 0,
+  "needsIndependentCheck": 0,
+  "generatedAt": "2026-09-24T11:06:21.684097+00:00",
+  "note": "Scaffold: full solvers TBD. Rows without a matching solver are reported as needsIndependentCheck — do not rubber-stamp.",
+  "rows": [
+    {
+      "row": 1,
+      "id": "seed-t5-pilot-01",
+      "status": "pass",
+      "method": "t5.lever_balls",
+      "detail": "solver matched",
+      "expectedKey": "C",
+      "actualKey": "C"
+    },
+    {
+      "row": 2,
+      "id": "seed-t5-pilot-07",
+      "status": "pass",
+      "method": "t5.percent_of_whole",
+      "detail": "solver matched",
+      "expectedKey": "D",
+      "actualKey": "D"
+    }
+  ]
+}

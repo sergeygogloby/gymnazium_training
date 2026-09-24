@@ -1,0 +1,55 @@
+{
+  "templateId": "t1.sentence-order.mcq",
+  "module": "M1",
+  "topic": "T1",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "title": "Zoraďovanie viet",
+  "description": "Shuffled sentences V1…Vn; ask which sentence is in a target position, or which does not belong.",
+  "slots": {
+    "sentences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "maxItems": 8
+    },
+    "ask": {
+      "type": "enum",
+      "values": [
+        "position",
+        "intruder"
+      ],
+      "description": "position = which Vi is k-th; intruder = which sentence does not belong"
+    },
+    "targetPosition": {
+      "type": "integer",
+      "optional": true
+    },
+    "correctSentenceId": {
+      "type": "string",
+      "example": "V2"
+    },
+    "canonicalOrder": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "renderStem": "V uvedenom texte je poprehadzované poradie viet. …\n{{numberedSentences}}\n{{askPrompt}}",
+  "renderChoices": "A–D as sentence ids (V1…)",
+  "deriveCorrectKey": {
+    "mode": "attested-order",
+    "notes": "canonicalOrder comes from seed/Riesenia; letter = choice matching correctSentenceId."
+  },
+  "rationalePattern": "State full order and why target position / intruder follows discourse cues.",
+  "provenance": {
+    "sourcePdfs": [
+      "VSJP8_Mudre-predplatne_1_Doplnanie-chybajucich-slov-zoradovanie-viet-axipyn.pdf",
+      "VSJP8_Mudre-predplatne_1_Riesenia-eqakog.pdf"
+    ]
+  },
+  "publishedDefault": false
+}

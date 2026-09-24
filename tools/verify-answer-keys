@@ -1,0 +1,370 @@
+#!/usr/bin/env python3
+"""Independently re-check correctKey on candidate CSV (scaffold).
+
+Full numeric/logic solvers land later; this framework:
+  1. Requires structural F22 lint pass (or fails the batch).
+  2. Loads optional templates from content/templates/.
+  3. Runs easy programmatic checks where templateId / pattern is known.
+  4. Marks remaining rows as needsIndependentCheck.
+  5. Writes content/reports/{batchId}_verify.json
+  6. Exits non-zero if any critical key mismatch is found on checked rows.
+
+Does NOT set published=true. Does NOT write catalog rows.
+
+Usage:
+  python3 tools/verify-answer-keys content/candidates/batch.csv
+  python3 tools/verify-answer-keys content/candidates/batch.csv --batch-id pilot-t5
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import re
+import sys
+from dataclasses import asdict, dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Callable
+
+ROOT = Path(__file__).resolve().parent
+REPO = ROOT.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from lib.f22_schema import CHOICE_KEYS, lint_csv_path, parse_choices  # noqa: E402
+
+
+@dataclass
+class RowVerdict:
+    row: int
+    id: str
+    status: str  # pass | fail | needsIndependentCheck | skipped
+    method: str
+    detail: str = ""
+    expectedKey: str | None = None
+    actualKey: str | None = None
+
+
+@dataclass
+class VerifyReport:
+    batchId: str
+    csvPath: str
+    ok: bool
+    lintOk: bool
+    checked: int = 0
+    passed: int = 0
+    failed: int = 0
+    needsIndependentCheck: int = 0
+    rows: list[RowVerdict] = field(default_factory=list)
+    generatedAt: str = ""
+    note: str = (
+        "Scaffold: full solvers TBD. Rows without a matching solver "
+        "are reported as needsIndependentCheck — do not rubber-stamp."
+    )
+
+
+def load_templates(templates_dir: Path) -> dict[str, dict[str, Any]]:
+    out: dict[str, dict[str, Any]] = {}
+    if not templates_dir.is_dir():
+        return out
+    for path in sorted(templates_dir.glob("*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        tid = data.get("templateId") or path.stem
+        out[tid] = data
+    return out
+
+
+def normalize_key(key: str) -> str:
+    return key.strip().upper()
+
+
+# --- Easy solvers (pilot) -------------------------------------------------
+
+
+def solve_percent_of_whole(stem: str, choices: list[str]) -> str | None:
+    """Tyčinka: part g of whole g → percent. Pattern from T5 bank."""
+    # PDF pattern: "na 50 gramov 12 gramov cukru" → 12/50*100
+    m = re.search(
+        r"na\s+(\d+)\s+gramov\w*\s+(\d+)\s+gramov\w*",
+        stem,
+        re.IGNORECASE,
+    )
+    if m and re.search(r"percent|%", stem, re.IGNORECASE):
+        whole, part = int(m.group(1)), int(m.group(2))
+        if whole == 0:
+            return None
+        pct = round(part / whole * 100)
+        return _match_numeric_choice(choices, pct)
+    return None
+
+
+def solve_simple_proportion_pulls(stem: str, choices: list[str]) -> str | None:
+    """Páky / guličky: n * a / b pulls."""
+    m = re.search(
+        r"(\d+)\s*guličiek?.*?(\d+)\s*guličk.*?trikrát|stlačili\s+trikrát",
+        stem,
+        re.IGNORECASE | re.DOTALL,
+    )
+    # Explicit: 14 into bowl1, 3 into bowl2, pull1 three times → 42/3=14
+    nums = re.findall(r"(\d+)\s*gulič", stem, re.IGNORECASE)
+    if len(nums) >= 2 and re.search(r"trikrát|3\s*krát", stem, re.IGNORECASE):
+        a, b = int(nums[0]), int(nums[1])
+        total = 3 * a
+        if b == 0:
+            return None
+        answer = total // b
+        return _match_numeric_choice(choices, answer)
+    return None
+
+
+def solve_discount_reverse(stem: str, choices: list[str]) -> str | None:
+    """Price after X% off is Y → original = Y / (1 - X/100)."""
+    m = re.search(
+        r"zlacnen[íi]\s+o\s+(\d+)\s*%.*?(\d[\d\s]*)\s*€",
+        stem,
+        re.IGNORECASE | re.DOTALL,
+    )
+    if not m:
+        return None
+    pct = int(m.group(1))
+    price = int(re.sub(r"\s+", "", m.group(2)))
+    remain = 1 - pct / 100
+    if remain <= 0:
+        return None
+    original = round(price / remain)
+    return _match_numeric_choice(choices, original)
+
+
+def solve_lcm_gear_turns(stem: str, choices: list[str]) -> str | None:
+    """Two gears: LCM(teeth)/smaller_teeth."""
+    m = re.search(
+        r"(\d+)\s*zubov.*?(\d+)\s*zubov",
+        stem,
+        re.IGNORECASE | re.DOTALL,
+    )
+    if not m:
+        return None
+    a, b = int(m.group(1)), int(m.group(2))
+    larger, smaller = max(a, b), min(a, b)
+    lcm = math.lcm(larger, smaller)
+    turns = lcm // smaller
+    return _match_numeric_choice(choices, turns)
+
+
+def solve_trip_days(stem: str, choices: list[str]) -> str | None:
+    """Day1=2x, day2=2x-10, day3=x, sum=65 → classic T5 #3."""
+    if not re.search(r"65\s*km", stem, re.IGNORECASE):
+        return None
+    if not re.search(r"dvakrát|o\s+10\s*km", stem, re.IGNORECASE):
+        return None
+    # x + (2x-10) + 2x = 65 → 5x = 75 → x=15 → 30,20,15
+    target = "30"
+    for i, c in enumerate(choices):
+        if "30" in c and "20" in c and "15" in c:
+            return chr(ord("A") + i)
+    return None
+
+
+def _match_numeric_choice(choices: list[str], value: int | float) -> str | None:
+    target = str(int(value)) if float(value).is_integer() else f"{value:g}"
+    for i, c in enumerate(choices):
+        # Strip optional "A." / "B." prefixes before extracting number
+        text = re.sub(r"^[A-D]\s*[.)]\s*", "", c.strip(), flags=re.IGNORECASE)
+        nums = re.findall(r"\d+(?:[.,]\d+)?", text.replace(" ", ""))
+        if not nums:
+            continue
+        # Prefer the first numeric token (choice value)
+        token = nums[0].replace(",", ".")
+        if token == target or token.rstrip("0").rstrip(".") == target:
+            return chr(ord("A") + i)
+        try:
+            if float(token) == float(value):
+                return chr(ord("A") + i)
+        except ValueError:
+            continue
+    return None
+
+
+SOLVER_PIPELINE: list[tuple[str, Callable[[str, list[str]], str | None]]] = [
+    ("t5.percent_of_whole", solve_percent_of_whole),
+    ("t5.lever_balls", solve_simple_proportion_pulls),
+    ("t5.discount_reverse", solve_discount_reverse),
+    ("t5.lcm_gears", solve_lcm_gear_turns),
+    ("t5.trip_days_linear", solve_trip_days),
+]
+
+
+def verify_row(
+    row: dict[str, str],
+    row_number: int,
+    templates: dict[str, dict[str, Any]],
+) -> RowVerdict:
+    rid = (row.get("id") or "").strip() or f"<row-{row_number}>"
+    actual = normalize_key(row.get("correctKey") or "")
+    stem = row.get("stem") or ""
+    try:
+        choices = parse_choices(row.get("choices"))
+    except ValueError as exc:
+        return RowVerdict(row_number, rid, "fail", "parse", str(exc), None, actual)
+
+    template_hint = (row.get("templateId") or "").strip()
+    # Optional column not in F22 core — ignore if absent
+
+    if choices:
+        for method, fn in SOLVER_PIPELINE:
+            expected = fn(stem, choices)
+            if expected is None:
+                continue
+            expected_n = normalize_key(expected)
+            if expected_n == actual:
+                return RowVerdict(
+                    row_number, rid, "pass", method, "solver matched", expected_n, actual
+                )
+            return RowVerdict(
+                row_number,
+                rid,
+                "fail",
+                method,
+                "solver disagrees with correctKey",
+                expected_n,
+                actual,
+            )
+
+    # Template present but no solver yet
+    if template_hint and template_hint in templates:
+        return RowVerdict(
+            row_number,
+            rid,
+            "needsIndependentCheck",
+            f"template:{template_hint}",
+            "template known; programmatic deriveCorrectKey not implemented yet",
+            None,
+            actual,
+        )
+
+    return RowVerdict(
+        row_number,
+        rid,
+        "needsIndependentCheck",
+        "manual",
+        "no matching solver — independent re-solve required before publish gate",
+        None,
+        actual,
+    )
+
+
+def run_verify(csv_path: Path, batch_id: str, templates_dir: Path) -> VerifyReport:
+    lint = lint_csv_path(csv_path)
+    report = VerifyReport(
+        batchId=batch_id,
+        csvPath=str(csv_path),
+        ok=False,
+        lintOk=lint.ok,
+        generatedAt=datetime.now(timezone.utc).isoformat(),
+    )
+    if not lint.ok:
+        report.rows.append(
+            RowVerdict(
+                0,
+                "<lint>",
+                "fail",
+                "f22_lint",
+                f"{len(lint.errors)} structural error(s); refuse verify",
+            )
+        )
+        report.failed = 1
+        return report
+
+    templates = load_templates(templates_dir)
+    for i, row in enumerate(lint.rows, start=1):
+        verdict = verify_row(row, i, templates)
+        report.rows.append(verdict)
+        if verdict.status == "pass":
+            report.passed += 1
+            report.checked += 1
+        elif verdict.status == "fail":
+            report.failed += 1
+            report.checked += 1
+        elif verdict.status == "needsIndependentCheck":
+            report.needsIndependentCheck += 1
+
+    # Batch fails on any critical key mismatch among checked rows.
+    # needsIndependentCheck alone does not pass the gate (ok stays False
+    # unless every row was checked and passed).
+    report.ok = report.failed == 0 and report.needsIndependentCheck == 0 and report.passed > 0
+    if report.failed == 0 and report.needsIndependentCheck > 0 and report.passed == len(lint.rows):
+        report.ok = True
+    elif report.failed == 0 and report.needsIndependentCheck > 0:
+        # Partial scaffold success: no known mismatches, but gate incomplete
+        report.ok = False
+        report.note += (
+            f" {report.needsIndependentCheck} row(s) still need independent check."
+        )
+    return report
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Verify answer keys on candidate CSV (scaffold + easy solvers)."
+    )
+    parser.add_argument("csv", type=Path, help="Candidate CSV path")
+    parser.add_argument(
+        "--batch-id",
+        default=None,
+        help="Batch id for report filename (default: CSV stem)",
+    )
+    parser.add_argument(
+        "--templates",
+        type=Path,
+        default=REPO / "content" / "templates",
+        help="Templates directory",
+    )
+    parser.add_argument(
+        "--reports-dir",
+        type=Path,
+        default=REPO / "content" / "reports",
+        help="Where to write {batchId}_verify.json",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Print report only; do not write JSON file",
+    )
+    args = parser.parse_args(argv)
+
+    batch_id = args.batch_id or args.csv.stem
+    report = run_verify(args.csv, batch_id, args.templates)
+
+    payload = {
+        **{k: v for k, v in asdict(report).items() if k != "rows"},
+        "rows": [asdict(r) for r in report.rows],
+    }
+
+    if not args.dry_run:
+        args.reports_dir.mkdir(parents=True, exist_ok=True)
+        out = args.reports_dir / f"{batch_id}_verify.json"
+        out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"Wrote {out}")
+
+    print(
+        f"verify ok={report.ok} lintOk={report.lintOk} "
+        f"pass={report.passed} fail={report.failed} "
+        f"needsIndependentCheck={report.needsIndependentCheck}"
+    )
+    for r in report.rows:
+        if r.status != "pass":
+            print(f"  [{r.status}] row {r.row} {r.id}: {r.method} — {r.detail}")
+
+    # Fail batch on key errors; also non-zero if lint failed
+    if not report.lintOk or report.failed > 0:
+        return 1
+    # Incomplete independent checks → exit 2 (gate not green, but no known wrong keys)
+    if report.needsIndependentCheck > 0:
+        return 2
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

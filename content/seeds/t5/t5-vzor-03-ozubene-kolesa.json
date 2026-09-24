@@ -1,0 +1,25 @@
+{
+  "seedId": "t5-vzor-03-ozubene-kolesa",
+  "templateId": "t5.lcm-gears.mcq",
+  "module": "M3",
+  "topic": "T5",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "sourceType": "bank",
+  "published": false,
+  "provenance": {
+    "sourcePdf": "VSJP8_Mudre-predplatne_5_Numericke-a-logicke-ulohy-mzrvef.pdf",
+    "itemIndex": 3,
+    "folder": "sources/3"
+  },
+  "stem": "Dve ozubené kolesá zapadajú navzájom do seba. Väčšie má 36 zubov, menšie 20 zubov. Koľkokrát sa otočí menšie koleso, aby do seba zapadali opäť tie isté zuby?",
+  "choices": ["5", "9", "18", "10"],
+  "correctKey": "B",
+  "rationale": "NSN(36, 20) = 180; 180÷20 = 9 otočení menšieho kolesa.",
+  "slots": {
+    "teethLarge": 36,
+    "teethSmall": 20,
+    "askWhich": "smaller"
+  },
+  "shapeNotes": "LCM / gear meshing."
+}

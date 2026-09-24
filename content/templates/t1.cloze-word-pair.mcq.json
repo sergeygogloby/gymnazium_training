@@ -1,0 +1,47 @@
+{
+  "templateId": "t1.cloze-word-pair.mcq",
+  "module": "M1",
+  "topic": "T1",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "title": "Dopĺňanie dvojice slov",
+  "description": "Short passage with two blanks; each choice is a word pair; pick the only pair that fits grammar + context.",
+  "slots": {
+    "passage": {
+      "type": "string",
+      "role": "stem",
+      "blanks": 2
+    },
+    "choicePairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "left": "string",
+          "right": "string"
+        }
+      },
+      "length": 4
+    },
+    "correctIndex": {
+      "type": "integer",
+      "min": 0,
+      "max": 3
+    }
+  },
+  "renderStem": "Ktorú dvojicu slov možno doplniť na vynechané miesta tak, aby vznikol zmysluplný text?\n{{passage}}",
+  "renderChoices": "A–D as '{{left}} – {{right}}'",
+  "deriveCorrectKey": {
+    "mode": "attested-only",
+    "notes": "No free-form Slovak idiom invention. Seed from bank with known correctKey; generators may only swap attested lexical frames from seeds allow-lists."
+  },
+  "rationalePattern": "Cite collocational / discourse cue that uniquely selects the pair (e.g. 'zatiaľ síce … nevedela').",
+  "provenance": {
+    "sourcePdfs": [
+      "VSJP8_Mudre-predplatne_1_Doplnanie-chybajucich-slov-zoradovanie-viet-axipyn.pdf",
+      "VSJP8_Mudre-predplatne_1_Ulohy-zhbksb.pdf",
+      "VSJP8_Mudre-predplatne_1_Riesenia-eqakog.pdf"
+    ]
+  },
+  "publishedDefault": false
+}

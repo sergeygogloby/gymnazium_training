@@ -1,0 +1,26 @@
+{
+  "seedId": "t5-uloohy-07-percent-cukor",
+  "templateId": "t5.percent-composition.mcq",
+  "module": "M3",
+  "topic": "T5",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "sourceType": "bank",
+  "published": false,
+  "provenance": {
+    "sourcePdf": "VSJP8_Mudre-predplatne_5_Ulohy-s6hvtz.pdf",
+    "solutionPdf": "VSJP8_Mudre-predplatne_5_Riesenia-00ceqg.pdf",
+    "itemIndex": 7,
+    "folder": "sources/3"
+  },
+  "stem": "Tyčinka obsahuje na 50 gramov 12 gramov cukru. Koľko percent cukru obsahuje tyčinka?",
+  "choices": ["12", "50", "20", "24"],
+  "correctKey": "D",
+  "rationale": "Percento cukru = (12/50)×100 = 24%.",
+  "slots": {
+    "wholeGrams": 50,
+    "partGrams": 12,
+    "substance": "cukru"
+  },
+  "shapeNotes": "Simple percent composition."
+}

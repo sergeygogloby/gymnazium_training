@@ -1,0 +1,50 @@
+{
+  "seedId": "t1-uloohy-02-zrazky-burok",
+  "templateId": "t1.cloze-word-pair.mcq",
+  "module": "M1",
+  "topic": "T1",
+  "skillArea": "VSP",
+  "itemType": "mcq",
+  "sourceType": "bank",
+  "published": false,
+  "provenance": {
+    "sourcePdf": "VSJP8_Mudre-predplatne_1_Ulohy-zhbksb.pdf",
+    "solutionPdf": "VSJP8_Mudre-predplatne_1_Riesenia-eqakog.pdf",
+    "itemIndex": 2,
+    "folder": "sources/1"
+  },
+  "stem": "Ktorú dvojicu slov možno doplniť na vynechané miesta tak, aby vznikol zmysluplný text?\nAj zajtra nás čaká podobné počasie, ako bolo dnes. Ak sa vyskytnú _____, tak iba v horských oblastiach a to vo forme prehánok alebo ojedinelých _____. Stále však bude pršať nad Balkánom a zajtra aj nad západom Európy.",
+  "choices": [
+    "lúče – mrazov",
+    "zrážky – búrok",
+    "dažde – vetrov",
+    "mrazy – tornád"
+  ],
+  "correctKey": "B",
+  "rationale": "Zrážky sa vyskytujú vo forme prehánok/búrok; ostatné páry sú kontextovo nesúrodé.",
+  "slots": {
+    "choicePairs": [
+      {
+        "left": "lúče",
+        "right": "mrazov"
+      },
+      {
+        "left": "zrážky",
+        "right": "búrok"
+      },
+      {
+        "left": "dažde",
+        "right": "vetrov"
+      },
+      {
+        "left": "mrazy",
+        "right": "tornád"
+      }
+    ],
+    "correctIndex": 1
+  },
+  "shapeNotes": "Cloze weather register; formá … vo forme …",
+  "attestedCues": [
+    "zrážky vo forme búrok"
+  ]
+}
