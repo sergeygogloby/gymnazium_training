@@ -371,6 +371,139 @@ export function formatPct(accuracy: number): string {
   return `${Math.round(accuracy * 100)} %`;
 }
 
+/** Household KPI strip — Duolingo/Quizlet-style overview (no gamification). */
+export interface InsightSummary {
+  sessionCount: number;
+  answerCount: number;
+  correctCount: number;
+  accuracy: number;
+  durationMs: number;
+  activeDays: number;
+  empty: boolean;
+}
+
+export function computeInsightSummary(attempts: Attempt[]): InsightSummary {
+  const closed = attempts.filter(isCompletedAttempt);
+  let answerCount = 0;
+  let correctCount = 0;
+  let durationMs = 0;
+  const days = new Set<string>();
+  for (const a of closed) {
+    answerCount += a.answers.length;
+    correctCount += a.answers.filter((x) => x.outcome === 'correct').length;
+    durationMs += a.durationMs ?? 0;
+    days.add(localDateKeyFromIso(a.startedAt));
+  }
+  return {
+    sessionCount: closed.length,
+    answerCount,
+    correctCount,
+    accuracy: answerCount > 0 ? correctCount / answerCount : 0,
+    durationMs,
+    activeDays: days.size,
+    empty: closed.length === 0,
+  };
+}
+
+export interface SkillAreaProgress {
+  skillArea: 'VSP' | 'VJS';
+  answered: number;
+  correct: number;
+  accuracy: number;
+}
+
+/** VŠP | VJS accuracy (F17 cue on progress). */
+export function computeSkillAreaProgress(
+  attempts: Attempt[],
+): SkillAreaProgress[] {
+  const buckets: Record<'VSP' | 'VJS', { answered: number; correct: number }> = {
+    VSP: { answered: 0, correct: 0 },
+    VJS: { answered: 0, correct: 0 },
+  };
+  for (const a of attempts) {
+    if (!isCompletedAttempt(a)) continue;
+    for (const ans of a.answers) {
+      const skill = ans.skillArea === 'VJS' ? 'VJS' : 'VSP';
+      buckets[skill].answered += 1;
+      if (ans.outcome === 'correct') buckets[skill].correct += 1;
+    }
+  }
+  return (['VSP', 'VJS'] as const)
+    .map((skillArea) => {
+      const b = buckets[skillArea];
+      return {
+        skillArea,
+        answered: b.answered,
+        correct: b.correct,
+        accuracy: b.answered > 0 ? b.correct / b.answered : 0,
+      };
+    })
+    .filter((r) => r.answered > 0);
+}
+
+export interface OutcomeMix {
+  correct: number;
+  incorrect: number;
+  skipped: number;
+  total: number;
+}
+
+export function computeOutcomeMix(attempts: Attempt[]): OutcomeMix {
+  let correct = 0;
+  let incorrect = 0;
+  let skipped = 0;
+  for (const a of attempts) {
+    if (!isCompletedAttempt(a)) continue;
+    for (const ans of a.answers) {
+      if (ans.outcome === 'correct') correct += 1;
+      else if (ans.outcome === 'incorrect') incorrect += 1;
+      else skipped += 1;
+    }
+  }
+  return { correct, incorrect, skipped, total: correct + incorrect + skipped };
+}
+
+export interface SessionScorePoint {
+  id: string;
+  startedAt: string;
+  label: string;
+  /** 0–1; null if unscored */
+  accuracy: number | null;
+  scoreCorrect: number;
+  scoreTotal: number;
+  sessionKind: SessionKind;
+}
+
+/** Chronological session scores for trend charts (Anki/Duolingo-style). */
+export function computeSessionScoreTrend(
+  attempts: Attempt[],
+  limit = 12,
+): SessionScorePoint[] {
+  const closed = sortAttemptsNewestFirst(attempts.filter(isCompletedAttempt))
+    .slice(0, limit)
+    .reverse();
+  return closed.map((a) => {
+    const scoreTotal =
+      a.scoreTotal ??
+      (a.answers.length > 0 ? a.answers.length : 0);
+    const scoreCorrect =
+      a.scoreCorrect ??
+      a.answers.filter((x) => x.outcome === 'correct').length;
+    const accuracy =
+      scoreTotal > 0 ? scoreCorrect / scoreTotal : null;
+    const day = localDateKeyFromIso(a.startedAt).slice(5); // MM-DD
+    return {
+      id: a.id,
+      startedAt: a.startedAt,
+      label: day,
+      accuracy,
+      scoreCorrect,
+      scoreTotal,
+      sessionKind: a.sessionKind,
+    };
+  });
+}
+
 export function attemptModuleLabel(a: Attempt): string {
   if (a.module) {
     return a.topic ? `${a.module} / ${a.topic}` : a.module;

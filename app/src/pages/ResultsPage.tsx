@@ -1,12 +1,24 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useMemo, useState } from 'react';
+import {
+  InsightSummaryCards,
+  ModuleAccuracyBars,
+  OutcomeMixBar,
+  SessionTrendChart,
+  SkillAreaTable,
+  TopicProgressTable,
+} from '../components/InsightCharts';
 import { PageShell } from '../components/PageShell';
 import { buildMistakesQueue } from '../lib/mistakesQueue';
 import {
   attemptModuleLabel,
   computeEffortVsAccuracy,
   computeGaps,
+  computeInsightSummary,
+  computeOutcomeMix,
   computeProgress,
+  computeSessionScoreTrend,
+  computeSkillAreaProgress,
   computeStreak,
   computeSuggestions,
   filterAttemptsBySection,
@@ -30,6 +42,7 @@ const SECTION_TABS: { id: SectionTab; label: string }[] = [
 /**
  * V06 Results & Progress — F08–F11 + F21, plus Mistakes entry (F16).
  * Practice and exam rollups stay in separate sections (locked).
+ * Insights (KPIs, graphs, tables) live here — no separate Insights mode.
  */
 export function ResultsPage() {
   const navigate = useNavigate();
@@ -70,6 +83,16 @@ export function ResultsPage() {
     () => buildMistakesQueue(attempts, catalog).length,
     [attempts, catalog],
   );
+  const summary = useMemo(() => computeInsightSummary(scoped), [scoped]);
+  const skillAreas = useMemo(
+    () => computeSkillAreaProgress(scoped),
+    [scoped],
+  );
+  const outcomeMix = useMemo(() => computeOutcomeMix(scoped), [scoped]);
+  const trend = useMemo(
+    () => computeSessionScoreTrend(scoped, 12),
+    [scoped],
+  );
 
   const anyCompleted = attempts.some((a) => a.endedAt);
 
@@ -94,9 +117,9 @@ export function ResultsPage() {
   return (
     <PageShell title="Výsledky a pokrok" viewId="V06">
       <p className="lede">
-        Spoločný prehľad domácnosti: pokrok, medzery, návrhy, nedávna aktivita,
-        ľahký streak a úsilie vs presnosť. Cvičenie a skúšky sú vždy oddelené —
-        nie jeden nerozlíšený súčet.
+        Spoločný prehľad domácnosti: metriky, grafy a tabuľky z uložených
+        relácií (SQLite). Cvičenie a skúšky sú vždy oddelené — nie jeden
+        nerozlíšený súčet. Žiadny samostatný režim Insights.
       </p>
 
       <fieldset className="filter-fieldset" data-testid="progress-section-filter">
@@ -146,6 +169,17 @@ export function ResultsPage() {
         </p>
       ) : null}
 
+      <section className="progress-block" data-testid="insight-summary-block">
+        <h2>
+          Prehľad — {section === 'practice' ? 'Cvičenie' : 'Skúšky'}
+        </h2>
+        {summary.empty ? (
+          <p className="muted">V tejto sekcii ešte nie sú dáta na súhrn.</p>
+        ) : (
+          <InsightSummaryCards summary={summary} />
+        )}
+      </section>
+
       <section className="results-mistakes-cue" data-testid="results-mistakes-link">
         <h2>Chyby na opakovanie</h2>
         {mistakesCount > 0 ? (
@@ -193,6 +227,27 @@ export function ResultsPage() {
       <section className="progress-block" data-testid="effort-block">
         <h2>Úsilie vs presnosť</h2>
         <p data-effort-cue={effort.cue}>{effort.label}</p>
+      </section>
+
+      <section className="progress-block" data-testid="outcome-mix-block">
+        <h2>Rozloženie odpovedí</h2>
+        {outcomeMix.total === 0 ? (
+          <p className="muted">Žiadne odpovede v tejto sekcii.</p>
+        ) : (
+          <OutcomeMixBar mix={outcomeMix} />
+        )}
+      </section>
+
+      <section className="progress-block" data-testid="session-trend-block">
+        <h2>
+          Trend skóre
+          {section === 'exams' ? ' (skúšky)' : ' (cvičenie)'}
+        </h2>
+        {trend.length === 0 ? (
+          <p className="muted">Po niekoľkých reláciách sa tu zobrazí krivka.</p>
+        ) : (
+          <SessionTrendChart points={trend} />
+        )}
       </section>
 
       <section className="progress-block" data-testid="suggestions-block">
@@ -251,39 +306,60 @@ export function ResultsPage() {
             jedného súčtu.
           </p>
         ) : (
-          <div className="table-wrap">
-            <table className="history-table">
-              <thead>
-                <tr>
-                  <th>Modul</th>
-                  <th>Presnosť</th>
-                  <th>Odpovede</th>
-                  <th>Relácie</th>
-                  <th>Témy</th>
-                </tr>
-              </thead>
-              <tbody>
-                {modules.map((m) => (
-                  <tr key={m.module} data-module={m.module}>
-                    <td>{m.module}</td>
-                    <td>{formatPct(m.accuracy)}</td>
-                    <td>
-                      {m.correct}/{m.answered}
-                    </td>
-                    <td>{m.sessionCount}</td>
-                    <td>
-                      {m.topics
-                        .map(
-                          (t) =>
-                            `${t.topic} ${formatPct(t.accuracy)}`,
-                        )
-                        .join(' · ') || '—'}
-                    </td>
+          <>
+            <ModuleAccuracyBars modules={modules} />
+            <div className="table-wrap">
+              <table className="history-table">
+                <thead>
+                  <tr>
+                    <th>Modul</th>
+                    <th>Presnosť</th>
+                    <th>Odpovede</th>
+                    <th>Relácie</th>
+                    <th>Témy</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {modules.map((m) => (
+                    <tr key={m.module} data-module={m.module}>
+                      <td>{m.module}</td>
+                      <td>{formatPct(m.accuracy)}</td>
+                      <td>
+                        {m.correct}/{m.answered}
+                      </td>
+                      <td>{m.sessionCount}</td>
+                      <td>
+                        {m.topics
+                          .map(
+                            (t) =>
+                              `${t.topic} ${formatPct(t.accuracy)}`,
+                          )
+                          .join(' · ') || '—'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </section>
+
+      <section className="progress-block" data-testid="skill-area-block">
+        <h2>VŠP | VJS</h2>
+        {skillAreas.length === 0 ? (
+          <p className="muted">Zatiaľ bez odpovedí s označením oblasti.</p>
+        ) : (
+          <SkillAreaTable rows={skillAreas} />
+        )}
+      </section>
+
+      <section className="progress-block" data-testid="topic-table-block">
+        <h2>Tabuľka tém</h2>
+        {modules.length === 0 ? (
+          <p className="muted">Žiadne témy v tejto sekcii.</p>
+        ) : (
+          <TopicProgressTable modules={modules} />
         )}
       </section>
 
@@ -318,8 +394,8 @@ export function ResultsPage() {
       </section>
 
       <p className="muted">
-        Tieto obrazovky nemenia uložené odpovede. Žiadny samostatný režim
-        Insights.
+        Metriky sa počítajú z <code>attempts</code> / <code>attempt_answers</code>{' '}
+        v lokálnej DB. Tieto obrazovky nemenia uložené odpovede.
       </p>
       <p>
         <Link to="/historia">História relácií (V05)</Link>
