@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { isExamKind, sessionKindLabel } from '../lib/sessionKind';
 import { useSessionStore } from '../store/useSessionStore';
 
 export function HistoryPage() {
@@ -11,8 +12,8 @@ export function HistoryPage() {
   return (
     <PageShell title="História relácií" viewId="V05">
       <p className="lede">
-        Zoznam pokusov s <code>sessionKind</code>. Filter Cvičenie | Skúšky —
-        Wave 2.
+        Pokusy s <code>sessionKind</code>. Skúšky sú označené oddelene od
+        cvičenia (plný filter Cvičenie | Skúšky — progress slice).
       </p>
       {sorted.length === 0 ? (
         <p className="muted">Zatiaľ žiadne relácie.</p>
@@ -28,9 +29,18 @@ export function HistoryPage() {
           </thead>
           <tbody>
             {sorted.map((a) => (
-              <tr key={a.id}>
+              <tr key={a.id} data-session-kind={a.sessionKind}>
                 <td>{new Date(a.startedAt).toLocaleString('sk-SK')}</td>
                 <td>
+                  <span
+                    className={
+                      isExamKind(a.sessionKind)
+                        ? 'kind-pill kind-exam'
+                        : 'kind-pill kind-practice'
+                    }
+                  >
+                    {sessionKindLabel(a.sessionKind)}
+                  </span>{' '}
                   <code>{a.sessionKind}</code>
                 </td>
                 <td>
