@@ -3,8 +3,24 @@ import { PageShell } from '../components/PageShell';
 import { attemptBreakdown, lookupItem } from '../lib/examSession';
 import { isExamKind, sessionKindLabel } from '../lib/sessionKind';
 import { useSessionStore } from '../store/useSessionStore';
+import type { AnswerOutcome } from '../types/content';
 
-/** V04 — shared result shell; exam kinds get end-of-session score + label. */
+const OUTCOME_LABEL: Record<AnswerOutcome, string> = {
+  correct: 'správne',
+  incorrect: 'nesprávne',
+  skipped: 'preskočené',
+};
+
+function formatDuration(ms?: number): string {
+  if (ms == null) return '—';
+  const sec = Math.round(ms / 1000);
+  if (sec < 60) return `${sec} s`;
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m} min ${s} s`;
+}
+
+/** V04 — shared result shell for practice (after-each already shown) and exam (end-only keys). */
 export function SessionResultPage() {
   const { attemptId } = useParams();
   const { attempts, catalog } = useSessionStore();
@@ -26,10 +42,6 @@ export function SessionResultPage() {
   const exam = isExamKind(attempt.sessionKind);
   const label = sessionKindLabel(attempt.sessionKind);
   const breakdown = attemptBreakdown(attempt);
-  const durationMin =
-    attempt.durationMs != null
-      ? Math.round(attempt.durationMs / 60000)
-      : null;
 
   return (
     <PageShell title="Výsledok relácie" viewId="V04">
@@ -56,10 +68,14 @@ export function SessionResultPage() {
               : '—'}
           </dd>
         </div>
-        {durationMin != null && (
+        <div>
+          <dt>Trvanie</dt>
+          <dd>{formatDuration(attempt.durationMs)}</dd>
+        </div>
+        {attempt.module && (
           <div>
-            <dt>Trvanie</dt>
-            <dd>~{durationMin} min</dd>
+            <dt>Modul</dt>
+            <dd>{attempt.module}</dd>
           </div>
         )}
         <div>
@@ -70,23 +86,22 @@ export function SessionResultPage() {
         </div>
       </dl>
 
-      {exam ? (
-        <>
-          <h2>Rozpis</h2>
-          <ul className="breakdown-list">
-            <li>Správne: {breakdown.correct}</li>
-            <li>Nesprávne: {breakdown.incorrect}</li>
-            <li>Preskočené: {breakdown.skipped}</li>
-          </ul>
-          {attempt.answers.length > 0 && (
-            <details className="answer-review">
-              <summary>Prehľad odpovedí (po ukončení)</summary>
+      <section className="result-breakdown">
+        <h2>Rozpis</h2>
+        <p className="muted">
+          Správne {breakdown.correct} · Nesprávne {breakdown.incorrect} ·
+          Preskočené {breakdown.skipped}
+        </p>
+        {attempt.answers.length > 0 ? (
+          exam ? (
+            <details className="answer-review" open>
+              <summary>Prehľad odpovedí (po ukončení skúšky)</summary>
               <ol>
-                {attempt.answers.map((a) => {
+                {attempt.answers.map((a, i) => {
                   const item = lookupItem(catalog, a.itemId);
                   return (
-                    <li key={`${a.itemId}-${a.outcome}`}>
-                      <strong>{a.outcome}</strong>
+                    <li key={`${a.itemId}-${i}`}>
+                      <strong>{OUTCOME_LABEL[a.outcome]}</strong>
                       {item ? ` — ${item.stem}` : ` — ${a.itemId}`}
                       {item && (
                         <span className="muted">
@@ -99,14 +114,47 @@ export function SessionResultPage() {
                 })}
               </ol>
             </details>
-          )}
-        </>
-      ) : (
-        <p className="placeholder-box">
-          Practice result detail — practice slice. Druh zostáva{' '}
-          <code>practice</code>.
-        </p>
-      )}
+          ) : (
+            <table className="history-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Položka</th>
+                  <th>Výsledok</th>
+                  <th>Značky</th>
+                </tr>
+              </thead>
+              <tbody>
+                {attempt.answers.map((a, i) => {
+                  const stem = catalog.find((c) => c.id === a.itemId)?.stem;
+                  return (
+                    <tr key={`${a.itemId}-${i}`}>
+                      <td>{i + 1}</td>
+                      <td>
+                        <code>{a.itemId}</code>
+                        {stem ? (
+                          <span className="muted">
+                            {' '}
+                            — {stem.slice(0, 48)}
+                            {stem.length > 48 ? '…' : ''}
+                          </span>
+                        ) : null}
+                      </td>
+                      <td>{OUTCOME_LABEL[a.outcome]}</td>
+                      <td>
+                        {a.module}/{a.topic} ·{' '}
+                        {a.skillArea === 'VSP' ? 'VŠP' : 'VJS'} · {a.sourceType}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )
+        ) : (
+          <p className="muted">Žiadne odpovede v tejto relácii.</p>
+        )}
+      </section>
 
       <ul className="home-links">
         <li>

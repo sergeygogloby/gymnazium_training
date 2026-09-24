@@ -12,8 +12,8 @@ export function HistoryPage() {
   return (
     <PageShell title="História relácií" viewId="V05">
       <p className="lede">
-        Pokusy s <code>sessionKind</code>. Skúšky sú označené oddelene od
-        cvičenia (plný filter Cvičenie | Skúšky — progress slice).
+        Pokusy s <code>sessionKind</code>. Cvičenie a skúšky sú rozlíšené;
+        plný filter Cvičenie | Skúšky príde v progress slice.
       </p>
       {sorted.length === 0 ? (
         <p className="muted">Zatiaľ žiadne relácie.</p>

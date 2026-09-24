@@ -1,20 +1,31 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { PageShell } from '../components/PageShell';
 import { catalogStats, selectEligibleItems } from '../lib/catalog';
 import { sessionKindLabel } from '../lib/sessionKind';
 import { sessionStore } from '../store/sessionStore';
 import { useSessionStore } from '../store/useSessionStore';
-import type { SessionKind } from '../types/content';
+import type { SkillArea } from '../types/content';
 
+/** Practice entry — skill filter + exam start; CSV eligibility + demo fallbacks. */
 export function PracticeEntryPage() {
   const navigate = useNavigate();
   const { activeSession, catalog } = useSessionStore();
+  const [skillFilter, setSkillFilter] = useState<SkillArea | 'all'>('all');
   const stats = catalogStats(catalog);
   const eligible = selectEligibleItems(catalog);
-  // Empty catalog: exam may fall back to demo items; all-unpublished blocks new sessions.
+  // All-unpublished blocks; empty catalog allows practice/exam demo seeds.
   const startBlocked = stats.total > 0 && eligible.length === 0;
 
-  function start(kind: SessionKind) {
+  function startPractice() {
+    sessionStore.startSession('practice', {
+      skillArea: skillFilter === 'all' ? undefined : skillFilter,
+      limit: 5,
+    });
+    navigate('/relacia');
+  }
+
+  function startExam(kind: 'exam_30' | 'exam_60') {
     sessionStore.startSession(kind);
     navigate('/relacia');
   }
@@ -22,9 +33,9 @@ export function PracticeEntryPage() {
   return (
     <PageShell title="Cvičenie / skúška" viewId="V03-entry">
       <p className="lede">
-        Vyberte druh relácie (nie režim). Cvičenie: spätná väzba po každej
-        položke. Skúška 30 / 60 min: odpočet, hodnotenie až na konci. Katalóg z
-        CSV uploadu (F14: len published).
+        Vyberte druh relácie (nie režim). Pri cvičení uvidíte správnu odpoveď a
+        zdôvodnenie po každej položke. Skúška 30 / 60 min: odpočet, hodnotenie
+        až na konci. Katalóg z CSV (F14: len published).
       </p>
       {activeSession && (
         <p className="notice">
@@ -33,24 +44,52 @@ export function PracticeEntryPage() {
           <Link to="/relacia">pokračovať</Link>
         </p>
       )}
+
+      <fieldset className="filter-fieldset">
+        <legend>Filter VŠP | VJS (F17)</legend>
+        <label className="choice">
+          <input
+            type="radio"
+            name="skill"
+            checked={skillFilter === 'all'}
+            onChange={() => setSkillFilter('all')}
+          />
+          Všetko
+        </label>
+        <label className="choice">
+          <input
+            type="radio"
+            name="skill"
+            checked={skillFilter === 'VSP'}
+            onChange={() => setSkillFilter('VSP')}
+          />
+          VŠP
+        </label>
+        <label className="choice">
+          <input
+            type="radio"
+            name="skill"
+            checked={skillFilter === 'VJS'}
+            onChange={() => setSkillFilter('VJS')}
+          />
+          VJS
+        </label>
+      </fieldset>
+
       <div className="session-kind-actions">
-        <button
-          type="button"
-          onClick={() => start('practice')}
-          disabled={startBlocked}
-        >
+        <button type="button" onClick={startPractice} disabled={startBlocked}>
           Cvičenie (bez časovača)
         </button>
         <button
           type="button"
-          onClick={() => start('exam_30')}
+          onClick={() => startExam('exam_30')}
           disabled={startBlocked}
         >
           Skúška · 30 min
         </button>
         <button
           type="button"
-          onClick={() => start('exam_60')}
+          onClick={() => startExam('exam_60')}
           disabled={startBlocked}
         >
           Skúška · 60 min
@@ -62,7 +101,7 @@ export function PracticeEntryPage() {
         {stats.total === 0 && (
           <>
             {' '}
-            — prázdny → skúška použije demo položky ·{' '}
+            — prázdny → cvičenie/skúška doplní demo ·{' '}
             <Link to="/nahrat">nahrať CSV</Link>
           </>
         )}

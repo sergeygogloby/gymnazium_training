@@ -3,8 +3,12 @@ import type {
   AttemptAnswer,
   ContentItem,
   FlagRecord,
+  ModuleId,
   SessionKind,
+  SkillArea,
+  TopicId,
 } from '../types/content';
+import { DEMO_CATALOG } from '../lib/demoCatalog';
 import {
   gradeAnswer,
   finalizeExamScores,
@@ -12,6 +16,7 @@ import {
   resolveExamItems,
 } from '../lib/examSession';
 import { examDurationMs, isExamKind } from '../lib/sessionKind';
+import { selectPracticeItems } from '../lib/selectPracticeItems';
 
 const STORAGE_KEY = 'gymnazium-training-store-v1';
 
@@ -19,11 +24,14 @@ export interface ActiveSession {
   sessionKind: SessionKind;
   attemptId: string;
   mistakesScoped?: boolean;
-  /** Exam item queue (ids). Practice agent owns practice item loop. */
+  /** Ordered item ids for practice or exam run. */
   itemIds?: string[];
   currentIndex?: number;
   /** ISO timestamp when exam countdown hits zero. */
   endsAt?: string;
+  module?: ModuleId;
+  topic?: TopicId;
+  skillFilter?: SkillArea;
 }
 
 export interface AppStoreState {
@@ -32,6 +40,18 @@ export interface AppStoreState {
   flags: FlagRecord[];
   activeSession: ActiveSession | null;
   seenHelp: boolean;
+}
+
+export interface StartSessionOptions {
+  mistakesScoped?: boolean;
+  module?: ModuleId;
+  topic?: TopicId;
+  skillArea?: SkillArea;
+  /** Explicit item set (e.g. mistakes queue); otherwise selected from catalog. */
+  itemIds?: string[];
+  limit?: number;
+  /** Injectable clock for exam duration tests. */
+  nowMs?: number;
 }
 
 const emptyState = (): AppStoreState => ({
@@ -86,6 +106,18 @@ function patchAttempt(id: string, patch: Partial<Attempt>): void {
   };
 }
 
+function publishedCount(catalog: ContentItem[]): number {
+  return catalog.filter((i) => i.published).length;
+}
+
+function wipeStore(): void {
+  state = emptyState();
+  if (typeof localStorage !== 'undefined') {
+    localStorage.removeItem(STORAGE_KEY);
+  }
+  listeners.forEach((l) => l());
+}
+
 export const sessionStore = {
   getState(): AppStoreState {
     return state;
@@ -120,6 +152,15 @@ export const sessionStore = {
     return { created, updated };
   },
 
+  /**
+   * If the store has no published items, seed the tagged demo/bank set
+   * so practice is testable without CSV upload.
+   */
+  ensureDemoCatalog(): void {
+    if (publishedCount(state.catalog) > 0) return;
+    sessionStore.upsertCatalogItems(DEMO_CATALOG);
+  },
+
   addAttempt(attempt: Attempt): void {
     state = { ...state, attempts: [...state.attempts, attempt] };
     emit();
@@ -131,33 +172,54 @@ export const sessionStore = {
   },
 
   /**
-   * Start a session. Exam kinds get countdown + item queue.
-   * Practice path stays minimal — practice slice owns after-each feedback.
+   * Start a session.
+   * Practice: item set from catalog (or demo seed) + currentIndex; after-each feedback in UI.
+   * Exam: countdown endsAt + item queue; end-only keys via recordExamResponse.
    */
-  startSession(
-    sessionKind: SessionKind,
-    options?: { mistakesScoped?: boolean; nowMs?: number },
-  ): string {
+  startSession(sessionKind: SessionKind, options?: StartSessionOptions): string {
     const attemptId = `att_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-    const startedAt = new Date(options?.nowMs ?? Date.now()).toISOString();
+    const now = options?.nowMs ?? Date.now();
+    const startedAt = new Date(now).toISOString();
+
     const attempt: Attempt = {
       id: attemptId,
       sessionKind,
       startedAt,
       answers: [],
       mistakesScoped: options?.mistakesScoped,
+      module: options?.module,
+      topic: options?.topic,
     };
 
     let activeSession: ActiveSession = {
       sessionKind,
       attemptId,
       mistakesScoped: options?.mistakesScoped,
+      module: options?.module,
+      topic: options?.topic,
+      skillFilter: options?.skillArea,
     };
 
-    if (isExamKind(sessionKind)) {
+    if (sessionKind === 'practice') {
+      sessionStore.ensureDemoCatalog();
+      let itemIds = options?.itemIds;
+      if (!itemIds || itemIds.length === 0) {
+        const selected = selectPracticeItems(sessionStore.getState().catalog, {
+          module: options?.module,
+          topic: options?.topic,
+          skillArea: options?.skillArea,
+          limit: options?.limit ?? 5,
+        });
+        itemIds = selected.map((i) => i.id);
+      }
+      activeSession = {
+        ...activeSession,
+        itemIds,
+        currentIndex: 0,
+      };
+    } else if (isExamKind(sessionKind)) {
       const items = resolveExamItems(state.catalog);
       const duration = examDurationMs(sessionKind);
-      const now = options?.nowMs ?? Date.now();
       activeSession = {
         ...activeSession,
         itemIds: items.map((i) => i.id),
@@ -173,6 +235,33 @@ export const sessionStore = {
     };
     emit();
     return attemptId;
+  },
+
+  /** Practice: append graded answer (key already revealed in UI). */
+  appendAnswer(answer: AttemptAnswer): void {
+    if (!state.activeSession) return;
+    const { attemptId } = state.activeSession;
+    patchAttempt(attemptId, {
+      answers: [
+        ...(state.attempts.find((a) => a.id === attemptId)?.answers ?? []),
+        answer,
+      ],
+    });
+    emit();
+  },
+
+  /** Practice: move to next item after feedback. */
+  advanceItem(): void {
+    if (!state.activeSession) return;
+    const idx = state.activeSession.currentIndex ?? 0;
+    state = {
+      ...state,
+      activeSession: {
+        ...state.activeSession,
+        currentIndex: idx + 1,
+      },
+    };
+    emit();
   },
 
   /**
@@ -206,17 +295,14 @@ export const sessionStore = {
     patchAttempt(active.attemptId, { answers });
     state = {
       ...state,
-      activeSession: done
-        ? { ...active, currentIndex: nextIndex }
-        : { ...active, currentIndex: nextIndex },
+      activeSession: { ...active, currentIndex: nextIndex },
     };
     emit();
     return { done, answer };
   },
 
   /**
-   * Close session: score exams end-only; clear active shell.
-   * Practice may call this after its own feedback loop.
+   * Close session: score exams end-only (auto-skip remaining); practice uses answers already appended.
    */
   endSession(options?: { nowMs?: number }): void {
     if (!state.activeSession) return;
@@ -233,7 +319,6 @@ export const sessionStore = {
     let answers = [...attempt.answers];
 
     if (isExamKind(sessionKind) && itemIds) {
-      // Auto-skip remaining items on time-up / early finish.
       const startIdx = currentIndex ?? answers.length;
       for (let i = startIdx; i < itemIds.length; i++) {
         const already = answers.some((a) => a.itemId === itemIds[i]);
@@ -283,12 +368,13 @@ export const sessionStore = {
     emit();
   },
 
-  /** Test helper — reset in-memory + storage. */
+  /** Test helper — wipe in-memory + persisted store (practice tests). */
+  resetForTests(): void {
+    wipeStore();
+  },
+
+  /** Test helper — wipe in-memory + persisted store (exam tests). */
   __resetForTests(): void {
-    state = emptyState();
-    if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem(STORAGE_KEY);
-    }
-    listeners.forEach((l) => l());
+    wipeStore();
   },
 };

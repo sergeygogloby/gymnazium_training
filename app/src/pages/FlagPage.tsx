@@ -4,8 +4,8 @@ import { PageShell } from '../components/PageShell';
 import { sessionStore } from '../store/sessionStore';
 
 export function FlagPage() {
-  const [params] = useSearchParams();
-  const [itemId, setItemId] = useState(params.get('itemId') ?? '');
+  const [searchParams] = useSearchParams();
+  const [itemId, setItemId] = useState(searchParams.get('itemId') ?? '');
   const [note, setNote] = useState('');
   const [done, setDone] = useState(false);
 
@@ -23,7 +23,8 @@ export function FlagPage() {
       </p>
       {done ? (
         <p>
-          Nahlásené. <Link to="/relacia">Späť na reláciu</Link>
+          Nahlásené. <Link to="/relacia">Späť na reláciu</Link> ·{' '}
+          <Link to="/cvicenie">Cvičenie</Link>
         </p>
       ) : (
         <form className="flag-form" onSubmit={onSubmit}>

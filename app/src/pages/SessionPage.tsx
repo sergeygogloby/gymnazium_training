@@ -1,8 +1,9 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
-import { selectEligibleItems, sourceTypeLabel } from '../lib/catalog';
+import { isDemoItemId } from '../lib/demoCatalog';
 import { lookupItem } from '../lib/examSession';
+import { gradeAnswer } from '../lib/selectPracticeItems';
 import {
   formatCountdown,
   isExamKind,
@@ -10,12 +11,17 @@ import {
 } from '../lib/sessionKind';
 import { sessionStore } from '../store/sessionStore';
 import { useSessionStore } from '../store/useSessionStore';
-import type { SessionKind } from '../types/content';
+import type { AnswerOutcome } from '../types/content';
+
+const SOURCE_LABEL = {
+  bank: 'bank',
+  synthetic: 'synthetic',
+} as const;
+
+type Phase = 'answer' | 'feedback';
 
 /**
- * V03 shared shell — behavior branches on sessionKind.
- * Exam: countdown + end-only scoring (this slice).
- * Practice: stub left for practice agent (after-each feedback).
+ * V03 shared shell — practice: after-each feedback; exam: timer + end-only keys.
  */
 export function SessionPage() {
   const { activeSession } = useSessionStore();
@@ -35,105 +41,215 @@ export function SessionPage() {
     return <ExamSessionBody />;
   }
 
-  return <PracticeSessionStub kind={activeSession.sessionKind} />;
+  return <PracticeSessionBody />;
 }
 
-function PracticeSessionStub({ kind }: { kind: SessionKind }) {
+function PracticeSessionBody() {
   const navigate = useNavigate();
-  const { activeSession, catalog } = useSessionStore();
-  const eligible = selectEligibleItems(catalog);
+  const { activeSession, catalog, attempts } = useSessionStore();
+  const [phase, setPhase] = useState<Phase>('answer');
+  const [selected, setSelected] = useState<string>('');
+  const [lastOutcome, setLastOutcome] = useState<AnswerOutcome | null>(null);
+
+  const attempt = useMemo(
+    () => attempts.find((a) => a.id === activeSession?.attemptId),
+    [attempts, activeSession?.attemptId],
+  );
+
+  const itemIds = activeSession.itemIds ?? [];
+  const index = activeSession.currentIndex ?? 0;
+  const done = itemIds.length === 0 || index >= itemIds.length;
+  const currentId = !done ? itemIds[index] : undefined;
+  const item = currentId
+    ? catalog.find((c) => c.id === currentId)
+    : undefined;
 
   function finish() {
     sessionStore.endSession();
     navigate(`/vysledok/${activeSession!.attemptId}`);
   }
 
-  return (
-    <PageShell title={`Relácia — ${sessionKindLabel(kind)}`} viewId="V03">
-      <p className="lede">
-        Shell cvičenia (<code>{kind}</code>
-        {activeSession?.mistakesScoped ? ', chyby' : ''}). Spätná väzba po
-        každej položke patrí practice slice — tu je iba stub. CSV: náhľad
-        published položiek.
-      </p>
-      <dl className="meta">
-        <div>
-          <dt>sessionKind</dt>
-          <dd>
-            <code>{kind}</code>
-          </dd>
-        </div>
-        <div>
-          <dt>Spätná väzba</dt>
-          <dd>Po každej položke (practice agent)</dd>
-        </div>
-        <div>
-          <dt>Spôsobilé položky</dt>
-          <dd>
-            {eligible.length} (z {catalog.length} v katalógu; skryté
-            published=false vylúčené)
-          </dd>
-        </div>
-      </dl>
+  function submitAnswer(outcomeForced?: AnswerOutcome) {
+    if (!item) return;
+    const outcome: AnswerOutcome =
+      outcomeForced ??
+      (selected.trim()
+        ? gradeAnswer(item, selected)
+        : 'incorrect');
+    sessionStore.appendAnswer({
+      itemId: item.id,
+      outcome,
+      givenAnswer: outcomeForced === 'skipped' ? undefined : selected || undefined,
+      module: item.module,
+      topic: item.topic,
+      skillArea: item.skillArea,
+      sourceType: item.sourceType,
+    });
+    setLastOutcome(outcome);
+    setPhase('feedback');
+  }
 
-      {eligible.length === 0 ? (
-        <p className="notice">
-          Žiadne published položky. <Link to="/nahrat">Nahrať CSV</Link>
+  function nextItem() {
+    const isLast = index + 1 >= itemIds.length;
+    if (isLast) {
+      finish();
+      return;
+    }
+    sessionStore.advanceItem();
+    setSelected('');
+    setLastOutcome(null);
+    setPhase('answer');
+  }
+
+  if (done) {
+    return (
+      <PageShell title="Relácia — Cvičenie" viewId="V03">
+        <p className="lede">
+          {itemIds.length === 0
+            ? 'V katalógu nie sú žiadne vhodné položky pre tento filter.'
+            : 'Všetky položky v tejto relácii sú hotové.'}
         </p>
+        <div className="session-kind-actions">
+          <button type="button" onClick={finish}>
+            Zobraziť výsledok
+          </button>
+        </div>
+      </PageShell>
+    );
+  }
+
+  if (!item) {
+    return (
+      <PageShell title="Relácia — Cvičenie" viewId="V03">
+        <p className="notice error">
+          Položka <code>{currentId}</code> chýba v katalógu.
+        </p>
+        <button type="button" onClick={finish}>
+          Ukončiť
+        </button>
+      </PageShell>
+    );
+  }
+
+  const skillDisplay = item.skillArea === 'VSP' ? 'VŠP' : 'VJS';
+  const sourceDisplay = SOURCE_LABEL[item.sourceType];
+  const correctChoice = item.choices?.find((c) =>
+    c.trim().toUpperCase().startsWith(item.correctKey.toUpperCase()),
+  );
+
+  return (
+    <PageShell title="Relácia — Cvičenie" viewId="V03">
+      <p className="session-progress muted">
+        Položka {index + 1} / {itemIds.length}
+        {attempt ? ` · odpovedí: ${attempt.answers.length}` : ''}
+        {activeSession.mistakesScoped ? ' · z chýb' : ''}
+      </p>
+
+      <div className="item-labels" aria-label="Značky položky">
+        <span className="tag tag-source">
+          {sourceDisplay}
+          {isDemoItemId(item.id) ? ' · demo' : ''}
+        </span>
+        <span className="tag">{skillDisplay}</span>
+        <span className="tag">
+          {item.module} / {item.topic}
+        </span>
+      </div>
+
+      <p className="item-stem">{item.stem}</p>
+
+      {phase === 'answer' ? (
+        <>
+          {item.choices && item.choices.length > 0 ? (
+            <ul className="choice-list">
+              {item.choices.map((choice) => {
+                const key = choice.trim().charAt(0).toUpperCase();
+                const checked = selected === key || selected === choice;
+                return (
+                  <li key={choice}>
+                    <label className={checked ? 'choice selected' : 'choice'}>
+                      <input
+                        type="radio"
+                        name="answer"
+                        value={key}
+                        checked={selected === key}
+                        onChange={() => setSelected(key)}
+                      />
+                      {choice}
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <label className="free-answer">
+              Odpoveď
+              <input
+                value={selected}
+                onChange={(e) => setSelected(e.target.value)}
+                autoComplete="off"
+              />
+            </label>
+          )}
+
+          <div className="session-kind-actions">
+            <button
+              type="button"
+              onClick={() => submitAnswer()}
+              disabled={!selected.trim()}
+            >
+              Potvrdiť odpoveď
+            </button>
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => submitAnswer('skipped')}
+            >
+              Preskočiť
+            </button>
+            <Link
+              to={`/nahlasenie?itemId=${encodeURIComponent(item.id)}`}
+            >
+              Nahlásiť zlú položku
+            </Link>
+          </div>
+        </>
       ) : (
-        <div className="table-wrap">
-          <table className="history-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>id</th>
-                <th>tagy</th>
-                <th>zdroj</th>
-                <th>stem (skrátene)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {eligible.map((item, idx) => (
-                <tr key={item.id}>
-                  <td>{idx + 1}</td>
-                  <td>
-                    <code>{item.id}</code>
-                  </td>
-                  <td>
-                    {item.module} · {item.topic} · {item.skillArea}
-                  </td>
-                  <td>
-                    <span
-                      className={
-                        item.sourceType === 'synthetic'
-                          ? 'source-label synthetic'
-                          : 'source-label bank'
-                      }
-                    >
-                      {sourceTypeLabel(item.sourceType)}
-                    </span>
-                  </td>
-                  <td>
-                    {item.stem.length > 80
-                      ? `${item.stem.slice(0, 80)}…`
-                      : item.stem}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div
+          className={
+            lastOutcome === 'correct'
+              ? 'feedback feedback-ok'
+              : 'feedback feedback-bad'
+          }
+        >
+          <p className="feedback-verdict">
+            {lastOutcome === 'correct'
+              ? 'Správne'
+              : lastOutcome === 'skipped'
+                ? 'Preskočené'
+                : 'Nesprávne'}
+          </p>
+          <p>
+            <strong>Správna odpoveď:</strong> {item.correctKey}
+            {correctChoice ? ` — ${correctChoice}` : ''}
+          </p>
+          <p>
+            <strong>Zdôvodnenie:</strong> {item.rationale}
+          </p>
+          <div className="session-kind-actions">
+            <button type="button" onClick={nextItem}>
+              {index + 1 >= itemIds.length
+                ? 'Dokončiť reláciu'
+                : 'Ďalšia položka'}
+            </button>
+            <Link
+              to={`/nahlasenie?itemId=${encodeURIComponent(item.id)}`}
+            >
+              Nahlásiť zlú položku
+            </Link>
+          </div>
         </div>
       )}
-
-      <p className="placeholder-box">
-        Practice item loop + after-each answer key — owned by practice slice.
-      </p>
-      <div className="session-kind-actions">
-        <button type="button" onClick={finish}>
-          Ukončiť stub cvičenia
-        </button>
-        <Link to="/nahlásenie">Nahlásiť zlú položku (V09)</Link>
-      </div>
     </PageShell>
   );
 }
