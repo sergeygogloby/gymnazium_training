@@ -79,13 +79,22 @@ export const sessionStore = {
     emit();
   },
 
-  upsertCatalogItems(items: ContentItem[]): void {
+  /**
+   * Upsert by id after all-or-nothing CSV validation.
+   * Returns created / updated counts for the V11 success summary.
+   */
+  upsertCatalogItems(items: ContentItem[]): { created: number; updated: number } {
     const byId = new Map(state.catalog.map((i) => [i.id, i]));
+    let created = 0;
+    let updated = 0;
     for (const item of items) {
+      if (byId.has(item.id)) updated += 1;
+      else created += 1;
       byId.set(item.id, item);
     }
     state = { ...state, catalog: Array.from(byId.values()) };
     emit();
+    return { created, updated };
   },
 
   addAttempt(attempt: Attempt): void {

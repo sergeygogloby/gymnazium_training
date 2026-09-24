@@ -1,0 +1,4 @@
+id,stem,choices,correctKey,rationale,module,topic,skillArea,sourceType,locale,published
+bad-module,"Otázka bez platného modulu?",A|B|C|D,A,Dôvod,M9,T5,VSP,bank,sk,false
+missing-stem,,A|B|C|D,B,Dôvod,M3,T5,VSP,synthetic,sk,false
+bad-skill,"Stem ok",A|B|C|D,C,Dôvod,M3,T5,VERBAL,bank,sk,false

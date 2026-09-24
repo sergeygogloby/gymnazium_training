@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+"""Validate F22 question CSV — all-or-nothing exit codes.
+
+Exit 0 only when every row passes. Any invalid row → exit 1 and zero writes
+(this tool never writes catalog rows).
+
+Usage:
+  python3 tools/validate-questions-csv path/to/file.csv
+  python3 tools/validate-questions-csv path/to/file.csv --json
+  python3 tools/validate-questions-csv path/to/dir/*.csv
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+# Allow `python3 tools/validate-questions-csv` from repo root
+ROOT = Path(__file__).resolve().parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from lib.f22_schema import lint_csv_path, result_as_dict  # noqa: E402
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Lint F22 question CSV (all-or-nothing: any bad row → fail)."
+    )
+    parser.add_argument(
+        "paths",
+        nargs="+",
+        type=Path,
+        help="CSV file(s) to validate",
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Emit machine-readable JSON report on stdout",
+    )
+    args = parser.parse_args(argv)
+
+    overall_ok = True
+    reports = []
+
+    for path in args.paths:
+        result = lint_csv_path(path)
+        report = result_as_dict(result)
+        report["path"] = str(path)
+        reports.append(report)
+        if not result.ok:
+            overall_ok = False
+
+        if not args.json:
+            status = "PASS" if result.ok else "FAIL"
+            print(f"[{status}] {path} — {len(result.rows)} row(s), {len(result.errors)} error(s)")
+            if not result.ok:
+                print("  All-or-nothing: reject whole file (wouldWrite=0).")
+                for err in result.errors:
+                    print(f"  - {err.format()}")
+
+    if args.json:
+        payload = {
+            "ok": overall_ok,
+            "allOrNothing": True,
+            "files": reports,
+        }
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+
+    return 0 if overall_ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

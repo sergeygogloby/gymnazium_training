@@ -28,8 +28,11 @@ export function HelpPage() {
           <strong>Výsledky a pokrok</strong> — cvičenie a skúšky oddelene.
         </li>
         <li>
-          <strong>Nahrať CSV</strong> — ops na LAN: doplnenie otázok bez
-          nasadenia kódu. Ktokoľvek na LAN môže nahrať — používajte opatrne.
+          <strong>Nahrať CSV (V11)</strong> — ops na dôveryhodnej domácej LAN:
+          doplnenie otázok bez nasadenia kódu. <em>Bez prihlásenia</em> —
+          nie je to account-zabezpečený admin na internete. Ktokoľvek na LAN
+          môže nahrať; používajte opatrne. Import je all-or-nothing (chybný
+          riadok → nič sa nezapíše).
         </li>
       </ul>
       <p>

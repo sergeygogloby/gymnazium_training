@@ -209,6 +209,57 @@ button:hover {
   border-bottom: 1px solid var(--line);
 }
 
+.ops-warning {
+  background: #f7ebe0;
+  border-left: 4px solid #a85a2a;
+  padding: 0.85rem 1rem;
+  margin: 0 0 1rem;
+  max-width: 42rem;
+}
+
+.ops-warning p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.source-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.source-label.synthetic {
+  color: #7a3e14;
+}
+
+.source-label.bank {
+  color: var(--brand);
+}
+
+.catalog-summary {
+  margin-top: 1.75rem;
+}
+
+.catalog-summary h2 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+
+.error-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .upload-form,
 .flag-form {
   display: grid;
