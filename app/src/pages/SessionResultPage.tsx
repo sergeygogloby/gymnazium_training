@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { attemptBreakdown, lookupItem } from '../lib/examSession';
+import { buildMistakesQueue } from '../lib/mistakesQueue';
 import { isExamKind, sessionKindLabel } from '../lib/sessionKind';
 import { useSessionStore } from '../store/useSessionStore';
 import type { AnswerOutcome } from '../types/content';
@@ -42,11 +43,16 @@ export function SessionResultPage() {
   const exam = isExamKind(attempt.sessionKind);
   const label = sessionKindLabel(attempt.sessionKind);
   const breakdown = attemptBreakdown(attempt);
+  const sessionMisses = attempt.answers.filter(
+    (a) => a.outcome === 'incorrect',
+  ).length;
+  const activeMistakes = buildMistakesQueue(attempts, catalog).length;
 
   return (
     <PageShell title="Výsledok relácie" viewId="V04">
       <p className="result-kind-badge" data-testid="result-kind-label">
         {label}
+        {attempt.mistakesScoped ? ' · z chýb' : ''}
       </p>
 
       <dl className="meta">
@@ -155,6 +161,16 @@ export function SessionResultPage() {
           <p className="muted">Žiadne odpovede v tejto relácii.</p>
         )}
       </section>
+
+      {(sessionMisses > 0 || activeMistakes > 0) && (
+        <p className="notice" data-testid="result-mistakes-cue">
+          {sessionMisses > 0
+            ? `V tejto relácii ${sessionMisses === 1 ? 'bola 1 nesprávna odpoveď' : `bolo ${sessionMisses} nesprávnych odpovedí`}. `
+            : ''}
+          Aktívna fronta chýb: <strong>{activeMistakes}</strong>.{' '}
+          <Link to="/chyby">Prejsť na Chyby (opakovanie)</Link>
+        </p>
+      )}
 
       <ul className="home-links">
         <li>

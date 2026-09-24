@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useMemo, useState } from 'react';
 import { PageShell } from '../components/PageShell';
+import { buildMistakesQueue } from '../lib/mistakesQueue';
 import {
   attemptModuleLabel,
   computeEffortVsAccuracy,
@@ -27,12 +28,12 @@ const SECTION_TABS: { id: SectionTab; label: string }[] = [
 ];
 
 /**
- * V06 Results & Progress — F08–F11 + F21.
+ * V06 Results & Progress — F08–F11 + F21, plus Mistakes entry (F16).
  * Practice and exam rollups stay in separate sections (locked).
  */
 export function ResultsPage() {
   const navigate = useNavigate();
-  const { attempts } = useSessionStore();
+  const { attempts, catalog } = useSessionStore();
   const [section, setSection] = useState<SectionTab>('practice');
   const [examSub, setExamSub] = useState<'exams' | 'exam_30' | 'exam_60'>(
     'exams',
@@ -64,6 +65,10 @@ export function ResultsPage() {
   const recent = useMemo(
     () => sortAttemptsNewestFirst(scoped).slice(0, 5),
     [scoped],
+  );
+  const mistakesCount = useMemo(
+    () => buildMistakesQueue(attempts, catalog).length,
+    [attempts, catalog],
   );
 
   const anyCompleted = attempts.some((a) => a.endedAt);
@@ -140,6 +145,22 @@ export function ResultsPage() {
           potrebné.
         </p>
       ) : null}
+
+      <section className="results-mistakes-cue" data-testid="results-mistakes-link">
+        <h2>Chyby na opakovanie</h2>
+        {mistakesCount > 0 ? (
+          <p>
+            Vo fronte je <strong>{mistakesCount}</strong>{' '}
+            {mistakesCount === 1 ? 'položka' : 'položiek'}.{' '}
+            <Link to="/chyby">Otvoriť Chyby (V10)</Link>
+          </p>
+        ) : (
+          <p className="muted">
+            Žiadne aktívne chyby. Po nesprávnej odpovedi sa tu objaví odkaz na{' '}
+            <Link to="/chyby">Chyby</Link>.
+          </p>
+        )}
+      </section>
 
       <section className="progress-block" data-testid="streak-block">
         <h2>Streak / kalendár</h2>
@@ -302,6 +323,8 @@ export function ResultsPage() {
       </p>
       <p>
         <Link to="/historia">História relácií (V05)</Link>
+        {' · '}
+        <Link to="/chyby">Chyby</Link>
         {' · '}
         <Link to="/cvicenie">Cvičenie / skúška</Link>
       </p>
