@@ -62,6 +62,8 @@ function PracticeSessionBody() {
         <p>Žiadna aktívna relácia.</p>
         <p>
           <Link to="/kurikulum">Späť na kurikulum</Link>
+          {' · '}
+          <Link to="/cvicenie">Spustiť cvičenie</Link>
         </p>
       </PageShell>
     );
