@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { sessionStore } from '../store/sessionStore';
 
 export function FlagPage() {
-  const [itemId, setItemId] = useState('');
+  const [searchParams] = useSearchParams();
+  const [itemId, setItemId] = useState(searchParams.get('itemId') ?? '');
   const [note, setNote] = useState('');
   const [done, setDone] = useState(false);
 
@@ -22,7 +23,8 @@ export function FlagPage() {
       </p>
       {done ? (
         <p>
-          Nahlásené. <Link to="/relacia">Späť na reláciu</Link>
+          Nahlásené. <Link to="/relacia">Späť na reláciu</Link> ·{' '}
+          <Link to="/cvicenie">Cvičenie</Link>
         </p>
       ) : (
         <form className="flag-form" onSubmit={onSubmit}>

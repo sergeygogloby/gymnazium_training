@@ -1,13 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
-import { MODULES, TOPICS, type SessionKind } from '../types/content';
+import { MODULES, TOPICS, type ModuleId, type SessionKind } from '../types/content';
 import { sessionStore } from '../store/sessionStore';
-import { useNavigate } from 'react-router-dom';
 
 export function CurriculumPage() {
   const navigate = useNavigate();
 
-  function start(kind: SessionKind) {
+  function startPractice(module?: ModuleId) {
+    sessionStore.startSession('practice', {
+      module,
+      limit: 5,
+    });
+    navigate('/relacia');
+  }
+
+  function startExamStub(kind: Extract<SessionKind, 'exam_30' | 'exam_60'>) {
     sessionStore.startSession(kind);
     navigate('/relacia');
   }
@@ -15,25 +22,35 @@ export function CurriculumPage() {
   return (
     <PageShell title="Kurikulum" viewId="V02">
       <p className="lede">
-        Moduly M1–M6 a témy T1–T12. Filter VŠP | VJS príde v ďalšej vlne.
-        Spustite cvičenie alebo časovanú skúšku (druh relácie, nie režim).
+        Moduly M1–M6 a témy T1–T12. Spustite <strong>cvičenie</strong> (untimed,
+        spätná väzba po každej položke) alebo časovanú skúšku (druh relácie, nie
+        režim — časovač v samostatnej vlne).
       </p>
       <div className="session-kind-actions">
-        <button type="button" onClick={() => start('practice')}>
+        <button type="button" onClick={() => startPractice()}>
           Začať cvičenie
         </button>
-        <button type="button" onClick={() => start('exam_30')}>
+        <button type="button" onClick={() => startExamStub('exam_30')}>
           Skúška 30 min
         </button>
-        <button type="button" onClick={() => start('exam_60')}>
+        <button type="button" onClick={() => startExamStub('exam_60')}>
           Skúška 60 min
         </button>
       </div>
       <section>
         <h2>Moduly</h2>
-        <ul>
+        <ul className="module-start-list">
           {MODULES.map((m) => (
-            <li key={m}>{m}</li>
+            <li key={m}>
+              {m}{' '}
+              <button
+                type="button"
+                className="btn-secondary btn-small"
+                onClick={() => startPractice(m)}
+              >
+                Cvičiť
+              </button>
+            </li>
           ))}
         </ul>
       </section>
