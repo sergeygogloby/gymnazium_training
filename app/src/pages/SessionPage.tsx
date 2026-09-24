@@ -56,6 +56,17 @@ function PracticeSessionBody() {
     [attempts, activeSession?.attemptId],
   );
 
+  if (!activeSession) {
+    return (
+      <PageShell title="Relácia — Cvičenie" viewId="V03">
+        <p>Žiadna aktívna relácia.</p>
+        <p>
+          <Link to="/cvicenie">Spustiť cvičenie</Link>
+        </p>
+      </PageShell>
+    );
+  }
+
   const itemIds = activeSession.itemIds ?? [];
   const index = activeSession.currentIndex ?? 0;
   const done = itemIds.length === 0 || index >= itemIds.length;

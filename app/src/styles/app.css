@@ -525,6 +525,49 @@ textarea {
   }
 }
 
+.progress-block {
+  margin: 1.5rem 0;
+}
+
+.progress-block h2 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+.suggestion-list,
+.gap-list,
+.recent-list {
+  margin: 0.35rem 0 0;
+  padding-left: 1.2rem;
+  line-height: 1.7;
+}
+
+.study-calendar {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  gap: 0.25rem;
+  max-width: 28rem;
+}
+
+.study-calendar li {
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.study-calendar .day-active {
+  background: var(--brand-soft);
+  border-color: var(--brand);
+}
+
+.study-calendar .day-idle {
+  opacity: 0.55;
+}
+
 @media (max-width: 560px) {
   .meta div {
     grid-template-columns: 1fr;
@@ -532,5 +575,9 @@ textarea {
 
   .source-label {
     margin-left: 0;
+  }
+
+  .study-calendar {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 }
