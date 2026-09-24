@@ -1,2 +1,7 @@
 .DS_Store
 sources/Mudre-predplatne_Prihlasovacie-udaje_VSJP8_KOMPLET-ezhkvi.pdf
+node_modules/
+app/dist/
+app/*.tsbuildinfo
+*.local
+.DS_Store
