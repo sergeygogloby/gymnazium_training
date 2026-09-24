@@ -22,6 +22,19 @@ npm run import-csv -- ../content/bank/vsjp8-ulohy-bank.csv
 
 Does **not** modify `sources/`. Gate artifacts: `content/reports/vsjp8-ulohy-bank_*.json` / `_gate.md`.
 
+## `export-catalog-csv`
+
+Dump the live SQLite catalog to well-structured F22 CSVs (full + bank + synthetic) so files match the DB.
+
+```bash
+python3 tools/export-catalog-csv
+# → content/published/catalog-all-376.csv
+# → content/bank/vsjp8-ulohy-bank.csv
+# → content/published/vsjp8-ulohy-bank.csv
+# → content/published/pilot-t5-synth-20260924_M3_T5.csv
+python3 tools/validate-questions-csv content/published/catalog-all-376.csv
+```
+
 ## `validate-questions-csv`
 
 F22 structural lint against [docs/specs/question-csv-upload.md](../docs/specs/question-csv-upload.md) / [content-model.md](../docs/specs/content-model.md).

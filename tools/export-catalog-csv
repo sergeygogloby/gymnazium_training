@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+"""Export SQLite question catalog to well-structured F22 CSVs.
+
+Writes (from DB, so files match the live catalog):
+  content/published/catalog-all-376.csv   — full catalog
+  content/bank/vsjp8-ulohy-bank.csv       — sourceType=bank
+  content/published/vsjp8-ulohy-bank.csv  — same bank copy under published/
+  content/published/pilot-t5-synth-*.csv  — sourceType=synthetic (existing name)
+  content/reports/catalog-csv-db-sync.json
+
+Usage (repo root):
+  python3 tools/export-catalog-csv
+"""
+
+from __future__ import annotations
+
+import csv
+import json
+import sqlite3
+import sys
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+DB = ROOT / "data" / "gymnazium.sqlite"
+PUB = ROOT / "content" / "published"
+BANK = ROOT / "content" / "bank"
+REPORTS = ROOT / "content" / "reports"
+
+FIELDS = [
+    "id",
+    "stem",
+    "choices",
+    "correctKey",
+    "rationale",
+    "module",
+    "topic",
+    "skillArea",
+    "sourceType",
+    "locale",
+    "published",
+    "sourcePdf",
+    "solutionPdf",
+    "itemIndex",
+]
+
+SYNTH_NAME = "pilot-t5-synth-20260924_M3_T5.csv"
+
+
+def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=FIELDS, extrasaction="ignore")
+        w.writeheader()
+        for row in rows:
+            w.writerow({k: row.get(k, "") for k in FIELDS})
+
+
+def main() -> int:
+    if not DB.is_file():
+        print(f"DB not found: {DB}", file=sys.stderr)
+        return 1
+
+    bank_prov: dict[str, dict[str, str]] = {}
+    bank_existing = BANK / "vsjp8-ulohy-bank.csv"
+    if bank_existing.is_file():
+        with bank_existing.open(encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                bank_prov[r["id"]] = r
+
+    con = sqlite3.connect(DB)
+    con.row_factory = sqlite3.Row
+    db_rows = con.execute(
+        "SELECT id, stem, choices_json, correct_key, rationale, module, topic, "
+        "skill_area, source_type, locale, published FROM questions "
+        "ORDER BY source_type, module, topic, id"
+    ).fetchall()
+    con.close()
+
+    out: list[dict[str, str]] = []
+    for r in db_rows:
+        choices = ""
+        if r["choices_json"]:
+            try:
+                arr = json.loads(r["choices_json"])
+                if isinstance(arr, list):
+                    choices = "|".join(str(x) for x in arr)
+            except json.JSONDecodeError:
+                choices = str(r["choices_json"])
+        prov = bank_prov.get(r["id"], {})
+        out.append(
+            {
+                "id": r["id"],
+                "stem": r["stem"],
+                "choices": choices,
+                "correctKey": r["correct_key"],
+                "rationale": r["rationale"],
+                "module": r["module"],
+                "topic": r["topic"],
+                "skillArea": r["skill_area"],
+                "sourceType": r["source_type"],
+                "locale": r["locale"] or "sk",
+                "published": "true" if r["published"] else "false",
+                "sourcePdf": prov.get("sourcePdf", ""),
+                "solutionPdf": prov.get("solutionPdf", ""),
+                "itemIndex": prov.get("itemIndex", ""),
+            }
+        )
+
+    bank_rows = [r for r in out if r["sourceType"] == "bank"]
+    synth_rows = [r for r in out if r["sourceType"] == "synthetic"]
+
+    catalog = PUB / f"catalog-all-{len(out)}.csv"
+    # Stable alias when count is the known gated total
+    catalog_alias = PUB / "catalog-all-376.csv"
+    bank_out = BANK / "vsjp8-ulohy-bank.csv"
+    bank_pub = PUB / "vsjp8-ulohy-bank.csv"
+    synth_out = PUB / SYNTH_NAME
+
+    write_csv(catalog, out)
+    if catalog.resolve() != catalog_alias.resolve():
+        write_csv(catalog_alias, out)
+    write_csv(bank_out, bank_rows)
+    write_csv(bank_pub, bank_rows)
+    write_csv(synth_out, synth_rows)
+
+    manifest = {
+        "generatedAt": datetime.now(timezone.utc).isoformat(),
+        "dbPath": str(DB.relative_to(ROOT)),
+        "total": len(out),
+        "bySourceType": dict(Counter(r["sourceType"] for r in out)),
+        "byTopic": dict(
+            sorted(
+                Counter(r["topic"] for r in out).items(),
+                key=lambda x: int(x[0][1:]),
+            )
+        ),
+        "published": sum(1 for r in out if r["published"] == "true"),
+        "files": {
+            "catalog": str(catalog_alias.relative_to(ROOT)),
+            "bank": str(bank_out.relative_to(ROOT)),
+            "bankPublishedCopy": str(bank_pub.relative_to(ROOT)),
+            "synthetic": str(synth_out.relative_to(ROOT)),
+        },
+        "note": "CSVs exported from SQLite so file catalog matches DB exactly.",
+    }
+    REPORTS.mkdir(parents=True, exist_ok=True)
+    (REPORTS / "catalog-csv-db-sync.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    print(f"Wrote {len(out)} rows → {catalog_alias}")
+    print(f"  bank={len(bank_rows)} synthetic={len(synth_rows)}")
+    print(f"Manifest → {REPORTS / 'catalog-csv-db-sync.json'}")
+    return 0 if out else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
